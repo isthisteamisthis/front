@@ -12,7 +12,7 @@
       android:allowBackup="false"
       android:theme="@style/AppTheme"
       android:src="@drawable/logoofsepp"
-      android:icon="@mipmap/logoofseppicon"
+      android:icon="@mipmap/logoofseppiconn"
       >
       
       <activity

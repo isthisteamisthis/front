@@ -39,9 +39,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: '100',
-    letterSpacing: -0.5,
+    letterSpacing: -1,
     marginTop: -40,
-    marginBottom: 0,
+    marginBottom: 10,
     lineHeight: 22,
     color: 'black',
   },

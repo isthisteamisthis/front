@@ -71,15 +71,18 @@ export default function VoiceRange({navigation}) {
   };
 
   return (
-    <View>
-      <Text style={styles.title}>{`음역대 측정을
- 진행합니다`}</Text>
+    <View style={styles.pageContainer}>
+      <Text style={styles.title}>{`지금부터
+음역대 측정을
+진행하겠습니다`}</Text>
       <Text style={styles.title01}>{recordTime}</Text>
       <Text style={styles.title00}>{`본인이 낼 수 있는 가장 높은 음과  
   낮은 음을 차례대로 내주세요`}</Text>
-      <Button title="녹음 시작" onPress={() => onStartRecord()}></Button>
-      <Button title="녹음 완료" onPress={() => onStopRecord()}></Button>
-      <Button title="전송" onPress={() => sendFileToServer()}></Button>
+      <Button title="  녹음 시작  " onPress={() => onStartRecord()}></Button>
+      <Button title="  녹음 완료  " onPress={() => onStopRecord()}></Button>
+      <Button
+        title="      전송      "
+        onPress={() => sendFileToServer()}></Button>
       <TouchableOpacity
         activeOpacity={0.8}
         style={styles.button02}
@@ -91,6 +94,13 @@ export default function VoiceRange({navigation}) {
 }
 
 const styles = StyleSheet.create({
+  pageContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 16,
+    backgroundColor: '#f4f4f4', // 페이지 배경색 변경
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -99,7 +109,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    marginTop: 160,
+    marginTop: -20,
     letterSpacing: -0.7,
     color: 'black',
     fontWeight: 'bold',
@@ -110,9 +120,9 @@ const styles = StyleSheet.create({
   },
   title00: {
     fontSize: 14,
-    letterSpacing: -0.7,
+    letterSpacing: -0.9,
     textAlign: 'center',
-    marginBottom: 30,
+    marginBottom: 40,
   },
   title01: {
     fontSize: 30,
@@ -126,12 +136,12 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   button02: {
-    marginTop: 30,
+    marginTop: 40,
     paddingTop: -7,
-    width: 80,
+    width: 100,
     height: 30,
     textAlign: 'center',
-    marginLeft: 160,
+    marginLeft: 3,
     borderRadius: 7,
     alignItems: 'center',
     borderWidth: 1,
@@ -140,5 +150,7 @@ const styles = StyleSheet.create({
   text01: {
     marginTop: 2,
     color: 'black',
+    fontWeight: '800',
+    letterSpacing: -1,
   },
 });

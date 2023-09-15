@@ -15,5 +15,6 @@ import songDetail from './src/screens/Main/songDetail';
 import aicover from './src/screens/recorder/aicover';
 import perfectscore from './src/screens/recorder/perfectscore';
 import login from './src/screens/Enter/login';
+import Select from './src/screens/Enter/select';
 
 AppRegistry.registerComponent(appName, () => App);

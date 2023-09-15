@@ -30,9 +30,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    marginTop: 180,
-    width: 300,
-    height: 300,
+    marginTop: 150,
+    width: 350,
+    height: 350,
   },
   text: {
     fontSize: 12,

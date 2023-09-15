@@ -11,7 +11,7 @@
         android:contentDescription="Splashscreen"
         android:scaleType="fitCenter"
         android:background="@color/splashprimary"
-        android:icon="@mipmap/logoofseppicon"
+        android:icon="@mipmap/logoofseppiconn"
         android:src="@drawable/logoofsepp"
         />
 </RelativeLayout>
