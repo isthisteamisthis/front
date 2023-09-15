@@ -1,14 +1,14 @@
-// Splash.jsx
-
 import React, {useEffect} from 'react';
 import {View, Text, Image, StyleSheet} from 'react-native';
+import {createStackNavigator} from '@react-navigation/stack';
 
 const Splash = ({navigation}) => {
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate('Select');
+      navigation.navigate('Middle');
     }, 3000);
   }, [navigation]);
+  const Stack = createStackNavigator();
 
   return (
     <View style={styles.container}>
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    marginTop: 200,
+    marginTop: 180,
     width: 300,
     height: 300,
   },
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   text01: {
     fontSize: 15,
     marginTop: 100,
-    marginBottom: 30,
+    marginBottom: 5,
     color: 'black',
     fontWeight: '800',
   },
@@ -51,7 +51,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginTop: 1,
     color: 'black',
-    fontWeight: '500',
   },
 });
 

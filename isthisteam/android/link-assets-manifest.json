@@ -1,0 +1,109 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "android/app/assets/fonts/LICENSE",
+      "sha1": "f9aca03801f77884fe3ad18aa0e6b98ef4507364"
+    },
+    {
+      "path": "android/app/assets/fonts/SpoqaHanSansNeo_OTF_original/SpoqaHanSansNeo-Bold.otf",
+      "sha1": "db0b78289b39d9a737fa93a2347ca32f651a3139"
+    },
+    {
+      "path": "android/app/assets/fonts/SpoqaHanSansNeo_OTF_original/SpoqaHanSansNeo-Light.otf",
+      "sha1": "cc7da00da7a5f96a2fe92981302ae2c59f6e4342"
+    },
+    {
+      "path": "android/app/assets/fonts/SpoqaHanSansNeo_OTF_original/SpoqaHanSansNeo-Medium.otf",
+      "sha1": "05aeff1c993bc3164ae82e46f340959db10cde43"
+    },
+    {
+      "path": "android/app/assets/fonts/SpoqaHanSansNeo_OTF_original/SpoqaHanSansNeo-Regular.otf",
+      "sha1": "28eb6f5e88a9c015ffd75c604b73da04170b6f40"
+    },
+    {
+      "path": "android/app/assets/fonts/SpoqaHanSansNeo_OTF_original/SpoqaHanSansNeo-Thin.otf",
+      "sha1": "0465dfee7f5f9dd36c12167078c3e1b877a1e22c"
+    },
+    {
+      "path": "android/app/assets/fonts/SpoqaHanSansNeo_OTF_subset/SpoqaHanSansNeo-Bold.eot",
+      "sha1": "bdbe11160d23554e3600a0709acf26ca55215e5d"
+    },
+    {
+      "path": "android/app/assets/fonts/SpoqaHanSansNeo_OTF_subset/SpoqaHanSansNeo-Bold.woff",
+      "sha1": "47d177daaaf2b83878e5d4c07b3e98f3aedaf1f7"
+    },
+    {
+      "path": "android/app/assets/fonts/SpoqaHanSansNeo_OTF_subset/SpoqaHanSansNeo-Bold.woff2",
+      "sha1": "b0773109821c4f45c7e297f13ccf0fe56b13ccab"
+    },
+    {
+      "path": "android/app/assets/fonts/SpoqaHanSansNeo_OTF_subset/SpoqaHanSansNeo-Light.eot",
+      "sha1": "9bf9d8794196cd5102192834d8dcb96583f947f5"
+    },
+    {
+      "path": "android/app/assets/fonts/SpoqaHanSansNeo_OTF_subset/SpoqaHanSansNeo-Light.woff",
+      "sha1": "5cd30dcd538c9a55297b6067ca12d5ba3aef0e2f"
+    },
+    {
+      "path": "android/app/assets/fonts/SpoqaHanSansNeo_OTF_subset/SpoqaHanSansNeo-Light.woff2",
+      "sha1": "1be9d982d5349fca61b28b2c1a99dee5be0621fe"
+    },
+    {
+      "path": "android/app/assets/fonts/SpoqaHanSansNeo_OTF_subset/SpoqaHanSansNeo-Medium.eot",
+      "sha1": "8f42137c45fa5b71ff3d22104d9d62b7d1016b68"
+    },
+    {
+      "path": "android/app/assets/fonts/SpoqaHanSansNeo_OTF_subset/SpoqaHanSansNeo-Medium.woff",
+      "sha1": "8de221daec2742d79c7dc8d5f124be1abfcb37bb"
+    },
+    {
+      "path": "android/app/assets/fonts/SpoqaHanSansNeo_OTF_subset/SpoqaHanSansNeo-Medium.woff2",
+      "sha1": "1cc11e27a429f99982759a18cb1648328593852a"
+    },
+    {
+      "path": "android/app/assets/fonts/SpoqaHanSansNeo_OTF_subset/SpoqaHanSansNeo-Regular.eot",
+      "sha1": "ca8beb13855622fef19880a75f8547b93b67899d"
+    },
+    {
+      "path": "android/app/assets/fonts/SpoqaHanSansNeo_OTF_subset/SpoqaHanSansNeo-Regular.woff",
+      "sha1": "e8701b656c9b4a6de77b2f289ea9ea6aeea6bc72"
+    },
+    {
+      "path": "android/app/assets/fonts/SpoqaHanSansNeo_OTF_subset/SpoqaHanSansNeo-Regular.woff2",
+      "sha1": "896afa5939a6ec540ff8e662dbfc16baa6972333"
+    },
+    {
+      "path": "android/app/assets/fonts/SpoqaHanSansNeo_OTF_subset/SpoqaHanSansNeo-Thin.eot",
+      "sha1": "9105fa81c099abc6ef8cbcbc2eb89677ad1334d3"
+    },
+    {
+      "path": "android/app/assets/fonts/SpoqaHanSansNeo_OTF_subset/SpoqaHanSansNeo-Thin.woff",
+      "sha1": "b886de1b60b7ac8f829c031aa0a0c9fa9bad4fb1"
+    },
+    {
+      "path": "android/app/assets/fonts/SpoqaHanSansNeo_OTF_subset/SpoqaHanSansNeo-Thin.woff2",
+      "sha1": "4256de2831b60777f6e5fd7ffb9417d57e79f952"
+    },
+    {
+      "path": "android/app/assets/fonts/SpoqaHanSansNeo_TTF_original/SpoqaHanSansNeo-Bold.ttf",
+      "sha1": "cb7dc0e5047cf54e5c2a201d02256a6357ffd36f"
+    },
+    {
+      "path": "android/app/assets/fonts/SpoqaHanSansNeo_TTF_original/SpoqaHanSansNeo-Light.ttf",
+      "sha1": "dcc99a8ec77d521edcfcd571df16efd400b269bd"
+    },
+    {
+      "path": "android/app/assets/fonts/SpoqaHanSansNeo_TTF_original/SpoqaHanSansNeo-Medium.ttf",
+      "sha1": "c74930efdc92cdd3623389122a08df515c5d5f57"
+    },
+    {
+      "path": "android/app/assets/fonts/SpoqaHanSansNeo_TTF_original/SpoqaHanSansNeo-Regular.ttf",
+      "sha1": "c00e1b380dab850ca8631085db53a0b97820a1af"
+    },
+    {
+      "path": "android/app/assets/fonts/SpoqaHanSansNeo_TTF_original/SpoqaHanSansNeo-Thin.ttf",
+      "sha1": "b86043785d0d8f07d6d506a65dc1e10730a00aff"
+    }
+  ]
+}

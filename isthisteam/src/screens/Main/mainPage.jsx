@@ -1,31 +1,17 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  Image,
-  ScrollView,
-  Linking,
-  SafeAreaView,
-  StyleSheet,
-  Button,
-} from 'react-native';
+import {View, Text, Button, StyleSheet} from 'react-native';
 
-function Main({navigation}) {
+function MainPage({navigation}) {
   return (
-    <View style={styles.container}>
-      <Button style={styles.title}> 커뮤니티 </Button>
-      <Button style={styles.title}> 마이페이지 </Button>
-      <Button style={styles.title}> 녹음하기 </Button>
-      <Button
-        title="작곡가"
-        onPress={() => navigation.navigate('VoiceRange')}
-      />
-      <Button title="가수" onPress={() => navigation.navigate('VoiceRange')} />
+    <View style={styles1.container}>
+      <Text style={styles1.title}> 커뮤니티 </Text>
+      <Text style={styles1.title}> 마이페이지 </Text>
+      <Text style={styles1.title}> 녹음하기 </Text>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
+const styles1 = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -38,4 +24,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Main;
+export default MainPage;

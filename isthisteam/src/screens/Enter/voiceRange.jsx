@@ -1,12 +1,16 @@
 import React, {useState} from 'react';
-import {View, Text, Button, StyleSheet} from 'react-native';
+import {View, Text, Button, StyleSheet, TouchableOpacity} from 'react-native';
 import AudioRecorderPlayer from 'react-native-audio-recorder-player';
 
 const audioRecorderPlayer = new AudioRecorderPlayer();
 
-export default function VoiceRange() {
+export default function VoiceRange({navigation}) {
   const [recordTime, setRecordTime] = useState('00:00');
   const [recordedFilePath, setRecordedFilePath] = useState(null);
+
+  const onPress = () => {
+    navigation.navigate('Mainpage');
+  };
 
   const onStartRecord = async () => {
     try {
@@ -68,17 +72,20 @@ export default function VoiceRange() {
 
   return (
     <View>
-      <Text style={styles.title}>음역대 측정을 진행합니다</Text>
+      <Text style={styles.title}>{`음역대 측정을
+ 진행합니다`}</Text>
       <Text style={styles.title01}>{recordTime}</Text>
-      <Button title="시작" onPress={() => onStartRecord()}>
-        가장 높은 음을 내주세요!
-      </Button>
-      <Button title="완료" onPress={() => onStopRecord()}>
-        완료
-      </Button>
-      <Button title="전송" onPress={() => sendFileToServer()}>
-        Send Recording to Server
-      </Button>
+      <Text style={styles.title00}>{`본인이 낼 수 있는 가장 높은 음과  
+  낮은 음을 차례대로 내주세요`}</Text>
+      <Button title="녹음 시작" onPress={() => onStartRecord()}></Button>
+      <Button title="녹음 완료" onPress={() => onStopRecord()}></Button>
+      <Button title="전송" onPress={() => sendFileToServer()}></Button>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={styles.button02}
+        onPress={onPress}>
+        <Text style={styles.text01}>입장하기</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -92,20 +99,46 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
+    marginTop: 160,
+    letterSpacing: -0.7,
+    color: 'black',
     fontWeight: 'bold',
-    marginBottom: 16,
+    textAlign: 'center',
+    marginBottom: 10,
+    lineHeight: 28,
     alignContent: 'center',
   },
+  title00: {
+    fontSize: 14,
+    letterSpacing: -0.7,
+    textAlign: 'center',
+    marginBottom: 30,
+  },
   title01: {
-    fontSize: 15,
-    fontWeight: 'bold',
+    fontSize: 30,
+    letterSpacing: -0.5,
+    marginTop: 10,
+    textAlign: 'center',
     marginBottom: 16,
   },
   recordTime: {
     fontSize: 18,
     marginBottom: 16,
   },
-  button: {
-    marginBottom: 16,
+  button02: {
+    marginTop: 30,
+    paddingTop: -7,
+    width: 80,
+    height: 30,
+    textAlign: 'center',
+    marginLeft: 160,
+    borderRadius: 7,
+    alignItems: 'center',
+    borderWidth: 1,
+    backgroundColor: '#F4F4F4',
+  },
+  text01: {
+    marginTop: 2,
+    color: 'black',
   },
 });
