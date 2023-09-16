@@ -5,6 +5,7 @@ import {
   FlatList,
   Image,
   StyleSheet,
+  Flatlist,
   TouchableOpacity,
 } from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -46,6 +47,8 @@ function MainPage({navigation}) {
           <Text style={styles.text01}>녹음하기</Text>
         </TouchableOpacity>
       </View>
+
+      <Text style={styles.additionalText}>나의 곡 추천</Text>
 
       <FlatList
         data={posts}
@@ -102,9 +105,25 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   titleofpost: {
-    marginTop: 8,
+    marginTop: -30,
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  additionalText: {
+    color: 'black',
+    fontSize: 16,
+    fontWeight: '900',
+    marginRight: 240,
+    marginTop: 30,
+    letterSpacing: -1,
+  },
+  additionalText1: {
+    color: 'black',
+    fontSize: 16,
+    fontWeight: '900',
+    marginRight: 240,
+    marginTop: 30,
+    letterSpacing: -1,
   },
   container: {
     flex: 1,
@@ -117,7 +136,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
-    marginBottom: 20, // 버튼과 게시글 간 간격 조절
+    marginBottom: 20,
   },
   button01: {
     backgroundColor: '#D9D7F1',

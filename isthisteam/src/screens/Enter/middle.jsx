@@ -38,11 +38,11 @@ const Middle = ({navigation}) => {
       SkipButtonComponent={Skip}
       NextButtonComponent={Next}
       DoneButtonComponent={() => <Done navigation={navigation} />}
-      onSkip={() => navigation.replace('loginpage')}
+      onSkip={() => navigation.replace('mainpage')}
       onDone={() => navigation.navigate('select')}
       pages={[
         {
-          backgroundColor: '#F8F6F4',
+          backgroundColor: '#FFF5EB',
           image: (
             <Image
               source={require('../../../android/app/assets/images/karaoke1.png')}
@@ -50,32 +50,35 @@ const Middle = ({navigation}) => {
             />
           ),
           title: '어서오세요',
-          subtitle: '랄라리아는 ',
+          subtitle:
+            '랄라리아는 커뮤니티 기반의  \n 커버 노래 공유 & 작곡가-가수 매칭 플랫폼입니다.',
         },
         {
-          backgroundColor: '#E3F4F4',
+          backgroundColor: '#DEEDF0',
           image: (
             <Image
               source={require('../../../android/app/assets/images/relax4.png')}
               style={styles.imageStyle}
             />
           ),
-          title: 'onboarding2',
-          subtitle: '룰루라랄라',
+          title: '랄라리아는',
+          subtitle:
+            '사용자가 작곡가 혹은 가수의 포지션을 직접 정하여 \n 본인이 작곡한 곡을 AI 커버를 통해 제공받을 수 있으며, \n 본인의 목소리를 녹음해 다양한 노래를 \n 본인의 목소리로 들을 수 있는 기능을 제공합니다.',
         },
         {
-          backgroundColor: '#D2E9E9',
+          backgroundColor: '#F4C7AB',
           image: (
             <Image
               source={require('../../../android/app/assets/images/relax4.png')}
               style={styles.imageStyle}
             />
           ),
-          title: 'onboarding3',
-          subtitle: '뭐 써야하지 ㅋㅋ',
+          title: '작곡가 | 가수',
+          subtitle:
+            '본인의 포지션을 미리 결정해주시면, \n더 나은 서비스를 제공받으실 수 있습니다.',
         },
         {
-          backgroundColor: '#C4DFDF',
+          backgroundColor: '#B2B8A3',
           image: (
             <Image
               source={require('../../../android/app/assets/images/woman.png')}
@@ -84,7 +87,7 @@ const Middle = ({navigation}) => {
           ),
           title: '시작해볼까요?',
           subtitle:
-            '랄라리아는 당신이 꿈꾸는 어떤 모습이든\n당신이 상상한 모습을 그대로 실현시켜드립니다.',
+            '랄라리아는 당신이 꿈꾸는 어떤 모습이든 \n 당신이 상상한 모습을 그대로 실현시켜드립니다.',
         },
       ]}
       titleStyles={{

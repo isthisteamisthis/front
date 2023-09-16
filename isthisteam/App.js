@@ -9,6 +9,7 @@ import Select from './src/screens/Enter/select';
 import VoiceRange from './src/screens/Enter/voiceRange';
 import mainpage from './src/screens/Main/mainpage';
 import Middle from './src/screens/Enter/middle';
+import VoiceRangehigh from './src/screens/Enter/voiceRangehigh';
 
 const Stack = createStackNavigator();
 
@@ -25,6 +26,7 @@ function App() {
           <Stack.Screen name="Select" component={Select} />
           <Stack.Screen name="Middle" component={Middle} />
           <Stack.Screen name="VoiceRange" component={VoiceRange} />
+          <Stack.Screen name="VoiceRangehigh" component={VoiceRangehigh} />
           <Stack.Screen name="Mainpage" component={mainpage} />
         </Stack.Navigator>
       </GestureHandlerRootView>

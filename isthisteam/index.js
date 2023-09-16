@@ -16,5 +16,6 @@ import aicover from './src/screens/recorder/aicover';
 import perfectscore from './src/screens/recorder/perfectscore';
 import login from './src/screens/Enter/login';
 import Select from './src/screens/Enter/select';
+import VoiceRangehigh from './src/screens/Enter/voiceRangehigh';
 
 AppRegistry.registerComponent(appName, () => App);

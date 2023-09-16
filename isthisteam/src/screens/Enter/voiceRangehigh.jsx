@@ -9,7 +9,7 @@ export default function VoiceRange({navigation}) {
   const [recordedFilePath, setRecordedFilePath] = useState(null);
 
   const onPress = () => {
-    navigation.navigate('VoiceRangehigh');
+    navigation.navigate('Mainpage');
   };
 
   const onStartRecord = async () => {
@@ -79,7 +79,7 @@ export default function VoiceRange({navigation}) {
       <Text
         style={
           styles.title00
-        }>{`본인이 낼 수 있는 가장 낮은 음을 내주세요`}</Text>
+        }>{`본인이 낼 수 있는 가장 높은 음을 내주세요`}</Text>
       <Button title="  녹음 시작  " onPress={() => onStartRecord()}></Button>
       <Button title="  녹음 완료  " onPress={() => onStopRecord()}></Button>
       <Button
@@ -89,7 +89,7 @@ export default function VoiceRange({navigation}) {
         activeOpacity={0.8}
         style={styles.button02}
         onPress={onPress}>
-        <Text style={styles.text01}>다음으로</Text>
+        <Text style={styles.text01}>입장하기</Text>
       </TouchableOpacity>
     </View>
   );
