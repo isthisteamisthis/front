@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
 function Select({navigation}) {
   const onPress = () => {
@@ -8,10 +8,12 @@ function Select({navigation}) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>
-        {`당신의 유형을 
- 선택해주세요`}
-      </Text>
+      <Image
+        source={require('../../../android/app/assets/images/select.png')}
+        style={styles.image}
+      />
+      <Text style={styles.title}>{`당신의 유형을 
+선택해주세요`}</Text>
 
       <TouchableOpacity
         activeOpacity={0.8}
@@ -31,6 +33,12 @@ function Select({navigation}) {
 }
 
 const styles = StyleSheet.create({
+  image: {
+    width: 170,
+    height: 170,
+    marginBottom: 550,
+    marginTop: -80,
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -38,9 +46,9 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontWeight: '100',
+    fontWeight: '400',
     letterSpacing: -1,
-    marginTop: -40,
+    marginTop: -530,
     marginBottom: 10,
     lineHeight: 22,
     color: 'black',

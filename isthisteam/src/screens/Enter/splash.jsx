@@ -17,7 +17,7 @@ const Splash = ({navigation}) => {
         style={styles.image}
       />
       <Text style={styles.text01}>ISTHISTEAM</Text>
-      <Text style={styles.text02}>AI | 이소영 여형구 차민수</Text>
+      <Text style={styles.text02}>AI | 여형구 이소영 차민수</Text>
       <Text style={styles.text02}>Server | 강수의 라현지 손정인</Text>
     </View>
   );

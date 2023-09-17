@@ -8,7 +8,9 @@ import {
   Flatlist,
   TouchableOpacity,
 } from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import ModalDropdown from 'react-native-modal-dropdown';
 
 const Stack = createStackNavigator();
 
@@ -18,11 +20,14 @@ function MainPage({navigation}) {
   };
 
   const onPress2 = () => {
-    navigation.navigate('Mypage');
+    navigation.navigate('MyPage');
   };
 
   const onPress3 = () => {
     navigation.navigate('Aicover');
+  };
+  const onPress4 = () => {
+    navigation.navigate('PerfectScore');
   };
 
   return (
@@ -32,20 +37,28 @@ function MainPage({navigation}) {
           activeOpacity={0.8}
           style={styles.button01}
           onPress={onPress1}>
-          <Text style={styles.text01}>커뮤니티</Text>
+          <Text style={styles.text00}>커뮤니티</Text>
         </TouchableOpacity>
         <TouchableOpacity
           activeOpacity={0.8}
           style={styles.button01}
           onPress={onPress2}>
-          <Text style={styles.text01}>마이페이지</Text>
+          <Text style={styles.text00}>마이페이지</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity={0.8}
-          style={styles.button01}
-          onPress={onPress3}>
+        <ModalDropdown
+          options={['AI 커버 생성', '퍼펙트 스코어']}
+          dropdownTextStyle={styles.dropdownText}
+          dropdownStyle={styles.dropdownContainer}
+          initialScrollIndex={null}
+          onSelect={(index, value) => {
+            if (value === 'AI 커버 생성') {
+              navigation.navigate('AiCover');
+            } else if (value === '퍼펙트 스코어') {
+              navigation.navigate('PerfectScore');
+            }
+          }}>
           <Text style={styles.text01}>녹음하기</Text>
-        </TouchableOpacity>
+        </ModalDropdown>
       </View>
 
       <Text style={styles.additionalText}>나의 곡 추천</Text>
@@ -115,7 +128,7 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     marginRight: 240,
     marginTop: 30,
-    letterSpacing: -1,
+    letterSpacing: -1.5,
   },
   additionalText1: {
     color: 'black',
@@ -142,15 +155,35 @@ const styles = StyleSheet.create({
     backgroundColor: '#D9D7F1',
     paddingVertical: 10,
     paddingHorizontal: 20,
-    borderRadius: 40,
+    borderRadius: 10,
+  },
+  text00: {
+    color: 'black',
+    fontSize: 16,
+    fontWeight: '900',
+    letterSpacing: -1,
+    marginTop: -2.5,
   },
   text01: {
+    color: 'black',
+    fontSize: 16,
+    fontWeight: '900',
+    textAlign: 'center',
+    letterSpacing: -1,
+    marginTop: -2.5,
+    backgroundColor: '#D9D7F1',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+  },
+  dropdownText: {
     color: 'black',
     fontSize: 16,
     fontWeight: '900',
     letterSpacing: -1,
     marginTop: -3,
   },
+  dropdownContainer: {},
 });
 
 export default MainPage;

@@ -72,7 +72,7 @@ export default function VoiceRange({navigation}) {
 
   return (
     <View style={styles.pageContainer}>
-      <Text style={styles.title}>{`
+      <Text style={styles.title}>{`낮은 음의
 음역대 측정을
 진행하겠습니다`}</Text>
       <Text style={styles.title01}>{recordTime}</Text>
