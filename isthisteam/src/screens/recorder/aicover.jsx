@@ -2,24 +2,50 @@ import React, {useState} from 'react';
 import {
   View,
   Text,
-  StyleSheet,
   Image,
-  TouchableOpacity,
+  Button,
+  StyleSheet,
+  TextInput,
+  Alert,
   SafeAreaView,
   ScrollView,
-  TextInput,
+  TouchableOpacity,
 } from 'react-native';
+import {Picker} from '@react-native-picker/picker';
 import DocumentPicker from 'react-native-document-picker';
 import {launchImageLibrary} from 'react-native-image-picker';
 import ModalDropdown from 'react-native-modal-dropdown';
+import axios from 'axios';
 
-function Aicover() {
+const Aicover = () => {
+  const [musicFile, setMusicFile] = useState(null);
+  const [name, setName] = useState('');
   const [response, setResponse] = useState('');
-  const [imageFile, setImageFile] = useState('');
+  const [model, setModel] = useState('');
   const [textInput, setTextInput] = useState('');
   const [audioFile, setAudioFile] = useState(null);
+  const [imageFile, setImageFile] = useState('');
+  const [octave, setOctave] = useState('');
+  const [index, setIndex] = useState('');
+  const [error, setError] = useState('');
 
-  // 이미지 가져오기 함수
+  const onSelectAudio = async () => {
+    try {
+      const result = await DocumentPicker.pick({
+        type: [DocumentPicker.types.audio],
+      });
+
+      // Handle the result
+      if (Array.isArray(result)) {
+        setMusicFile(result[0]);
+      } else {
+        setMusicFile(result);
+      }
+    } catch (err) {
+      setError('Error picking music: ' + err.message);
+    }
+  };
+
   const onSelectImage = () => {
     launchImageLibrary(
       {
@@ -42,96 +68,139 @@ function Aicover() {
     );
   };
 
-  // 음원 파일 가져오기 함수
-  const onSelectAudio = async () => {
+  const uploadData = async () => {
     try {
-      const result = await DocumentPicker.pick({
-        type: [DocumentPicker.types.audio],
+      if (!musicFile) {
+        setError('Please select a music file');
+        return;
+      }
+
+      // const jsonString = `{
+      //     "name": "${name}",
+      //     "model": "${model}",
+      //     "octave": "${octave}",
+      //     "index": "${index}"
+      // }`
+
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('model', model);
+      formData.append('octave', octave);
+      formData.append('index', index);
+      formData.append('ai-song', {
+        uri: musicFile.uri,
+        type: 'audio/wav',
+        name: 'ai-demo.wav',
       });
 
-      console.log(
-        result.uri,
-        result.type, // mime 타입
-        result.name,
-        result.size,
+      const response = await axios.post(
+        'http://192.168.0.109:8080/api/ai-songs',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        },
       );
 
-      setAudioFile(result);
-    } catch (err) {
-      if (DocumentPicker.isCancel(err)) {
-        // 사용자가 취소한 경우
-      } else {
-        throw err;
-      }
+      console.log(response.data);
+      setError('');
+    } catch (error) {
+      console.error('Error uploading data:', error);
+      setError('Error uploading data: ' + error.message);
     }
-  };
-
-  // AI 커버 생성 함수
-  const onCreateAiCover = () => {
-    // imageFile, audioFile, textInput 등을 사용하여 AI 커버 생성하는 로직 구현
-    // 이 부분에 AI 커버 생성 로직을 작성하세요. from GPT !
-    console.log('AI 커버 생성 버튼이 눌렸습니다.');
-    console.log('Image File:', imageFile);
-    console.log('Audio File:', audioFile);
-    console.log('Text Input:', textInput);
-
-    // 실제 AI 커버 생성 로직을 구현하세요.
   };
 
   return (
     <SafeAreaView style={{backgroundColor: '#FFFFFF'}}>
       <ScrollView>
         <View style={styles.container}>
-          <View style={styles.contentContainer}>
-            <View style={styles.imageContainer}>
-              <Image
-                source={response ? {uri: response.assets[0].uri} : null}
-                style={styles.img}
-              />
-            </View>
+          <View style={styles.contentContainer} />
+          <View style={styles.imageContainer} />
+          <Image
+            source={response ? {uri: response.assets[0].uri} : null}
+            style={styles.img}
+          />
+        </View>
 
-            <View style={styles.rightContent}>
-              <TouchableOpacity
-                style={styles.imageButton}
-                onPress={onSelectImage}>
-                <Text style={styles.buttonText}>
-                  {imageFile ? '이미지 변경하기' : '이미지 추가하기'}
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.audioButton}
-                onPress={onSelectAudio}>
-                <Text style={styles.buttonText}>
-                  {audioFile ? '음원 파일 변경하기' : '음원 파일 추가하기'}
-                </Text>
-              </TouchableOpacity>
-              <TextInput
-                style={styles.textInput}
-                placeholder="[ 가수 - 노래 제목 ] 을 입력하세요"
-                value={textInput}
-                onChangeText={text => setTextInput(text)}
+        <View style={styles.rightContent}>
+          <TouchableOpacity style={styles.imageButton} onPress={onSelectImage}>
+            <Text style={styles.buttonText}>
+              {imageFile ? '이미지  변경하기' : '이미지 추가하기'}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.audioButton} onPress={onSelectAudio}>
+            <Text style={styles.buttonText}>
+              {audioFile ? '음원 파일 변경하기' : '음원 파일 추가하기'}
+            </Text>
+          </TouchableOpacity>
+
+          <TextInput
+            style={styles.textInput}
+            placeholder="본인의 이름과 노래 제목을 입력하세요"
+            value={name}
+            onChangeText={text => setName(text)}
+          />
+          <TextInput
+            style={styles.reference}
+            placeholder="0~1까지의 숫자로 참조율을 적어주세요."
+            value={index}
+            onChangeText={text => setIndex(text)}
+            keyboardType="numeric"
+          />
+          <ModalDropdown
+            style={styles.dropdownText}
+            options={[
+              'hyungku50',
+              'hyungku100',
+              'hyungku250',
+              'hyungku2500',
+              'Jungkook',
+              'Jimin',
+            ]}
+            dropdownTextStyle={styles.dropdownText}
+            dropdownStyle={styles.dropdownContainer}
+            textoptionsStyle={styles.options01}
+            initialScrollIndex={0}>
+            <Text style={styles.text01}>목소리 선택</Text>
+          </ModalDropdown>
+
+          {/* <Picker
+            selectedValue={model}
+            onValueChange={(itemValue, itemIndex) => setModel(itemValue)}
+            style={styles.picker}>
+            <Picker.Item label="목소리 모델 선택" value="" />
+            <Picker.Item label="여형구" value="hyungku250" />
+            <Picker.Item label="더 멋진 여형구" value="hyungku2500" />
+            <Picker.Item label="지민" value="Jimin" />
+            <Picker.Item label="정국" value="Jungkook" />
+          </Picker> */}
+
+          <Picker
+            selectedValue={octave}
+            onValueChange={(itemValue, itemIndex) => setOctave(itemValue)}
+            style={styles.picker}>
+            <Picker.Item label="옥타브 선택" value="" />
+            {Array.from({length: 25}, (_, i) => i - 12).map(value => (
+              <Picker.Item
+                key={value.toString()}
+                label={value.toString()}
+                value={value.toString()}
+                style={styles.pickerItem}
               />
-              <ModalDropdown
-                textoptions={['성시경', '브루노마스', '아이유', '조세호']}
-                dropdownTextStyle={styles.dropdownText}
-                dropdownStyle={styles.dropdownContainer}
-                textoptionsStyle={styles.options01}
-                initialScrollIndex={null}>
-                <Text style={styles.text01}>목소리 선택</Text>
-              </ModalDropdown>
-              <TouchableOpacity
-                style={styles.createAiCoverButton}
-                onPress={onCreateAiCover} // AI 커버 생성 함수 연결
-              >
-                <Text style={styles.createAiCoverText}>AI 커버 생성</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
+            ))}
+          </Picker>
+
+          <TouchableOpacity style={styles.made} onPress={uploadData}>
+            <Text style={styles.madetext}>Ai 데모곡 생성</Text>
+          </TouchableOpacity>
+
+          {error ? <Text style={{color: 'red'}}>{error}</Text> : null}
         </View>
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -153,18 +222,17 @@ const styles = StyleSheet.create({
   img: {
     height: 120,
     width: 120,
-    marginTop: -120,
-    marginBottom: 20,
-    marginLeft: 40,
+    marginTop: 60,
   },
   imageButton: {
     backgroundColor: '#000',
     padding: 7,
     width: 140,
     borderRadius: 5,
-    marginTop: 120,
+    marginTop: 90,
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: -90,
+    marginLeft: 10,
   },
   audioButton: {
     backgroundColor: '#000',
@@ -174,7 +242,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
     alignItems: 'center',
     marginRight: 0,
-    marginBottom: 10,
+    marginBottom: 30,
+    marginLeft: 10,
+  },
+  options: {
+    color: 'black',
   },
   buttonText: {
     fontSize: 16,
@@ -194,22 +266,62 @@ const styles = StyleSheet.create({
     padding: 10,
     width: 330,
     height: 40,
-    marginLeft: -200,
+    marginLeft: 30,
+    letterSpacing: -1,
+    textAlign: 'center',
+    color: 'black',
+    borderRadius: 10,
+  },
+  dropdownText: {
+    fontSize: 16,
+    color: 'black',
+    marginLeft: 230,
+    letterSpacing: -1.5,
+    lineHeight: 18,
+  },
+  reference: {
+    fontSize: 14,
+    borderWidth: 1,
+    marginTop: 10,
+    borderColor: '#000',
+    padding: 10,
+    width: 330,
+    height: 40,
+    marginLeft: 30,
     letterSpacing: -1,
     textAlign: 'center',
     color: 'black',
     borderRadius: 10,
   },
   dropdownContainer: {
-    borderWidth: 1,
-    borderColor: '#000',
-    padding: 5,
-    marginLeft: -200,
+    fontSize: 16,
+    color: 'white',
+    marginLeft: 230,
+    letterSpacing: -1.5,
+    lineHeight: 18,
     width: 330,
-    height: 40,
-    letterSpacing: -1,
-    textAlign: 'center',
+  },
+  options01: {
+    fontSize: 16,
     color: 'black',
+    letterSpacing: -1.5,
+    lineHeight: 18,
+  },
+  made: {
+    backgroundColor: '#000',
+    padding: 7,
+    width: 140,
+    borderRadius: 5,
+    marginTop: 30,
+    alignItems: 'center',
+    marginBottom: 400,
+    marginLeft: 10,
+  },
+  madetext: {
+    fontSize: 16,
+    color: 'white',
+    letterSpacing: -1.5,
+    lineHeight: 18,
   },
   text01: {
     borderWidth: 1,
@@ -224,11 +336,26 @@ const styles = StyleSheet.create({
     color: 'black',
     borderRadius: 10,
   },
-  options01: {
+  picker: {
+    borderWidth: 1,
+    borderColor: '#000',
+    marginTop: 10,
+    width: 330,
+    height: 40,
+    marginLeft: 20,
+    letterSpacing: -1,
+    textAlign: 'center',
+    color: 'black',
+    borderRadius: 10,
+  },
+  pickerItem: {
     fontSize: 16,
-    color: 'white',
-    letterSpacing: -1.5,
-    lineHeight: 18,
+    color: 'black',
+  },
+  pickerLabel: {
+    letterSpacing: -1,
+    fontSize: 16,
+    color: 'black',
   },
   createAiCoverButton: {},
   createAiCoverText: {

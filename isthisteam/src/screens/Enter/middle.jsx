@@ -78,7 +78,7 @@ const Middle = ({navigation}) => {
             '본인의 포지션을 미리 결정해주시면, \n더 나은 서비스를 제공받으실 수 있습니다.',
         },
         {
-          backgroundColor: '#FFB2A9',
+          backgroundColor: '#FFBB5C',
           image: (
             <Image
               source={require('../../../android/app/assets/images/middle04.png')}
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
   imageStyle: {
     width: 200,
     height: 200,
-    marginTop: -200,
+    marginTop: -100,
   },
 });
 

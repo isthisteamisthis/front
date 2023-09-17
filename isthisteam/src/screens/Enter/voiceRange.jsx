@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {View, Text, Button, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  Button,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import AudioRecorderPlayer from 'react-native-audio-recorder-player';
 
 const audioRecorderPlayer = new AudioRecorderPlayer();
@@ -10,6 +17,15 @@ export default function VoiceRange({navigation}) {
 
   const onPress = () => {
     navigation.navigate('VoiceRangehigh');
+  };
+  const onPress00 = () => {
+    onStartRecord();
+  };
+  const onPress01 = () => {
+    onStopRecord();
+  };
+  const onPress02 = () => {
+    sendFileToServer();
   };
 
   const onStartRecord = async () => {
@@ -59,14 +75,21 @@ export default function VoiceRange({navigation}) {
 
         if (response.ok) {
           console.log('성공!');
+          // 성공할 때 알람 창을 표시
+          alert('파일 업로드 성공!');
         } else {
           console.error('실패');
+          // 실패할 때 알람 창을 표시
+          alert('파일 업로드 실패');
         }
       } catch (error) {
         console.error('에러: ', error);
+        // 에러 발생 시 알람 창을 표시
+        alert('파일 업로드 중 오류 발생');
       }
     } else {
       console.log('음원 파일 없음');
+      alert('음원 파일이 없습니다.');
     }
   };
 
@@ -80,22 +103,41 @@ export default function VoiceRange({navigation}) {
         style={
           styles.title00
         }>{`본인이 낼 수 있는 가장 낮은 음을 내주세요`}</Text>
-      <Button title="  녹음 시작  " onPress={() => onStartRecord()}></Button>
-      <Button title="  녹음 완료  " onPress={() => onStopRecord()}></Button>
-      <Button
-        title="      전송      "
-        onPress={() => sendFileToServer()}></Button>
       <TouchableOpacity
         activeOpacity={0.8}
         style={styles.button02}
+        onPress={onPress00}>
+        <Text style={styles.text01}>녹음 시작</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={styles.button02}
+        onPress={onPress01}>
+        <Text style={styles.text01}>녹음 중지</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={styles.button02}
+        onPress={onPress02}>
+        <Text style={styles.text01}>전송</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={styles.button03}
         onPress={onPress}>
-        <Text style={styles.text01}>다음으로</Text>
+        <Text style={styles.text02}>다음으로</Text>
       </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  image: {
+    width: 120,
+    height: 50,
+    marginTop: -50,
+    marginBottom: 60,
+  },
   pageContainer: {
     flex: 1,
     justifyContent: 'center',
@@ -138,6 +180,19 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   button02: {
+    backgroundColor: '#4F709C',
+    // paddingTop: -5,
+    width: 130,
+    height: 30,
+    padding: 1,
+    textAlign: 'center',
+    marginLeft: 3,
+    borderRadius: 7,
+    margin: 2,
+    alignItems: 'center',
+    // borderWidth: 1,
+  },
+  button03: {
     marginTop: 40,
     paddingTop: -7,
     width: 100,
@@ -150,6 +205,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#F4F4F4',
   },
   text01: {
+    marginTop: 2,
+    color: 'white',
+    fontWeight: '800',
+    letterSpacing: -1,
+  },
+  text02: {
     marginTop: 2,
     color: 'black',
     fontWeight: '800',

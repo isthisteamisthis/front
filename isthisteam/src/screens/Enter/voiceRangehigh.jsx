@@ -8,8 +8,17 @@ export default function VoiceRange({navigation}) {
   const [recordTime, setRecordTime] = useState('00:00');
   const [recordedFilePath, setRecordedFilePath] = useState(null);
 
-  const onPress = () => {
+  const onPress03 = () => {
     navigation.navigate('Mainpage');
+  };
+  const onPress00 = () => {
+    onStartRecord();
+  };
+  const onPress01 = () => {
+    onStopRecord();
+  };
+  const onPress02 = () => {
+    sendFileToServer();
   };
 
   const onStartRecord = async () => {
@@ -40,7 +49,7 @@ export default function VoiceRange({navigation}) {
     if (recordedFilePath) {
       try {
         // const apiUrl = 'http://10.0.2.2:8080/api/perfect-scores';
-        const apiUrl = 'http://192.168.0.109:8080/api/min-voice-range';
+        const apiUrl = 'http://192.168.0.109:8080/api/max-voice-range';
 
         const formData = new FormData();
         formData.append('voice-range', {
@@ -80,16 +89,29 @@ export default function VoiceRange({navigation}) {
         style={
           styles.title00
         }>{`본인이 낼 수 있는 가장 높은 음을 내주세요`}</Text>
-      <Button title="  녹음 시작  " onPress={() => onStartRecord()}></Button>
-      <Button title="  녹음 완료  " onPress={() => onStopRecord()}></Button>
-      <Button
-        title="      전송      "
-        onPress={() => sendFileToServer()}></Button>
       <TouchableOpacity
         activeOpacity={0.8}
         style={styles.button02}
-        onPress={onPress}>
-        <Text style={styles.text01}>입장하기</Text>
+        onPress={onPress00}>
+        <Text style={styles.text01}>녹음 시작</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={styles.button02}
+        onPress={onPress01}>
+        <Text style={styles.text01}>녹음 중지</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={styles.button02}
+        onPress={onPress02}>
+        <Text style={styles.text01}>전송</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={styles.button03}
+        onPress={onPress03}>
+        <Text style={styles.text02}>입장하기</Text>
       </TouchableOpacity>
     </View>
   );
@@ -138,6 +160,19 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   button02: {
+    backgroundColor: '#4F709C',
+    // paddingTop: -5,
+    width: 130,
+    height: 30,
+    padding: 1,
+    textAlign: 'center',
+    marginLeft: 3,
+    borderRadius: 7,
+    margin: 2,
+    alignItems: 'center',
+    // borderWidth: 1,
+  },
+  button03: {
     marginTop: 40,
     paddingTop: -7,
     width: 100,
@@ -150,6 +185,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#F4F4F4',
   },
   text01: {
+    marginTop: 2,
+    color: 'white',
+    fontWeight: '800',
+    letterSpacing: -1,
+  },
+  text02: {
     marginTop: 2,
     color: 'black',
     fontWeight: '800',
