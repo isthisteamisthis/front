@@ -9,11 +9,23 @@
     <application
       android:name=".MainApplication"
       android:label="@string/app_name"
-      android:allowBackup="false"
+      android:allowBackup="true"
       android:theme="@style/AppTheme"
       android:src="@drawable/logoofsepp"
       android:icon="@mipmap/logoofseppiconn"
       >
+
+      <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+        android:exported="true">
+      
+    <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:host="oauth"
+            android:scheme="kakaotest" />
+    </intent-filter>
+</activity>
       
       <activity
         android:name=".MainActivity"

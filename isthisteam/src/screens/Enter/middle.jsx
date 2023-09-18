@@ -27,7 +27,7 @@ const Next = ({...props}) => <Button title="Next" color="#000000" {...props} />;
 const Done = ({navigation}) => (
   <TouchableOpacity
     style={{marginHorizontal: 8}}
-    onPress={() => navigation.navigate('Select')}>
+    onPress={() => navigation.navigate('Login')}>
     <Text style={{fontSize: 16}}>Done</Text>
   </TouchableOpacity>
 );
@@ -39,7 +39,7 @@ const Middle = ({navigation}) => {
       NextButtonComponent={Next}
       DoneButtonComponent={() => <Done navigation={navigation} />}
       onSkip={() => navigation.replace('mainpage')}
-      onDone={() => navigation.navigate('select')}
+      onDone={() => navigation.navigate('login')}
       pages={[
         {
           backgroundColor: '#FFF5EB',

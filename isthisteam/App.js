@@ -8,17 +8,28 @@ import ModalDropdown from 'react-native-modal-dropdown';
 import Onboarding from 'react-native-onboarding-swiper';
 import Swiper from 'react-native-swiper';
 import {Swipeable, GestureHandlerRootView} from 'react-native-gesture-handler';
+
+// enter -
 import Splash from './src/screens/Enter/splash';
 import Select from './src/screens/Enter/select';
-import MyPage from './src/screens/Main/mypage';
-import VoiceRange from './src/screens/Enter/voiceRange';
-import mainpage from './src/screens/Main/mainpage';
 import Middle from './src/screens/Enter/middle';
+import VoiceRange from './src/screens/Enter/voiceRange';
 import VoiceRangehigh from './src/screens/Enter/voiceRangehigh';
+import Login from './src/screens/Enter/login';
+import Logout from './src/screens/Enter/logout';
+// import SongDetail from './src/screens/Main/songDetail';
+
+// main -
+import MyPage from './src/screens/Main/mypage';
+import mainpage from './src/screens/Main/mainpage';
 import Community from './src/screens/Main/commuity';
-import Aicover from './src/screens/recorder/aicover';
 // import ChatModal from './src/screens/Main/ChatModal';
 // import ChatPage from './src/screens/Main/chatPage';
+// import Login from './src/screens/Enter/login';
+
+// record -
+import Aicover from './src/screens/recorder/aicover';
+import PerfectScore from './src/screens/recorder/perfectscore';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -54,6 +65,16 @@ function App() {
             options={{headerShown: false}}
           />
           <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Logout"
+            component={Logout}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
             name="Mainpage"
             component={mainpage}
             options={{headerShown: false}}
@@ -68,13 +89,23 @@ function App() {
             component={MyPage}
             options={{headerShown: false}}
           />
+          {/* <Stack.Screen
+            name="SongDetail"
+            component={SongDetail}
+            options={{headerShown: false}}
+          /> */}
           <Stack.Screen
             name="AiCover"
             component={Aicover}
             options={{headerShown: false}}
           />
-          {/* <Stack.Screen name="ChatModal" component={ChatModal} />
-          <Stack.Screen name="ChatPage" component={ChatPage} /> */}
+          {/* <Stack.Screen
+            name="PerfectScore"
+            component={PerfectScore}
+            options={{headerShown: false}}
+          /> */}
+          {/* <Stack.Screen name="ChatModal" component={ChatModal} options={{headerShown: false} />
+          <Stack.Screen name="ChatPage" component={ChatPage} options={{headerShown: false} /> */}
         </Stack.Navigator>
       </GestureHandlerRootView>
     </NavigationContainer>

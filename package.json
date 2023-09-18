@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "react-native-document-picker": "^9.0.1",
-    "react-native-screen-wrapper": "^1.0.4"
-  }
-}

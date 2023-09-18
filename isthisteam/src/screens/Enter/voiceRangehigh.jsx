@@ -68,14 +68,18 @@ export default function VoiceRange({navigation}) {
 
         if (response.ok) {
           console.log('성공!');
+          alert('파일 업로드를 성공했습니다');
         } else {
           console.error('실패');
+          alert('파일 업로드를 실패했습니다');
         }
       } catch (error) {
         console.error('에러: ', error);
+        alert('파일 업로드 중 오류가 발생했습니다');
       }
     } else {
       console.log('음원 파일 없음');
+      alert('음원 파일이 존재하지 않습니다');
     }
   };
 

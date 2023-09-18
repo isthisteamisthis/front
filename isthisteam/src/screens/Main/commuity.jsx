@@ -15,13 +15,13 @@ const data = [
     id: 'rachaz',
     title: '안녕이라고 말하지마',
     date: '2023-09-23',
-    thumbnail: '../../../android/app/assets/images/exam',
+    // thumbnail: '../../../android/app/assets/images/exam',
   },
   {
     id: 'dylan',
     title: 'smoke',
     date: '2023-02-01',
-    thumbnail: 'url_to_thumbnail_image_2.jpg',
+    // thumbnail: 'url_to_thumbnail_image_2.jpg',
   },
 ];
 

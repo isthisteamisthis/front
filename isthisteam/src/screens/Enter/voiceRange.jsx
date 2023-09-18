@@ -75,26 +75,27 @@ export default function VoiceRange({navigation}) {
 
         if (response.ok) {
           console.log('성공!');
-          // 성공할 때 알람 창을 표시
-          alert('파일 업로드 성공!');
+          alert('파일 업로드를 성공했습니다');
         } else {
           console.error('실패');
-          // 실패할 때 알람 창을 표시
-          alert('파일 업로드 실패');
+          alert('파일 업로드를 실패했습니다');
         }
       } catch (error) {
         console.error('에러: ', error);
-        // 에러 발생 시 알람 창을 표시
-        alert('파일 업로드 중 오류 발생');
+        alert('파일 업로드 중 오류가 발생했습니다');
       }
     } else {
       console.log('음원 파일 없음');
-      alert('음원 파일이 없습니다.');
+      alert('음원 파일이 존재하지 않습니다');
     }
   };
 
   return (
     <View style={styles.pageContainer}>
+      {/* <Image
+        source={require('../../../android/app/assets/images/headers01.png')}
+        style={styles.image}
+      /> */}
       <Text style={styles.title}>{`낮은 음의
 음역대 측정을
 진행하겠습니다`}</Text>
@@ -132,12 +133,6 @@ export default function VoiceRange({navigation}) {
 }
 
 const styles = StyleSheet.create({
-  image: {
-    width: 120,
-    height: 50,
-    marginTop: -50,
-    marginBottom: 60,
-  },
   pageContainer: {
     flex: 1,
     justifyContent: 'center',

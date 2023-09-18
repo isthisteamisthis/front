@@ -241,9 +241,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '900',
     letterSpacing: -1,
-    marginTop: -3,
+    marginTop: -1,
   },
-  dropdownContainer: {},
+  dropdownContainer: {
+    height: 80,
+  },
 });
 
 export default MainPage;
