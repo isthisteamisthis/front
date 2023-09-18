@@ -6,15 +6,18 @@ import DocumentPicker from 'react-native-document-picker';
 import {launchImageLibrary} from 'react-native-image-picker';
 import ModalDropdown from 'react-native-modal-dropdown';
 import Onboarding from 'react-native-onboarding-swiper';
+// import Login from './src/screens/Enter/login';
 import Swiper from 'react-native-swiper';
 import {Swipeable, GestureHandlerRootView} from 'react-native-gesture-handler';
 
 // enter -
+import MyTab from './src/components/myTab';
 import Splash from './src/screens/Enter/splash';
 import Select from './src/screens/Enter/select';
 import Middle from './src/screens/Enter/middle';
 import VoiceRange from './src/screens/Enter/voiceRange';
 import VoiceRangehigh from './src/screens/Enter/voiceRangehigh';
+import Reselect from './src/screens/Enter/reselect';
 import Login from './src/screens/Enter/login';
 import Logout from './src/screens/Enter/logout';
 // import SongDetail from './src/screens/Main/songDetail';
@@ -25,7 +28,6 @@ import mainpage from './src/screens/Main/mainpage';
 import Community from './src/screens/Main/commuity';
 // import ChatModal from './src/screens/Main/ChatModal';
 // import ChatPage from './src/screens/Main/chatPage';
-// import Login from './src/screens/Enter/login';
 
 // record -
 import Aicover from './src/screens/recorder/aicover';
@@ -64,6 +66,11 @@ function App() {
             component={VoiceRangehigh}
             options={{headerShown: false}}
           />
+          {/* <Stack.Screen
+            name="Reselect"
+            component={Reselect}
+            options={{headerShown: false}}
+          /> */}
           <Stack.Screen
             name="Login"
             component={Login}
@@ -99,6 +106,11 @@ function App() {
             component={Aicover}
             options={{headerShown: false}}
           />
+          {/* <Stack.Screen
+            name="MyTab"
+            component={MyTab}
+            options={{headerShown: false}}
+          /> */}
           {/* <Stack.Screen
             name="PerfectScore"
             component={PerfectScore}

@@ -7,7 +7,9 @@ import App from './App';
 import {name as appName} from './app.json';
 
 // enter -
+import MyTab from './src/components/myTab';
 import Splash from './src/screens/Enter/splash';
+import Reselect from './src/screens/Enter/reselect';
 import Login from './src/screens/Enter/login';
 import Logout from './src/screens/Enter/logout';
 import Select from './src/screens/Enter/select';

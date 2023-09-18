@@ -39,7 +39,7 @@ const Middle = ({navigation}) => {
       NextButtonComponent={Next}
       DoneButtonComponent={() => <Done navigation={navigation} />}
       onSkip={() => navigation.replace('mainpage')}
-      onDone={() => navigation.navigate('login')}
+      onDone={() => navigation.navigate('Login')}
       pages={[
         {
           backgroundColor: '#FFF5EB',

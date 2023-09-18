@@ -12,6 +12,7 @@ import {
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import ModalDropdown from 'react-native-modal-dropdown';
+import MyTab from '../../components/myTab';
 
 const Stack = createStackNavigator();
 
@@ -85,6 +86,7 @@ function MainPage({navigation}) {
         showsHorizontalScrollIndicator={false}
         horizontal={true}
       />
+      <MyTab />
     </View>
   );
 }
@@ -164,6 +166,7 @@ const styles = StyleSheet.create({
     // backgroundColor: 'black',
   },
   image: {
+    marginTop: 10,
     width: 120,
     height: 50,
   },
