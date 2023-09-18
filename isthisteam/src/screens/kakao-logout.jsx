@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity, Button} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, Button } from 'react-native';
 import * as KakaoLogins from '@react-native-seoul/kakao-login';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Kakaologout() {
   const navigation = useNavigation();

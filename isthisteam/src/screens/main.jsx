@@ -48,7 +48,6 @@ function Main() {
 
   return (
     <View>
-      <Text>Start!</Text>
       <Button
         title="높낮이 측정하러 가기"
         onPress={() => navigation.navigate('VoiceRange')}

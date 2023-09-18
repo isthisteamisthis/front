@@ -20,11 +20,11 @@ function App({navigation}) {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Main">
-        <Stack.Screen name="Main" component={Main} />
-        <Stack.Screen name="VoiceRange" component={VoiceRange} />
-        <Stack.Screen name="KakaoLogin" component={KakaoLogin} />
-        <Stack.Screen name="KakaoLogout" component={KakaoLogout} />
-        <Stack.Screen name="MyPage" component={MyPage} />
+        <Stack.Screen name="Main" component={Main} options={{ headerbackVisible: false, headerShown: false }}/>
+        <Stack.Screen name="VoiceRange" component={VoiceRange} options={{ headerbackVisible: false, headerShown: false }}/>
+        <Stack.Screen name="KakaoLogin" component={KakaoLogin} options={{ headerbackVisible: false, headerShown: false }} />
+        <Stack.Screen name="KakaoLogout" component={KakaoLogout} options={{ headerbackVisible: false, headerShown: false }} />
+        <Stack.Screen name="MyPage" component={MyPage} options={{ headerbackVisible: false, headerShown: false }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

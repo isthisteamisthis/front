@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
-import {View, Text, TouchableOpacity, BackHandler, Alert} from 'react-native';
+import { View, TouchableOpacity, BackHandler, Alert, Image} from 'react-native';
 import * as KakaoLogins from '@react-native-seoul/kakao-login';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import Config from "react-native-config";
 
 export default function KakaoLogin() {
@@ -83,10 +83,19 @@ export default function KakaoLogin() {
   }, [navigation]);
 
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <TouchableOpacity onPress={handleKakaoLogin}>
-        <Text>Kakao Login</Text>
-      </TouchableOpacity>
-    </View>
+    <>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Image
+          source={require('../../android/app/assets/images/lalalia_large_logo.png')}
+          style={{ width: 210, height: 85, marginTop: 250, marginBottom: 50 }}
+        />
+        <TouchableOpacity onPress={handleKakaoLogin}>
+          <Image
+            source={require('../../android/app/assets/images/kakao_login_large_narrow.png')}
+            style={{ width: 200, height: 50, marginTop: 150, marginBottom: 50 }}
+          />
+        </TouchableOpacity>
+      </View>
+    </>
   );
 }
