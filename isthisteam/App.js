@@ -10,25 +10,25 @@ import Swiper from 'react-native-swiper';
 import {Swipeable, GestureHandlerRootView} from 'react-native-gesture-handler';
 
 // enter -
-import Splash from './src/screens/Enter/splash';
-import Select from './src/screens/Enter/select';
-import Middle from './src/screens/Enter/middle';
-import VoiceRange from './src/screens/Enter/voiceRange';
-import VoiceRangehigh from './src/screens/Enter/voiceRangehigh';
-import KakaoLogin from './src/screens/Enter/kakaoLogin';
-import KakaoLogout from './src/screens/Enter/kakaoLogout';
-// import SongDetail from './src/screens/Main/songDetail';
+import splash from './src/screens/Enter/splash';
+import select from './src/screens/Enter/select';
+import middle from './src/screens/Enter/middle';
+import voiceRange from './src/screens/Enter/voiceRange';
+import voiceRangeHigh from './src/screens/Enter/voiceRangeHigh';
+import kakaoLogin from './src/screens/Enter/kakaoLogin';
+import kakaoLogout from './src/screens/Enter/kakaoLogout';
+// import songDetail from './src/screens/Main/songDetail';
 
 // main -
-import MyPage from './src/screens/Main/myPage';
+import myPage from './src/screens/Main/myPage';
 import mainpage from './src/screens/Main/mainPage';
 import Community from './src/screens/Main/commuity';
 // import ChatModal from './src/screens/Main/ChatModal';
 // import ChatPage from './src/screens/Main/chatPage';
 
 // record -
-import Aicover from './src/screens/recorder/aiCover';
-import PerfectScore from './src/screens/recorder/perfectScore';
+import aiCover from './src/screens/recorder/aiCover';
+import perfectScore from './src/screens/recorder/perfectScore';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -40,42 +40,37 @@ function App() {
         <Stack.Navigator initialRouteName="Splash">
           <Stack.Screen
             name="Splash"
-            component={Splash}
+            component={splash}
             options={{headerShown: false}}
           />
           <Stack.Screen
             name="Select"
-            component={Select}
+            component={select}
             options={{headerShown: false}}
           />
           <Stack.Screen
             name="Middle"
-            component={Middle}
+            component={middle}
             options={{headerShown: false}}
           />
           <Stack.Screen
             name="VoiceRange"
-            component={VoiceRange}
+            component={voiceRange}
             options={{headerShown: false}}
           />
           <Stack.Screen
             name="VoiceRangehigh"
-            component={VoiceRangehigh}
+            component={voiceRangeHigh}
             options={{headerShown: false}}
           />
-          {/* <Stack.Screen
-            name="Reselect"
-            component={Reselect}
-            options={{headerShown: false}}
-          /> */}
           <Stack.Screen
             name="KakaoLogin"
-            component={KakaoLogin}
+            component={kakaoLogin}
             options={{headerbackVisible: false, headerShown: false}}
           />
           <Stack.Screen
             name="KakaoLogout"
-            component={KakaoLogout}
+            component={kakaoLogout}
             options={{headerbackVisible: false, headerShown: false}}
           />
           <Stack.Screen
@@ -90,24 +85,24 @@ function App() {
           />
           <Stack.Screen
             name="MyPage"
-            component={MyPage}
+            component={myPage}
             options={{headerShown: false}}
           />
           {/* <Stack.Screen
             name="SongDetail"
-            component={SongDetail}
+            component={songDetail}
             options={{headerShown: false}}
           /> */}
           <Stack.Screen
             name="AiCover"
-            component={Aicover}
+            component={aiCover}
             options={{headerShown: false}}
           />
-          {/* <Stack.Screen
+          <Stack.Screen
             name="PerfectScore"
-            component={PerfectScore}
+            component={perfectScore}
             options={{headerShown: false}}
-          /> */}
+          />
           {/* <Stack.Screen name="ChatModal" component={ChatModal} options={{headerShown: false} />
           <Stack.Screen name="ChatPage" component={ChatPage} options={{headerShown: false} /> */}
         </Stack.Navigator>

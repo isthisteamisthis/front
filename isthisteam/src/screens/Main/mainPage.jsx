@@ -24,12 +24,12 @@ function MainPage({navigation}) {
     navigation.navigate('MyPage');
   };
 
-  const onPress3 = () => {
-    navigation.navigate('Aicover');
-  };
-  const onPress4 = () => {
-    navigation.navigate('PerfectScore');
-  };
+  // const onPress3 = () => {
+  //   navigation.navigate('Aicover');
+  // };
+  // const onPress4 = () => {
+  //   navigation.navigate('perfectScore');
+  // };
 
   return (
     <View style={styles.container}>
