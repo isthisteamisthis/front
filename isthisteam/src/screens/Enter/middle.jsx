@@ -22,12 +22,22 @@ const Dots = ({selected}) => {
   );
 };
 
-const Skip = ({...props}) => <Button title="Skip" color="#000000" {...props} />;
-const Next = ({...props}) => <Button title="Next" color="#000000" {...props} />;
+const Skip = ({navigation}) => (
+  <TouchableOpacity
+    style={{marginHorizontal: 20}}
+    onPress1={() => navigation.navigate('KakaoLogin')}>
+    <Text style={{fontSize: 16}}>Skip</Text>
+  </TouchableOpacity>
+);
+const Next = ({...props}) => (
+  <TouchableOpacity style={{marginHorizontal: 20}}>
+    <Text style={{fontSize: 16}}>Next</Text>
+  </TouchableOpacity>
+);
 const Done = ({navigation}) => (
   <TouchableOpacity
-    style={{marginHorizontal: 8}}
-    onPress={() => navigation.navigate('Login')}>
+    style={{marginHorizontal: 50}}
+    onPress={() => navigation.navigate('KakaoLogin')}>
     <Text style={{fontSize: 16}}>Done</Text>
   </TouchableOpacity>
 );
@@ -39,7 +49,7 @@ const Middle = ({navigation}) => {
       NextButtonComponent={Next}
       DoneButtonComponent={() => <Done navigation={navigation} />}
       onSkip={() => navigation.replace('mainpage')}
-      onDone={() => navigation.navigate('Login')}
+      onDone={() => navigation.navigate('KakaoLogin')}
       pages={[
         {
           backgroundColor: '#FFF5EB',
@@ -114,6 +124,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  skip: {
+    backgroundColor: 'none',
+  },
+  next: {},
   imageStyle: {
     width: 200,
     height: 200,

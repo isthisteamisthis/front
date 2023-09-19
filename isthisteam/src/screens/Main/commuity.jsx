@@ -29,10 +29,10 @@ function Community({navigation}) {
   const renderItem = ({item}) => (
     <TouchableOpacity onPress={() => navigation.navigate('SongDetail')}>
       <View style={styles.item}>
-        <Image
+        {/* <Image
           source={require('../../../android/app/assets/images/logoofsepp.png')}
           style={styles.image}
-        />
+        /> */}
         <Image source={{uri: item.thumbnail}} style={styles.thumbnail} />
         <View style={styles.itemInfo}>
           <Text style={styles.title}>{item.title}</Text>

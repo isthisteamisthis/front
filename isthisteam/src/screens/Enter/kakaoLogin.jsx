@@ -4,45 +4,46 @@ import * as KakaoLogins from '@react-native-seoul/kakao-login';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
 import Config from 'react-native-config';
+// import Mainpage from '../Main/mainpage';
 
-export default function Login() {
+export default function KakaoLogin() {
   const navigation = useNavigation();
 
   // 하드웨어 뒤로가기 버튼 클릭 시 동작
   // Alert 창 : 앱을 종료할건지 묻고, 확인을 선택하면 앱 종료
-  useEffect(() => {
-    const backAction = () => {
-      Alert.alert(
-        '앱 종료',
-        '앱을 종료하시겠습니까?',
-        [
-          {
-            text: '취소',
-            onPress: () => null,
-            style: 'cancel',
-          },
-          {
-            text: '확인',
-            onPress: () => {
-              BackHandler.exitApp(); // 앱 종료
-            },
-          },
-        ],
-        {cancelable: false},
-      );
+  // useEffect(() => {
+  //   const backAction = () => {
+  //     Alert.alert(
+  //       '앱 종료',
+  //       '앱을 종료하시겠습니까?',
+  //       [
+  //         {
+  //           text: '취소',
+  //           onPress: () => null,
+  //           style: 'cancel',
+  //         },
+  //         {
+  //           text: '확인',
+  //           onPress: () => {
+  //             BackHandler.exitApp(); // 앱 종료
+  //           },
+  //         },
+  //       ],
+  //       {cancelable: false},
+  //     );
 
-      return true; // 기본적인 하드웨어 뒤로가기 동작 방지
-    };
+  //   return true; // 기본적인 하드웨어 뒤로가기 동작 방지
+  // };
 
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      backAction,
-    );
+  // const backHandler = BackHandler.addEventListener(
+  //   'hardwareBackPress',
+  //   backAction,
+  // );
 
-    return () => {
-      backHandler.remove(); // 컴포넌트가 언마운트 될 때 이벤트 리스너 해제
-    };
-  }, []);
+  //   return () => {
+  //     backHandler.remove(); // 컴포넌트가 언마운트 될 때 이벤트 리스너 해제
+  //   };
+  // }, []);
 
   const handleKakaoLogin = async () => {
     try {

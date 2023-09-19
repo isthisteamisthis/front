@@ -4,7 +4,7 @@ import * as KakaoLogins from '@react-native-seoul/kakao-login';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
 
-export default function Logout() {
+export default function KakaoLogout() {
   const navigation = useNavigation();
 
   const handleKakaoLogout = async () => {

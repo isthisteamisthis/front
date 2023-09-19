@@ -6,32 +6,29 @@ import DocumentPicker from 'react-native-document-picker';
 import {launchImageLibrary} from 'react-native-image-picker';
 import ModalDropdown from 'react-native-modal-dropdown';
 import Onboarding from 'react-native-onboarding-swiper';
-// import Login from './src/screens/Enter/login';
 import Swiper from 'react-native-swiper';
 import {Swipeable, GestureHandlerRootView} from 'react-native-gesture-handler';
 
 // enter -
-import MyTab from './src/components/myTab';
 import Splash from './src/screens/Enter/splash';
 import Select from './src/screens/Enter/select';
 import Middle from './src/screens/Enter/middle';
 import VoiceRange from './src/screens/Enter/voiceRange';
 import VoiceRangehigh from './src/screens/Enter/voiceRangehigh';
-import Reselect from './src/screens/Enter/reselect';
-import Login from './src/screens/Enter/login';
-import Logout from './src/screens/Enter/logout';
+import KakaoLogin from './src/screens/Enter/kakaoLogin';
+import KakaoLogout from './src/screens/Enter/kakaoLogout';
 // import SongDetail from './src/screens/Main/songDetail';
 
 // main -
-import MyPage from './src/screens/Main/mypage';
-import mainpage from './src/screens/Main/mainpage';
+import MyPage from './src/screens/Main/myPage';
+import mainpage from './src/screens/Main/mainPage';
 import Community from './src/screens/Main/commuity';
 // import ChatModal from './src/screens/Main/ChatModal';
 // import ChatPage from './src/screens/Main/chatPage';
 
 // record -
-import Aicover from './src/screens/recorder/aicover';
-import PerfectScore from './src/screens/recorder/perfectscore';
+import Aicover from './src/screens/recorder/aiCover';
+import PerfectScore from './src/screens/recorder/perfectScore';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -72,14 +69,14 @@ function App() {
             options={{headerShown: false}}
           /> */}
           <Stack.Screen
-            name="Login"
-            component={Login}
-            options={{headerShown: false}}
+            name="KakaoLogin"
+            component={KakaoLogin}
+            options={{headerbackVisible: false, headerShown: false}}
           />
           <Stack.Screen
-            name="Logout"
-            component={Logout}
-            options={{headerShown: false}}
+            name="KakaoLogout"
+            component={KakaoLogout}
+            options={{headerbackVisible: false, headerShown: false}}
           />
           <Stack.Screen
             name="Mainpage"
@@ -106,11 +103,6 @@ function App() {
             component={Aicover}
             options={{headerShown: false}}
           />
-          {/* <Stack.Screen
-            name="MyTab"
-            component={MyTab}
-            options={{headerShown: false}}
-          /> */}
           {/* <Stack.Screen
             name="PerfectScore"
             component={PerfectScore}
