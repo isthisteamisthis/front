@@ -11,18 +11,18 @@ function Header({username}) {
 }
 
 function Content({id, username, averageScore, introduction}) {
-  return (
-    <View style={styles.content}>
-      <Text style={styles.contentText}></Text>
-      <Text style={styles.label}>
-        {username} 님의 평균 점수 | {averageScore}
-      </Text>
-      <Text style={styles.label}>
-        자기소개
-        {introduction}
-      </Text>
-    </View>
-  );
+  // return (
+  // <View style={styles.content}>
+  //   <Text style={styles.contentText}></Text>
+  //   <Text style={styles.label}>
+  //     {username} 님의 평균 점수 | {averageScore}
+  //   </Text>
+  //   <Text style={styles.label}>
+  //     자기소개
+  //     {introduction}
+  //   </Text>
+  // </View>
+  // );
 }
 
 function Footer({onLogoutPress}) {
@@ -39,7 +39,7 @@ export default function MyPage() {
     username: 'raxchaz',
     id: 'rachaz',
     averageScore: 100,
-    introduction: '안녕하세요! 저는 React Native를 공부하고 있는 개발자입니다.',
+    introduction: '안녕하세요, 오늘은',
   });
 
   const handleLogout = () => {
