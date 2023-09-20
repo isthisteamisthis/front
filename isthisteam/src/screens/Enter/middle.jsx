@@ -16,17 +16,14 @@ const Dots = ({selected}) => {
         width: 5,
         height: 5,
         marginHorizontal: 3,
-        backgroundColor,
       }}
     />
   );
 };
 
 const Skip = ({navigation}) => (
-  <TouchableOpacity
-    style={{marginHorizontal: 20}}
-    onPress1={() => navigation.navigate('KakaoLogin')}>
-    <Text style={{fontSize: 16}}>Skip</Text>
+  <TouchableOpacity onPress={() => navigation.navigate('Select')}>
+    <Text style={styles.skip}>Skip</Text>
   </TouchableOpacity>
 );
 const Next = ({...props}) => (
@@ -37,7 +34,7 @@ const Next = ({...props}) => (
 const Done = ({navigation}) => (
   <TouchableOpacity
     style={{marginHorizontal: 50}}
-    onPress={() => navigation.navigate('KakaoLogin')}>
+    onPress={() => navigation.navigate('Select')}>
     <Text style={{fontSize: 16}}>Done</Text>
   </TouchableOpacity>
 );
@@ -45,14 +42,14 @@ const Done = ({navigation}) => (
 const Middle = ({navigation}) => {
   return (
     <Onboarding
-      SkipButtonComponent={Skip}
+      SkipButtonComponent={() => <Skip navigation={navigation} />}
       NextButtonComponent={Next}
       DoneButtonComponent={() => <Done navigation={navigation} />}
-      onSkip={() => navigation.replace('mainpage')}
-      onDone={() => navigation.navigate('KakaoLogin')}
+      onSkip={() => navigation.replace('Select')}
+      onDone={() => navigation.navigate('Select')}
       pages={[
         {
-          backgroundColor: '#FFF5EB',
+          backgroundColor: '#EAE0DA',
           image: (
             <Image
               source={require('../../../android/app/assets/images/middle001.png')}
@@ -64,7 +61,7 @@ const Middle = ({navigation}) => {
             '랄라리아는 커뮤니티 기반의  \n 커버 노래 공유 & 작곡가-가수 매칭 플랫폼입니다.',
         },
         {
-          backgroundColor: '#FFE3C9',
+          backgroundColor: '#F3D2C1',
           image: (
             <Image
               source={require('../../../android/app/assets/images/middle02.png')}
@@ -76,7 +73,7 @@ const Middle = ({navigation}) => {
             '사용자가 작곡가 혹은 가수의 포지션을 직접 정하여 \n 본인이 작곡한 곡을 AI 커버를 통해 제공받을 수 있으며, \n 본인의 목소리를 녹음해 다양한 노래를 \n 본인의 목소리로 들을 수 있는 기능을 제공합니다.',
         },
         {
-          backgroundColor: '#FFCDB2',
+          backgroundColor: '#F7F5EB',
           image: (
             <Image
               source={require('../../../android/app/assets/images/middle003.png')}
@@ -88,7 +85,7 @@ const Middle = ({navigation}) => {
             '본인의 포지션을 미리 결정해주시면, \n더 나은 서비스를 제공받으실 수 있습니다.',
         },
         {
-          backgroundColor: '#FFBB5C',
+          backgroundColor: '#EAC7C7',
           image: (
             <Image
               source={require('../../../android/app/assets/images/middle04.png')}
@@ -125,7 +122,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   skip: {
-    backgroundColor: 'none',
+    fontWeight: '800',
+    marginLeft: 20,
+    marginBottom: 10,
   },
   next: {},
   imageStyle: {

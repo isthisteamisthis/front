@@ -1,5 +1,13 @@
 import React, {useEffect} from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  BackHandler,
+  Alert,
+  Image,
+} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 const Splash = ({navigation}) => {
@@ -10,10 +18,49 @@ const Splash = ({navigation}) => {
   }, [navigation]);
   const Stack = createStackNavigator();
 
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert(
+        '앱 종료',
+        '앱을 종료하시겠습니까?',
+        [
+          {
+            text: '취소',
+            onPress: () => null,
+            style: 'cancel',
+          },
+          {
+            text: '확인',
+            onPress: () => {
+              BackHandler.exitApp(); // 앱 종료
+            },
+          },
+        ],
+        {cancelable: false},
+      );
+
+      return true; // 기본적인 하드웨어 뒤로가기 동작 방지
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    return () => {
+      backHandler.remove(); // 컴포넌트가 언마운트 될 때 이벤트 리스너 해제
+    };
+  }, []);
+
+  // state(상태)를 어디서 관리할 건지 확인!
+  // 요청된 url 주소 출력해보기
+  // 그 값을 state에 담아보기
+  // 의도치 않게 돌아가면, 적절한 state위치를 찾기 (어디서 관리할 것인지!)
+
   return (
     <View style={styles.container}>
       <Image
-        source={require('../../../android/app/src/main/res/drawable/logoofsepp.png')}
+        source={require('../../../android/app/src/main/res/drawable/lastlogo01.png')}
         style={styles.image}
       />
       <Text style={styles.text01}>ISTHISTEAM</Text>
@@ -28,6 +75,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#EAC7C7',
   },
   image: {
     marginTop: 150,

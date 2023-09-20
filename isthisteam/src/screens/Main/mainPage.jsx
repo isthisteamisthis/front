@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -12,32 +12,51 @@ import {
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import ModalDropdown from 'react-native-modal-dropdown';
+import BottomTab from '../../components/bottomTab';
+import Banner from '../../components/banner';
 
 const Stack = createStackNavigator();
 
 function MainPage({navigation}) {
-  const onPress1 = () => {
-    navigation.navigate('Community');
+  const [posts, setPosts] = useState([]);
+
+  const GetRecommendSong = async () => {
+    const apiUrl = 'http://192.168.0.42:8080/song-recommend';
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          //토큰 받아서 넣는 로직 추가
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMDI2MDc5NjcyIiwiaWF0IjoxNjk1MTEyMjU3LCJleHAiOjE2OTUxOTg2NTd9.hiQteBEnvqnCY70fUdm_Qu-ZyN-8kERKx2FNpUYBpI0`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+
+      const postsData = Object.keys(data.data.recommendSongs).map(key => ({
+        imageUrl: data.data.recommendSongs[key],
+        title: key,
+      }));
+
+      setPosts(postsData);
+    } catch (error) {
+      // console.error('Error:', error);
+    }
   };
 
-  const onPress2 = () => {
-    navigation.navigate('MyPage');
-  };
-
-  // const onPress3 = () => {
-  //   navigation.navigate('Aicover');
-  // };
-  // const onPress4 = () => {
-  //   navigation.navigate('perfectScore');
-  // };
+  useEffect(() => {
+    GetRecommendSong();
+  }, []);
 
   return (
     <View style={styles.container}>
-      <Image
-        source={require('../../../android/app/assets/images/logoofsepp.png')}
-        style={styles.image}
-      />
-      <View style={styles.buttonsContainer}>
+      {/* <View style={styles.buttonsContainer}>
         <TouchableOpacity
           activeOpacity={0.8}
           style={styles.button01}
@@ -64,7 +83,11 @@ function MainPage({navigation}) {
           }}>
           <Text style={styles.text01}>녹음하기</Text>
         </ModalDropdown>
-      </View>
+      </View> */}
+      <Banner
+        title="Welcome to Our App"
+        imageUrl="https://mblogthumb-phinf.pstatic.net/MjAyMDA3MTNfMTMz/MDAxNTk0NjMxNDM1MTg2.A5UfpkxCdV3CiPF8K6eR0QEc0U6vLSBsi0G-o13Ir8Eg.zbAD2wJV9NahMIKnk70Fln3z_SR7cVQfX01qG0S8jtMg.JPEG.ejunglestory/%EA%B9%80%EC%83%81%EC%9C%A4_%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4_Page_03.jpg?type=w800"
+      />
 
       <Text style={styles.additionalText}>나의 곡 추천</Text>
 
@@ -85,36 +108,36 @@ function MainPage({navigation}) {
         showsHorizontalScrollIndicator={false}
         horizontal={true}
       />
-      {/* <MyTab /> */}
+      <BottomTab navigation={navigation} />
     </View>
   );
 }
 
-const posts = [
-  {
-    id: '1',
-    imageUrl:
-      'https://image.bugsm.co.kr/album/images/200/40713/4071363.jpg?version=20220330120007.0',
-    title: '사랑인가봐',
-  },
-  {
-    id: '2',
-    imageUrl:
-      'https://image.bugsm.co.kr/album/images/200/201547/20154722.jpg?version=20230601001519.0',
-    title: '모든 날 모든 순간',
-  },
-  {
-    id: '3',
-    imageUrl:
-      'https://image.bugsm.co.kr/album/images/200/4132/413209.jpg?version=20210203135508.0',
-    title: '너의 모든 순간',
-  },
-  {
-    id: '4',
-    imageUrl: 'https://image.bugsm.co.kr/album/images/1000/352/35269.jpg',
-    title: '사랑의 바보',
-  },
-];
+// const posts = [
+//   {
+//     id: '1',
+//     imageUrl:
+//       'https://image.bugsm.co.kr/album/images/200/40713/4071363.jpg?version=20220330120007.0',
+//     title: '사랑인가봐',
+//   },
+//   {
+//     id: '2',
+//     imageUrl:
+//       'https://image.bugsm.co.kr/album/images/200/201547/20154722.jpg?version=20230601001519.0',
+//     title: '모든 날 모든 순간',
+//   },
+//   {
+//     id: '3',
+//     imageUrl:
+//       'https://image.bugsm.co.kr/album/images/200/4132/413209.jpg?version=20210203135508.0',
+//     title: '너의 모든 순간',
+//   },
+//   {
+//     id: '4',
+//     imageUrl: 'https://image.bugsm.co.kr/album/images/1000/352/35269.jpg',
+//     title: '사랑의 바보',
+//   },
+// ];
 
 const posts1 = [
   {
@@ -162,12 +185,11 @@ const styles = StyleSheet.create({
     margin: 15,
     marginTop: 5,
     alignItems: 'center',
-    // backgroundColor: 'black',
   },
   image: {
-    marginTop: 10,
-    width: 120,
-    height: 50,
+    marginTop: -30,
+    width: 400,
+    height: 65,
   },
   imageofpost: {
     width: 120,
@@ -205,7 +227,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 25,
-    backgroundColor: '#FFF',
+    backgroundColor: '#F7F5EB',
   },
   buttonsContainer: {
     flexDirection: 'row',

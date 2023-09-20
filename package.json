@@ -1,6 +1,9 @@
 {
   "dependencies": {
-    "react-native-audio-recorder-player": "^3.5.4",
-    "@react-native-seoul/kakao-login": "^2.1.0"
+    "@react-native-seoul/kakao-login": "^2.1.0",
+    "react-native-audio-recorder-player": "^3.5.4"
+  },
+  "devDependencies": {
+    "metro": "^0.79.1"
   }
 }

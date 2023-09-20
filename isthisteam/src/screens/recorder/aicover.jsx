@@ -132,6 +132,7 @@ const Aicover = () => {
           <TouchableOpacity style={styles.audioButton} onPress={onSelectAudio}>
             <Text style={styles.buttonText}>
               {audioFile ? '음원 파일 변경하기' : '음원 파일 추가하기'}
+              {/* useEffect or useState 사용해서 음원 이름으로 변경하기 ! */}
             </Text>
           </TouchableOpacity>
 

@@ -12,6 +12,6 @@
         android:scaleType="fitCenter"
         android:background="@color/splashprimary"
         android:icon="@mipmap/logoofseppiconn"
-        android:src="@drawable/logoofsepp"
+        android:src="@drawable/lastlogo01"
         />
 </RelativeLayout>

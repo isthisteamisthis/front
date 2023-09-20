@@ -11,18 +11,18 @@ function Header({username}) {
 }
 
 function Content({id, username, averageScore, introduction}) {
-  // return (
-  // <View style={styles.content}>
-  //   <Text style={styles.contentText}></Text>
-  //   <Text style={styles.label}>
-  //     {username} 님의 평균 점수 | {averageScore}
-  //   </Text>
-  //   <Text style={styles.label}>
-  //     자기소개
-  //     {introduction}
-  //   </Text>
-  // </View>
-  // );
+  return (
+    <View style={styles.content}>
+      <Text style={styles.contentText}></Text>
+      <Text style={styles.label}>
+        {username} 님의 평균 점수 | {averageScore}
+      </Text>
+      <Text style={styles.label}>
+        자기소개
+        {introduction}
+      </Text>
+    </View>
+  );
 }
 
 function Footer({onLogoutPress}) {

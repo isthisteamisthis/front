@@ -9,26 +9,29 @@ import Onboarding from 'react-native-onboarding-swiper';
 import Swiper from 'react-native-swiper';
 import {Swipeable, GestureHandlerRootView} from 'react-native-gesture-handler';
 
-// enter -
+// enter -------------------------------------------------
 import splash from './src/screens/Enter/splash';
 import select from './src/screens/Enter/select';
 import middle from './src/screens/Enter/middle';
 import voiceRange from './src/screens/Enter/voiceRange';
 import voiceRangeHigh from './src/screens/Enter/voiceRangeHigh';
-import kakaoLogin from './src/screens/Enter/kakaoLogin';
+// import kakaoLogin from './src/screens/Enter/kakaoLogin';
 import kakaoLogout from './src/screens/Enter/kakaoLogout';
-// import songDetail from './src/screens/Main/songDetail';
+import SongDetail from './src/screens/Main/songDetail';
 
-// main -
+// main ----------------------------------------------------
 import myPage from './src/screens/Main/myPage';
 import mainpage from './src/screens/Main/mainPage';
 import Community from './src/screens/Main/commuity';
 // import ChatModal from './src/screens/Main/ChatModal';
 // import ChatPage from './src/screens/Main/chatPage';
 
-// record -
+// record ---------------------------------------------------
 import aiCover from './src/screens/recorder/aiCover';
-import perfectScore from './src/screens/recorder/perfectScore';
+import PerfectScore from './src/screens/recorder/perfectScore';
+import recordSelect from './src/screens/recorder/recordSelect';
+
+// ----------------------------------------------------------
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -63,11 +66,11 @@ function App() {
             component={voiceRangeHigh}
             options={{headerShown: false}}
           />
-          <Stack.Screen
+          {/* <Stack.Screen
             name="KakaoLogin"
             component={kakaoLogin}
             options={{headerbackVisible: false, headerShown: false}}
-          />
+          /> */}
           <Stack.Screen
             name="KakaoLogout"
             component={kakaoLogout}
@@ -88,11 +91,11 @@ function App() {
             component={myPage}
             options={{headerShown: false}}
           />
-          {/* <Stack.Screen
+          <Stack.Screen
             name="SongDetail"
-            component={songDetail}
+            component={SongDetail}
             options={{headerShown: false}}
-          /> */}
+          />
           <Stack.Screen
             name="AiCover"
             component={aiCover}
@@ -100,7 +103,12 @@ function App() {
           />
           <Stack.Screen
             name="PerfectScore"
-            component={perfectScore}
+            component={PerfectScore}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="RecordSelect"
+            component={recordSelect}
             options={{headerShown: false}}
           />
           {/* <Stack.Screen name="ChatModal" component={ChatModal} options={{headerShown: false} />
