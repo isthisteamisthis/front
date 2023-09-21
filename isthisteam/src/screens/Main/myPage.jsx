@@ -1,61 +1,120 @@
-import React, {useState} from 'react';
-import {View, Text, Button, StyleSheet, Image, Flat} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  ScrollView,
+  Button,
+  FlatList,
+} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
-function Header({username}) {
-  return (
-    <View style={styles.header}>
-      <Text style={styles.headerText}></Text>
-      <Text style={styles.username}>{username}</Text>
-    </View>
-  );
-}
+const MyPage = () => {
+  const [posts, setPosts] = useState([]);
+  const [name, setName] = useState('John Doe');
+  const [userIntroduction, setUserIntroduction] = useState(
+    '안녕하세요! 저는 누구누구입니다. \n 취미는 하비 특기는 잠자기',
+  ); // 자기소개를 마이페이지에서 할 필요가 있는가? 노출이 안 되는데
+  const [voiceHighRange, setVoiceHighRange] = useState('3옥타브 라');
+  const [voiceRowRange, setVoiceRowRange] = useState('2옥타브 미');
+  const navigation = useNavigation(); // 내비게이션 객체 가져오기
 
-function Content({id, username, averageScore, introduction}) {
-  return (
-    <View style={styles.content}>
-      <Text style={styles.contentText}></Text>
-      <Text style={styles.label}>
-        {username} 님의 평균 점수 | {averageScore}
-      </Text>
-      <Text style={styles.label}>
-        자기소개
-        {introduction}
-      </Text>
-    </View>
-  );
-}
+  useEffect(() => {
+    // 사용자 정보를 가져오는 로직 (API 호출 또는 데이터베이스 쿼리)을 구현합니다.
+    // 가져온 정보를 상태 변수에 설정합니다.
+    // 예시:
+    // fetchUserInfo().then(data => {
+    //   setUserName(data.name);
+    //   setUserIntroduction(data.introduction);
+    //   setVocalRange(data.vocalRange);
+    // });
+  }, []);
 
-function Footer({onLogoutPress}) {
-  return (
-    <View style={styles.footer}>
-      <Text style={styles.footerText}></Text>
-      <Button title="로그아웃" onPress={onLogoutPress} />
-    </View>
-  );
-}
+  // 개인 정보 수정 페이지로 이동
+  // const goToEditProfile = () => {
+  //   navigation.navigate('EditProfileModal');
+  // };
 
-export default function MyPage() {
-  const [userInfo, setUserInfo, username] = useState({
-    username: 'raxchaz',
-    id: 'rachaz',
-    averageScore: 100,
-    introduction: '안녕하세요, 오늘은',
-  });
+  const GetRecommendSong = async () => {
+    const apiUrl = 'http://192.168.0.42:8080/song-recommend';
 
-  const handleLogout = () => {
-    // 로그아웃 로직이 들어갈 공간!
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          //토큰 받아서 넣는 로직 추가
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMDI6MDc5NjcyIiwiaWF0IjoxNjk1MTEyMjU3LCJleHAiOjE2OTUxOTg2NTd9.hiQteBEnvqnCY70fUdm_Qu-ZyN-8kERKx2FNpUYBpI0`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+
+      const postsData = Object.keys(data.data.recommendSongs).map(key => ({
+        imageUrl: data.data.recommendSongs[key],
+        title: key,
+      }));
+
+      setPosts(postsData);
+    } catch (error) {
+      // console.error('Error:', error);
+    }
   };
 
+  useEffect(() => {
+    GetRecommendSong();
+  });
   return (
-    <View style={styles.container}>
-      <Header username={userInfo.id} />
-      <Content
-        id={userInfo.id}
-        username={userInfo.username}
-        averageScore={userInfo.averageScore}
-        introduction={userInfo.introduction}
+    <ScrollView contentContainerStyle={styles.container}>
+      <Image
+        source={require('../../../android/app/assets/images/user.png')}
+        style={styles.avatar}
       />
-      <Footer onLogoutPress={handleLogout} />
+      <Text style={styles.name}>{name}</Text>
+      <Text style={styles.int}>{name}님의 자기소개</Text>
+      <View style={styles.userIntroductionContainer}>
+        <Text style={styles.userIntroduction}>{userIntroduction}</Text>
+      </View>
+      <Text style={styles.int}>{name}님의 음역대</Text>
+      <View style={styles.textContainer}>
+        <Text style={styles.voiceRange}>{voiceHighRange}</Text>
+        <Text style={styles.voiceRange}>{voiceRowRange}</Text>
+      </View>
+      <View style={styles.additionalTextContainer}>
+        <Text style={styles.int}>{name}님의 추천곡 몰아보기</Text>
+        {/* <Text style={styles.additionalText}>내 추천 곡 몰아보기</Text> */}
+      </View>
+
+      <FlatList
+        data={posts}
+        keyExtractor={item => item.id}
+        renderItem={({item}) => <PostItem post={item} />}
+        showsHorizontalScrollIndicator={false}
+        horizontal={true}
+      />
+
+      {/* <Button
+        title="프로필 수정"
+        onPress={goToEditProfile} // 수정 버튼을 누를 때 개인 정보 수정 페이지로 이동
+      /> */}
+    </ScrollView>
+  );
+};
+
+function PostItem({post}) {
+  return (
+    <View style={styles.containerofpost}>
+      <Image
+        source={{uri: post.imageUrl}}
+        style={styles.imageofpost}
+        showsHorizontalScrollIndicator={false}
+      />
+      <Text style={styles.titleofpost}>{post.title}</Text>
     </View>
   );
 }
@@ -63,40 +122,69 @@ export default function MyPage() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-between',
-    padding: 0,
+    backgroundColor: '#F7F5EB',
+    alignItems: 'center',
+    padding: 20,
   },
-  header: {
-    // backgroundColor: 'lightgray',
-    padding: 16,
+  name: {
+    marginBottom: 10,
+    fontSize: 25,
+    fontWeight: 'bold',
+    color: 'black',
   },
-  username: {
-    fontSize: 30,
-    letterSpacing: -1.5,
+  int: {
+    marginTop: 20,
+    fontWeight: 'bold',
+  },
+  avatar: {
+    width: 50,
+    height: 50,
+    borderRadius: 75,
+    marginBottom: 20,
+    marginTop: 30,
+  },
+  userIntroductionContainer: {
+    marginTop: 30,
+    marginBottom: 0,
+    width: 400,
+    height: 100,
+    borderWidth: 1,
+    alignItems: 'center',
+    borderColor: 'lightgray',
+    borderRadius: 5,
+  },
+  userIntroduction: {
+    fontSize: 16,
+    textAlign: 'center',
+    color: 'black',
+    margin: 10,
+    letterSpacing: -1,
+  },
+  textContainer: {
+    marginTop: 30,
+    marginBottom: 0,
+    width: 400,
+    height: 60,
+    borderWidth: 1,
+    alignItems: 'center',
+    borderColor: 'lightgray',
+    borderRadius: 5,
+    flexDirection: 'row',
+  },
+  voiceRange: {
+    marginRight: 100,
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'black',
+    marginLeft: 45,
+  },
+  additionalText: {
+    marginRight: 230,
+    marginTop: 20,
+    letterSpacing: -1,
+    color: 'black',
     fontWeight: '800',
-    marginTop: -30,
   },
-  content: {
-    // backgroundColor: 'lightgray',
-    padding: 16,
-    marginTop: -330,
-  },
-  contentText: {
-    marginTop: -70,
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  label: {
-    fontSize: 20,
-    marginTop: 10,
-    letterSpacing: -2,
-  },
-  footer: {
-    padding: 16,
-  },
-  footerText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  button: {},
 });
+
+export default MyPage;

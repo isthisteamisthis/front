@@ -22,7 +22,7 @@ const Dots = ({selected}) => {
 };
 
 const Skip = ({navigation}) => (
-  <TouchableOpacity onPress={() => navigation.navigate('Select')}>
+  <TouchableOpacity onPress={() => navigation.navigate('KakaoLogin')}>
     <Text style={styles.skip}>Skip</Text>
   </TouchableOpacity>
 );

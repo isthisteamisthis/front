@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
     marginTop: -30,
   },
   container: {
+    backgroundColor: '#F7F5EB',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',

@@ -60,7 +60,7 @@ const Splash = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Image
-        source={require('../../../android/app/src/main/res/drawable/lastlogo01.png')}
+        source={require('../../../android/app/src/main/res/drawable/logo.png')}
         style={styles.image}
       />
       <Text style={styles.text01}>ISTHISTEAM</Text>

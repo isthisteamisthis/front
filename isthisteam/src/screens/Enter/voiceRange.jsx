@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
-    backgroundColor: '#f4f4f4', // 페이지 배경색 변경
+    backgroundColor: '#F7F5EB',
   },
   container: {
     flex: 1,

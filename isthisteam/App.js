@@ -9,22 +9,28 @@ import Onboarding from 'react-native-onboarding-swiper';
 import Swiper from 'react-native-swiper';
 import {Swipeable, GestureHandlerRootView} from 'react-native-gesture-handler';
 
+// component
+import BottomTab from './src/components/bottomTab';
+
 // enter -------------------------------------------------
 import splash from './src/screens/Enter/splash';
 import select from './src/screens/Enter/select';
 import middle from './src/screens/Enter/middle';
 import voiceRange from './src/screens/Enter/voiceRange';
 import voiceRangeHigh from './src/screens/Enter/voiceRangeHigh';
-// import kakaoLogin from './src/screens/Enter/kakaoLogin';
+import kakaoLogin from './src/screens/Enter/kakaoLogin';
 import kakaoLogout from './src/screens/Enter/kakaoLogout';
 import SongDetail from './src/screens/Main/songDetail';
 
 // main ----------------------------------------------------
 import myPage from './src/screens/Main/myPage';
+// import EditProfileModal from './src/screens/Main/editProfileModal';
 import mainpage from './src/screens/Main/mainPage';
-import Community from './src/screens/Main/commuity';
-// import ChatModal from './src/screens/Main/ChatModal';
-// import ChatPage from './src/screens/Main/chatPage';
+import Community from './src/screens/Message/commuity';
+import songList from './src/screens/Main/songList';
+import MessageDetail from './src/screens/Message/messageDetail';
+import ReplyMessage from './src/screens/Message/replyMessage';
+import SentMessages from './src/screens/Message/SentMessages';
 
 // record ---------------------------------------------------
 import aiCover from './src/screens/recorder/aiCover';
@@ -51,6 +57,11 @@ function App() {
             component={select}
             options={{headerShown: false}}
           />
+          {/* <Stack.Screen
+            name="EditProfileModal"
+            component={EditProfileModal}
+            options={{headerShown: false}}
+          /> */}
           <Stack.Screen
             name="Middle"
             component={middle}
@@ -66,14 +77,34 @@ function App() {
             component={voiceRangeHigh}
             options={{headerShown: false}}
           />
-          {/* <Stack.Screen
+          <Stack.Screen
+            name="songList"
+            component={songList}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="ReplyMessage"
+            component={ReplyMessage}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="SentMessages"
+            component={SentMessages}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
             name="KakaoLogin"
             component={kakaoLogin}
             options={{headerbackVisible: false, headerShown: false}}
-          /> */}
+          />
           <Stack.Screen
             name="KakaoLogout"
             component={kakaoLogout}
+            options={{headerbackVisible: false, headerShown: false}}
+          />
+          <Stack.Screen
+            name="messageDetail"
+            component={MessageDetail}
             options={{headerbackVisible: false, headerShown: false}}
           />
           <Stack.Screen

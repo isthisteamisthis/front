@@ -11,18 +11,19 @@ function RecordSelect({navigation}) {
 
   return (
     <View style={styles.container}>
-      <Image
+      {/* <Image
         source={require('../../../android/app/assets/images/select.png')}
         style={styles.image}
-      />
-      <Text style={styles.title}>{`      어떤 기능을
-선택하시겠습니까?`}</Text>
+      /> */}
+      {/* <Text style={styles.title}>{`      어떤 기능을
+선택하시겠습니까?`}</Text> */}
 
       <TouchableOpacity
         activeOpacity={0.8}
         style={styles.button}
         onPress={onPress1}>
-        <Text style={styles.text}>Ai 커버 생성하러 가기</Text>
+        <Text style={styles.text}>{`      Ai 커버 
+생성하러 가기`}</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -43,27 +44,35 @@ const styles = StyleSheet.create({
     marginTop: -30,
   },
   container: {
+    backgroundColor: '#F7F5EB',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
+    marginRight: 5,
+    marginLeft: 100,
   },
   title: {
     fontSize: 18,
     fontWeight: '400',
     letterSpacing: -1,
-    marginTop: -530,
-    marginBottom: 10,
+    marginTop: -200,
+    marginLeft: 100,
+    // marginBottom: 10,
     lineHeight: 22,
     color: 'black',
   },
   button: {
-    marginTop: 5,
-    paddingTop: -7,
-    width: 200,
-    height: 52,
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    marginTop: -30,
+    marginRight: 100,
+    padding: 0,
+    width: 100,
+    height: 80,
     textAlign: 'center',
     borderRadius: 10,
-    alignItems: 'center',
     borderWidth: 1,
     backgroundColor: '#F4F4F4',
     marginHorizontal: 'auto',
@@ -71,7 +80,7 @@ const styles = StyleSheet.create({
   text: {
     color: 'black',
     marginTop: 2.5,
-    fontSize: 28,
+    fontSize: 16,
     letterSpacing: -1,
     fontWeight: '600',
   },

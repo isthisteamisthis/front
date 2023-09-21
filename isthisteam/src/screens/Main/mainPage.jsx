@@ -12,6 +12,7 @@ import {
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import ModalDropdown from 'react-native-modal-dropdown';
+import Swiper from 'react-native-swiper';
 import BottomTab from '../../components/bottomTab';
 import Banner from '../../components/banner';
 
@@ -19,6 +20,14 @@ const Stack = createStackNavigator();
 
 function MainPage({navigation}) {
   const [posts, setPosts] = useState([]);
+
+  // const handleMoreButtonPress = () => {
+  //   navigation.navigate('songList');
+  // };
+
+  const MoreButtonPress = () => {
+    navigation.navigate('songList');
+  };
 
   const GetRecommendSong = async () => {
     const apiUrl = 'http://192.168.0.42:8080/song-recommend';
@@ -29,7 +38,7 @@ function MainPage({navigation}) {
         headers: {
           'Content-Type': 'application/json',
           //토큰 받아서 넣는 로직 추가
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMDI2MDc5NjcyIiwiaWF0IjoxNjk1MTEyMjU3LCJleHAiOjE2OTUxOTg2NTd9.hiQteBEnvqnCY70fUdm_Qu-ZyN-8kERKx2FNpUYBpI0`,
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMDI6MDc5NjcyIiwiaWF0IjoxNjk1MTEyMjU3LCJleHAiOjE2OTUxOTg2NTd9.hiQteBEnvqnCY70fUdm_Qu-ZyN-8kERKx2FNpUYBpI0`,
         },
       });
 
@@ -52,92 +61,62 @@ function MainPage({navigation}) {
 
   useEffect(() => {
     GetRecommendSong();
-  }, []);
+  });
 
   return (
     <View style={styles.container}>
-      {/* <View style={styles.buttonsContainer}>
-        <TouchableOpacity
-          activeOpacity={0.8}
-          style={styles.button01}
-          onPress={onPress1}>
-          <Text style={styles.text00}>커뮤니티</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity={0.8}
-          style={styles.button01}
-          onPress={onPress2}>
-          <Text style={styles.text00}>마이페이지</Text>
-        </TouchableOpacity>
-        <ModalDropdown
-          options={['AI 커버 생성', '퍼펙트 스코어']}
-          dropdownTextStyle={styles.dropdownText}
-          dropdownStyle={styles.dropdownContainer}
-          initialScrollIndex={null}
-          onSelect={(index, value) => {
-            if (value === 'AI 커버 생성') {
-              navigation.navigate('AiCover');
-            } else if (value === '퍼펙트 스코어') {
-              navigation.navigate('PerfectScore');
-            }
-          }}>
-          <Text style={styles.text01}>녹음하기</Text>
-        </ModalDropdown>
-      </View> */}
-      <Banner
-        title="Welcome to Our App"
-        imageUrl="https://mblogthumb-phinf.pstatic.net/MjAyMDA3MTNfMTMz/MDAxNTk0NjMxNDM1MTg2.A5UfpkxCdV3CiPF8K6eR0QEc0U6vLSBsi0G-o13Ir8Eg.zbAD2wJV9NahMIKnk70Fln3z_SR7cVQfX01qG0S8jtMg.JPEG.ejunglestory/%EA%B9%80%EC%83%81%EC%9C%A4_%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4_Page_03.jpg?type=w800"
-      />
+      <View style={styles.bannercontainer}>
+        <Swiper style={styles.bannerSwiper} autoplay={true}>
+          <Image
+            source={{
+              uri: 'https://postfiles.pstatic.net/MjAyMzA5MjBfMTE2/MDAxNjk1MjE5NTIwNjk3.Ir8oigQnh7XLITUuM9UNQ0co1s0y__HVNPKF3XlVm0sg.rApQLTM5OzKdNUlmGw-Y0hLblElADLXW-YjHFzryRakg.PNG.guswl3621/%EC%A0%9C%EB%AA%A9%EC%9D%84_%EC%9E%85%EB%A0%A5%ED%95%B4%EC%A3%BC%EC%84%B8%EC%9A%94_-001_(1).png?type=w966',
+            }}
+            style={styles.bannerImage}
+          />
+          <Image
+            source={{
+              uri: 'https://postfiles.pstatic.net/MjAyMzA5MjBfMTI1/MDAxNjk1MjE2MjYyNTUw.0WRI1QUM_vENdBpbQ93lvRsDrfIICY06EuiGbJCBDl0g.IV62ePZAG-RM-2YiJrZOsoJQMiyTNd36XtIMD0LP2Zcg.PNG.guswl3621/002.png?type=w966',
+            }}
+            style={styles.bannerImage}
+          />
+        </Swiper>
+      </View>
 
-      <Text style={styles.additionalText}>나의 곡 추천</Text>
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        <View style={styles.additionalTextContainer}>
+          <Text style={styles.additionalText}>나만의 추천곡</Text>
+          <TouchableOpacity onPress={MoreButtonPress}>
+            <Text style={styles.moreButton}>더보기</Text>
+          </TouchableOpacity>
+        </View>
 
-      <FlatList
-        data={posts}
-        keyExtractor={item => item.id}
-        renderItem={({item}) => <PostItem post={item} />}
-        showsHorizontalScrollIndicator={false}
-        horizontal={true}
-      />
+        <FlatList
+          data={posts}
+          keyExtractor={item => item.id}
+          renderItem={({item}) => <PostItem post={item} />}
+          showsHorizontalScrollIndicator={false}
+          horizontal={true}
+        />
 
-      <Text style={styles.additionalText1}>퍼펙트 스코어</Text>
+        <View style={styles.additionalTextContainer}>
+          <Text style={styles.additionalText}>퍼펙트 스코어</Text>
+          {/* <TouchableOpacity onPress={handleMoreButtonPress}>
+            <Text style={styles.moreButton}>더보기</Text>
+          </TouchableOpacity> */}
+        </View>
 
-      <FlatList
-        data={posts1}
-        keyExtractor={item => item.id}
-        renderItem={({item}) => <PostItem post={item} />}
-        showsHorizontalScrollIndicator={false}
-        horizontal={true}
-      />
+        <FlatList
+          data={posts1}
+          keyExtractor={item => item.id}
+          renderItem={({item}) => <PostItem post={item} />}
+          showsHorizontalScrollIndicator={false}
+          horizontal={true}
+        />
+      </ScrollView>
       <BottomTab navigation={navigation} />
     </View>
   );
 }
-
-// const posts = [
-//   {
-//     id: '1',
-//     imageUrl:
-//       'https://image.bugsm.co.kr/album/images/200/40713/4071363.jpg?version=20220330120007.0',
-//     title: '사랑인가봐',
-//   },
-//   {
-//     id: '2',
-//     imageUrl:
-//       'https://image.bugsm.co.kr/album/images/200/201547/20154722.jpg?version=20230601001519.0',
-//     title: '모든 날 모든 순간',
-//   },
-//   {
-//     id: '3',
-//     imageUrl:
-//       'https://image.bugsm.co.kr/album/images/200/4132/413209.jpg?version=20210203135508.0',
-//     title: '너의 모든 순간',
-//   },
-//   {
-//     id: '4',
-//     imageUrl: 'https://image.bugsm.co.kr/album/images/1000/352/35269.jpg',
-//     title: '사랑의 바보',
-//   },
-// ];
 
 const posts1 = [
   {
@@ -180,6 +159,15 @@ function PostItem({post}) {
 }
 
 const styles = StyleSheet.create({
+  bannercontainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 0,
+    marginBottom: 20,
+
+    // backgroundColor: '#F7F5EB',
+  },
   containerofpost: {
     flex: 1,
     margin: 15,
@@ -195,33 +183,25 @@ const styles = StyleSheet.create({
     width: 120,
     height: 120,
     borderRadius: 4,
+    marginLeft: -15,
   },
   titleofpost: {
     marginTop: 10,
+    marginRight: 18,
     fontSize: 16,
     fontWeight: 'bold',
     letterSpacing: -1,
   },
-  additionalText: {
-    color: 'black',
-    fontSize: 16,
-    fontWeight: '900',
-    marginRight: 240,
-    marginTop: 30,
-    marginBottom: 10,
-    letterSpacing: -1.5,
-  },
-  additionalText1: {
-    color: 'black',
-    fontSize: 16,
-    fontWeight: '900',
-    marginRight: 240,
-    marginBottom: 10,
-    marginLeft: 30,
-    width: 100,
-    marginTop: -60,
-    letterSpacing: -1,
-  },
+  // additionalText: {
+  //   color: 'black',
+  //   fontSize: 16,
+  //   width: 150,
+  //   fontWeight: '900',
+  //   marginRight: 185,
+  //   marginTop: 40,
+  //   marginBottom: 10,
+  //   letterSpacing: -1.5,
+  // },
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -261,6 +241,28 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 1,
   },
+  additionalTextContainer: {
+    flexDirection: 'row', // 가로로 정렬
+    alignItems: 'center', // 수직 가운데 정렬
+  },
+  additionalText: {
+    marginTop: 10,
+    marginBottom: 5,
+    fontSize: 15,
+    marginRight: 215, // 텍스트 사이 간격 조절
+    color: 'black',
+    letterSpacing: -1,
+    fontWeight: '800',
+  },
+  moreButton: {
+    letterSpacing: -1,
+  },
+  // moreButton: {
+  //   marginLeft: 270,
+  //   color: 'black',
+  //   fontWeight: '800',
+  //   letterSpacing: -1,
+  // },
   dropdownText: {
     color: 'black',
     fontSize: 16,
@@ -270,6 +272,15 @@ const styles = StyleSheet.create({
   },
   dropdownContainer: {
     height: 80,
+  },
+  bannerSwiper: {
+    height: 400,
+    width: 1920,
+  },
+  bannerImage: {
+    width: '100%',
+    height: '60%',
+    borderRadius: 10,
   },
 });
 
