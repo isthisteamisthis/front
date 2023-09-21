@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {
+  Image,
   View,
   Text,
   TextInput,
@@ -10,6 +11,10 @@ import {
 const ReplyMessage = ({route, navigation}) => {
   const {originalMessage} = route.params;
   const [replyMessage, setReplyMessage] = useState('');
+
+  //   <TouchableOpacity onPress={MoreButtonPress}>
+  //   <Text style={styles.moreButton}>더보기</Text>
+  // </TouchableOpacity>
 
   const handleSendReply = () => {
     // 여기에서 replyMessage를 이용하여 답장 쪽지를 작성 및 전송하는 로직을 추가하세요.
@@ -23,15 +28,16 @@ const ReplyMessage = ({route, navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>답장 작성</Text>
+      <Image
+        source={require('../../../android/app/assets/images/paper.png')} // 이미지 경로를 설정합니다.
+        style={styles.header}
+      />
       <View style={styles.messageContainer}>
         <Text style={styles.senderName}>
-          보낸 사람: {originalMessage.sender}
+          보낸 사람 | {originalMessage.sender}
         </Text>
-        <Text style={styles.subject}>제목: {originalMessage.subject}</Text>
-        <Text style={styles.date}>
-          원본 메시지 날짜: {originalMessage.date}
-        </Text>
+        <Text style={styles.subject}>{originalMessage.subject}</Text>
+        <Text style={styles.date}>{originalMessage.date}</Text>
         <Text style={styles.messageText}>{originalMessage.message}</Text>
       </View>
       <TextInput
@@ -52,18 +58,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: '#F7F5EB',
+    backgroundColor: '#Fff',
   },
   header: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 16,
-    letterSpacing: -1,
+    marginTop: 10,
+    marginBottom: 10,
+    marginLeft: 170,
   },
   messageContainer: {
     padding: 16,
-    borderWidth: 1,
-    borderColor: 'lightgray',
+    borderWidth: 3,
+    borderColor: '#FFCBB3',
     borderRadius: 8,
     backgroundColor: 'white',
   },

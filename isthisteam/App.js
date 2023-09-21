@@ -8,6 +8,7 @@ import ModalDropdown from 'react-native-modal-dropdown';
 import Onboarding from 'react-native-onboarding-swiper';
 import Swiper from 'react-native-swiper';
 import {Swipeable, GestureHandlerRootView} from 'react-native-gesture-handler';
+import {AudioPlayer} from 'react-native-simple-audio-player';
 
 // component
 import BottomTab from './src/components/bottomTab';
@@ -26,8 +27,11 @@ import SongDetail from './src/screens/Main/songDetail';
 import myPage from './src/screens/Main/myPage';
 // import EditProfileModal from './src/screens/Main/editProfileModal';
 import mainpage from './src/screens/Main/mainPage';
-import Community from './src/screens/Message/commuity';
 import songList from './src/screens/Main/songList';
+import openUserPage from './src/screens/Main/openUserPage';
+
+// message ------------------------------------------------------
+import Community from './src/screens/Message/commuity';
 import MessageDetail from './src/screens/Message/messageDetail';
 import ReplyMessage from './src/screens/Message/replyMessage';
 import SentMessages from './src/screens/Message/SentMessages';
@@ -35,7 +39,8 @@ import SentMessages from './src/screens/Message/SentMessages';
 // record ---------------------------------------------------
 import aiCover from './src/screens/recorder/aiCover';
 import PerfectScore from './src/screens/recorder/perfectScore';
-import recordSelect from './src/screens/recorder/recordSelect';
+import recSelect from './src/screens/recorder/recSelect';
+import coverDetail from './src/screens/recorder/coverDetail';
 
 // ----------------------------------------------------------
 
@@ -46,6 +51,7 @@ function App() {
   return (
     <NavigationContainer>
       <GestureHandlerRootView style={{flex: 1}}>
+        {/* ---------------------------------------- ENTER page ----------------------------------------------------- */}
         <Stack.Navigator initialRouteName="Splash">
           <Stack.Screen
             name="Splash"
@@ -57,39 +63,9 @@ function App() {
             component={select}
             options={{headerShown: false}}
           />
-          {/* <Stack.Screen
-            name="EditProfileModal"
-            component={EditProfileModal}
-            options={{headerShown: false}}
-          /> */}
           <Stack.Screen
             name="Middle"
             component={middle}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen
-            name="VoiceRange"
-            component={voiceRange}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen
-            name="VoiceRangehigh"
-            component={voiceRangeHigh}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen
-            name="songList"
-            component={songList}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen
-            name="ReplyMessage"
-            component={ReplyMessage}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen
-            name="SentMessages"
-            component={SentMessages}
             options={{headerShown: false}}
           />
           <Stack.Screen
@@ -103,29 +79,59 @@ function App() {
             options={{headerbackVisible: false, headerShown: false}}
           />
           <Stack.Screen
-            name="messageDetail"
-            component={MessageDetail}
-            options={{headerbackVisible: false, headerShown: false}}
+            name="VoiceRange"
+            component={voiceRange}
+            options={{headerShown: false}}
           />
+          <Stack.Screen
+            name="VoiceRangehigh"
+            component={voiceRangeHigh}
+            options={{headerShown: false}}
+          />
+
+          {/* ---------------------------------------- MAIN page----------------------------------------------------- */}
           <Stack.Screen
             name="Mainpage"
             component={mainpage}
             options={{headerShown: false}}
           />
-          <Stack.Screen
-            name="Community"
-            component={Community}
+          {/* <Stack.Screen
+            name="EditProfileModal"
+            component={EditProfileModal}
             options={{headerShown: false}}
-          />
+          /> */}
           <Stack.Screen
             name="MyPage"
             component={myPage}
             options={{headerShown: false}}
           />
           <Stack.Screen
+            name="openUserPage"
+            component={openUserPage}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="songList"
+            component={songList}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
             name="SongDetail"
             component={SongDetail}
             options={{headerShown: false}}
+          />
+
+          {/* ------------------------------------------- RECORD page----------------------------------------------------- */}
+
+          <Stack.Screen
+            name="coverDetail"
+            component={coverDetail}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="recSelect"
+            component={recSelect}
+            options={{headerbackVisible: false, headerShown: false}}
           />
           <Stack.Screen
             name="AiCover"
@@ -137,11 +143,29 @@ function App() {
             component={PerfectScore}
             options={{headerShown: false}}
           />
+
+          {/* ---------------------------------------- MESSAGE page----------------------------------------------------- */}
           <Stack.Screen
-            name="RecordSelect"
-            component={recordSelect}
+            name="SentMessages"
+            component={SentMessages}
             options={{headerShown: false}}
           />
+          <Stack.Screen
+            name="ReplyMessage"
+            component={ReplyMessage}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="messageDetail"
+            component={MessageDetail}
+            options={{headerbackVisible: false, headerShown: false}}
+          />
+          <Stack.Screen
+            name="Community"
+            component={Community}
+            options={{headerShown: false}}
+          />
+
           {/* <Stack.Screen name="ChatModal" component={ChatModal} options={{headerShown: false} />
           <Stack.Screen name="ChatPage" component={ChatPage} options={{headerShown: false} /> */}
         </Stack.Navigator>

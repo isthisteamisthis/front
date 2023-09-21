@@ -23,19 +23,19 @@ const Dots = ({selected}) => {
 
 const Skip = ({navigation}) => (
   <TouchableOpacity onPress={() => navigation.navigate('KakaoLogin')}>
-    <Text style={styles.skip}>Skip</Text>
+    <Text style={styles.bottombtn}>Skip</Text>
   </TouchableOpacity>
 );
 const Next = ({...props}) => (
   <TouchableOpacity style={{marginHorizontal: 20}}>
-    <Text style={{fontSize: 16}}>Next</Text>
+    <Text style={styles.bottombtn}>Next</Text>
   </TouchableOpacity>
 );
 const Done = ({navigation}) => (
   <TouchableOpacity
-    style={{marginHorizontal: 50}}
-    onPress={() => navigation.navigate('Select')}>
-    <Text style={{fontSize: 16}}>Done</Text>
+    style={{marginHorizontal: 20}}
+    onPress={() => navigation.navigate('KakaoLogin')}>
+    <Text style={styles.bottombtn}>Done</Text>
   </TouchableOpacity>
 );
 
@@ -49,60 +49,70 @@ const Middle = ({navigation}) => {
       onDone={() => navigation.navigate('Select')}
       pages={[
         {
-          backgroundColor: '#EAE0DA',
-          image: (
-            <Image
-              source={require('../../../android/app/assets/images/middle001.png')}
-              style={styles.imageStyle}
-            />
-          ),
-          title: '어서오세요',
-          subtitle:
-            '랄라리아는 커뮤니티 기반의  \n 커버 노래 공유 & 작곡가-가수 매칭 플랫폼입니다.',
-        },
-        {
-          backgroundColor: '#F3D2C1',
+          // backgroundColor: '#F7F5EB',
           image: (
             <Image
               source={require('../../../android/app/assets/images/middle02.png')}
               style={styles.imageStyle}
             />
           ),
-          title: '랄라리아는',
-          subtitle:
-            '사용자가 작곡가 혹은 가수의 포지션을 직접 정하여 \n 본인이 작곡한 곡을 AI 커버를 통해 제공받을 수 있으며, \n 본인의 목소리를 녹음해 다양한 노래를 \n 본인의 목소리로 들을 수 있는 기능을 제공합니다.',
+          title:
+            '개인의 음역대를 측정하여 \n 본인과 잘 어울리는 노래를 추천받고, ',
+          // subtitle: '사용자의 음역대를 ',
         },
         {
-          backgroundColor: '#F7F5EB',
+          // backgroundColor: '#F7F5EB',
           image: (
             <Image
               source={require('../../../android/app/assets/images/middle003.png')}
               style={styles.imageStyle}
             />
           ),
-          title: '작곡가 | 가수',
-          subtitle:
-            '본인의 포지션을 미리 결정해주시면, \n더 나은 서비스를 제공받으실 수 있습니다.',
+          title: '퍼펙트 스코어를 통해 \n 자신이 부른 노래를 평가받고,',
+          subtitle: '',
         },
         {
-          backgroundColor: '#EAC7C7',
+          // backgroundColor: '#F7F5EB',
           image: (
             <Image
               source={require('../../../android/app/assets/images/middle04.png')}
               style={styles.imageStyle}
             />
           ),
-          title: '시작해볼까요?',
-          subtitle:
-            '랄라리아는 당신이 어떤 모습을 꿈꾸든 \n 당신이 상상한 모습을 그대로 실현시켜드립니다.',
+          title:
+            'Ai를 통해 본인 혹은 타인의 목소리로 \n 원하는 곡을 들을 수 있는 경험을 제공하며,',
+          subtitle: '',
+        },
+        {
+          // backgroundColor: '#F7F5EB',
+          image: (
+            <Image
+              source={require('../../../android/app/assets/images/middle04.png')}
+              style={styles.imageStyle}
+            />
+          ),
+          title:
+            '작곡가와 가수의 만남을 위한 \n 커뮤니티 기능 역시 제공하는 여기는,',
+          subtitle: '',
+        },
+        {
+          // backgroundColor: '#F7F5EB',
+          image: (
+            <Image
+              source={require('../../../android/app/assets/images/middle001.png')}
+              style={styles.imageStyle}
+            />
+          ),
+          title: '어서오세요 \n 랄라리아입니다',
+          subtitle: '',
         },
       ]}
       titleStyles={{
-        marginTop: -50,
-        fontSize: 24,
-        fontWeight: '900',
+        marginTop: -30,
+        fontSize: 18,
+        fontWeight: '400',
         color: 'black',
-        letterSpacing: -1,
+        letterSpacing: -1.5,
       }}
       subTitleStyles={{
         marginTop: -10,
@@ -121,12 +131,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  skip: {
-    fontWeight: '800',
+  bottombtn: {
+    fontWeight: '400',
     marginLeft: 20,
-    marginBottom: 10,
+    fontSize: 18,
+    letterSpacing: -1,
   },
-  next: {},
   imageStyle: {
     width: 200,
     height: 200,

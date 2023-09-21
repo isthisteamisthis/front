@@ -1,12 +1,19 @@
 import React, {useState} from 'react';
-import {View, Text, FlatList, TouchableOpacity, StyleSheet} from 'react-native';
+import {
+  Image,
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
 
 // 가짜 데이터
 const fakeMessages = [
   {
     id: '1',
     sender: 'sui',
-    subject: '안녕하세요!',
+    subject: '안녕하다!',
     date: '2023-09-25',
     message: '안녕하세요! 절 집에 보내주시겠어요?',
   },
@@ -99,7 +106,11 @@ const Community = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>내게 온 쪽지 목록</Text>
+      {/* <Text style={styles.header}>쪽지 목록</Text> */}
+      <Image
+        source={require('../../../android/app/assets/images/paper.png')} // 이미지 경로를 설정합니다.
+        style={styles.header}
+      />
       <FlatList
         data={messages}
         renderItem={renderItem}
@@ -111,18 +122,17 @@ const Community = ({navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#F7F5EB',
+    backgroundColor: '#Fff',
     flex: 1,
     padding: 16,
   },
   header: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 16,
-    letterSpacing: -1,
+    marginTop: 10,
+    marginBottom: 10,
+    marginLeft: 170,
   },
   messageItem: {
-    padding: 16,
+    padding: 20,
     borderBottomWidth: 1,
     borderBottomColor: 'lightgray',
     letterSpacing: -1,
@@ -132,6 +142,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 4,
     letterSpacing: -1,
+    color: 'black',
   },
   subject: {
     fontSize: 16,

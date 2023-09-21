@@ -12,7 +12,7 @@ import {useNavigation} from '@react-navigation/native';
 
 const MyPage = () => {
   const [posts, setPosts] = useState([]);
-  const [name, setName] = useState('John Doe');
+  const [name, setName] = useState('수이');
   const [userIntroduction, setUserIntroduction] = useState(
     '안녕하세요! 저는 누구누구입니다. \n 취미는 하비 특기는 잠자기',
   ); // 자기소개를 마이페이지에서 할 필요가 있는가? 노출이 안 되는데
@@ -135,17 +135,19 @@ const styles = StyleSheet.create({
   int: {
     marginTop: 20,
     fontWeight: 'bold',
+    marginBottom: -20,
   },
   avatar: {
     width: 50,
     height: 50,
     borderRadius: 75,
-    marginBottom: 20,
+    marginBottom: 10,
     marginTop: 30,
   },
   userIntroductionContainer: {
+    backgroundColor: 'lightgray',
     marginTop: 30,
-    marginBottom: 0,
+    marginBottom: 30,
     width: 400,
     height: 100,
     borderWidth: 1,
@@ -161,8 +163,9 @@ const styles = StyleSheet.create({
     letterSpacing: -1,
   },
   textContainer: {
+    backgroundColor: 'lightgray',
     marginTop: 30,
-    marginBottom: 0,
+    marginBottom: 30,
     width: 400,
     height: 60,
     borderWidth: 1,

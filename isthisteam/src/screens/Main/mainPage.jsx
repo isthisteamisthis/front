@@ -160,13 +160,10 @@ function PostItem({post}) {
 
 const styles = StyleSheet.create({
   bannercontainer: {
-    flex: 1,
+    flex: 0.5,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 0,
-    marginBottom: 20,
-
-    // backgroundColor: '#F7F5EB',
   },
   containerofpost: {
     flex: 1,
@@ -182,7 +179,7 @@ const styles = StyleSheet.create({
   imageofpost: {
     width: 120,
     height: 120,
-    borderRadius: 4,
+    borderRadius: 5,
     marginLeft: -15,
   },
   titleofpost: {
@@ -207,7 +204,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 25,
-    backgroundColor: '#F7F5EB',
+    backgroundColor: '#Fff',
+    marginTop: 10,
   },
   buttonsContainer: {
     flexDirection: 'row',
@@ -216,12 +214,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginTop: 20,
   },
-  button01: {
-    backgroundColor: '#4F709C',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 5,
-  },
   text00: {
     color: 'white',
     fontSize: 16,
@@ -229,18 +221,18 @@ const styles = StyleSheet.create({
     letterSpacing: -1,
     marginTop: -1,
   },
-  text01: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: '900',
-    textAlign: 'center',
-    letterSpacing: -1,
-    backgroundColor: '#4F709C',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 5,
-    padding: 1,
-  },
+  // text01: {
+  //   color: 'white',
+  //   fontSize: 16,
+  //   fontWeight: '900',
+  //   textAlign: 'center',
+  //   letterSpacing: -1,
+  //   // backgroundColor: '#4F709C',
+  //   paddingVertical: 10,
+  //   paddingHorizontal: 20,
+  //   borderRadius: 5,
+  //   padding: 1,
+  // },
   additionalTextContainer: {
     flexDirection: 'row', // 가로로 정렬
     alignItems: 'center', // 수직 가운데 정렬
@@ -279,7 +271,7 @@ const styles = StyleSheet.create({
   },
   bannerImage: {
     width: '100%',
-    height: '60%',
+    height: '70%',
     borderRadius: 10,
   },
 });

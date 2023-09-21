@@ -42,7 +42,7 @@ export default function KakaoLogin() {
         console.log(jwtToken);
 
         // 화면 전환 : 메인 화면으로 이동
-        navigation.navigate('Mainpage');
+        navigation.navigate('Select');
       } else {
         console.error('서버에서 토큰을 받지 못했습니다.');
       }
@@ -60,17 +60,23 @@ export default function KakaoLogin() {
 
   return (
     <>
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          // backgroundColor: '#F7F5EB',
+        }}>
         <Image
           source={require('../../../android/app/assets/images/logo.png')}
-          style={{width: 250, height: 250, marginTop: 50, marginBottom: -50}}
+          style={{width: 250, height: 250, marginBottom: 10}}
         />
         {/* <Text style={styles.text01}>{`         로그인을 
         진행합니다`}</Text> */}
         <TouchableOpacity onPress={handleKakaoLogin}>
           <Image
             source={require('../../../android/app/assets/images/kakao_login_large_narrow.png')}
-            style={{width: 200, height: 50, marginTop: 0, marginBottom: 100}}
+            style={{width: 200, height: 50, marginTop: -100, marginBottom: -60}}
           />
         </TouchableOpacity>
       </View>

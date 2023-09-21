@@ -17,7 +17,7 @@ function BottomTab({navigation}) {
         style={styles.tabItem}>
         <View style={styles.tabContent}>
           <Image
-            source={require('../../android/app/assets/images/users.png')} // 이미지 경로를 설정합니다.
+            source={require('../../android/app/assets/images/person.png')} // 이미지 경로를 설정합니다.
             style={styles.tabImage}
           />
         </View>
@@ -27,17 +27,17 @@ function BottomTab({navigation}) {
         style={styles.tabItem}>
         <View style={styles.tabContent}>
           <Image
-            source={require('../../android/app/assets/images/community.png')} // 이미지 경로를 설정합니다.
+            source={require('../../android/app/assets/images/chatt.png')} // 이미지 경로를 설정합니다.
             style={styles.tabImage}
           />
         </View>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => navigation.navigate('RecordSelect')}
+        onPress={() => navigation.navigate('recSelect')}
         style={styles.tabItem}>
         <View style={styles.tabContent}>
           <Image
-            source={require('../../android/app/assets/images/record.png')} // 이미지 경로를 설정합니다.
+            source={require('../../android/app/assets/images/micc.png')} // 이미지 경로를 설정합니다.
             style={styles.tabImage}
           />
         </View>
@@ -65,11 +65,11 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 30,
     marginBottom: -10,
-    backgroundColor: '#EAC7C7',
+    backgroundColor: '#ff5403',
   },
   tabImage: {
-    width: 25,
-    height: 25,
+    width: 30,
+    height: 30,
   },
   tabItem: {
     flex: 1,
