@@ -42,16 +42,16 @@ function recSongList({navigation}) {
     <View style={styles.container}>
       <View style={styles.container1}>
         <Image
-          source={require('../../../android/app/assets/images/musics.png')} // 이미지 경로를 설정합니다.
+          source={require('../../../android/app/assets/images/musics.png')}
           style={styles.header}
         />
-        <Text style={styles.sendtext1}>추천 곡 리스트</Text>
+        <Text style={styles.sendtext1}>추천곡 리스트</Text>
       </View>
-      <FlatList
+      {/* <FlatList
         data={data}
         renderItem={renderItem}
         keyExtractor={item => item.id}
-      />
+      /> */}
     </View>
   );
 }
@@ -62,7 +62,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 16,
     borderBottomWidth: 1,
-    // borderColor: '#ccc',
   },
   thumbnail: {
     width: 70,

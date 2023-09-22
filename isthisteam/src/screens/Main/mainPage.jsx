@@ -20,6 +20,7 @@ const Stack = createStackNavigator();
 
 function MainPage({navigation}) {
   const [posts, setPosts] = useState([]);
+  const [name, setName] = useState('수이');
 
   // const handleMoreButtonPress = () => {
   //   navigation.navigate('songList');
@@ -83,8 +84,9 @@ function MainPage({navigation}) {
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
+        {/* <Text style={styles.open}>환영합니다, {name}님</Text> */}
         <View style={styles.additionalTextContainer}>
-          <Text style={styles.additionalText}>나만의 추천곡</Text>
+          <Text style={styles.additionalText}>회원님을 위한 맞춤 추천곡</Text>
           <TouchableOpacity onPress={MoreButtonPress}>
             <Text style={styles.moreButton}>더보기</Text>
           </TouchableOpacity>
@@ -165,6 +167,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 0,
   },
+  // open: {
+  //   fontSize: 22,
+  //   letterSpacing: -1.5,
+  //   marginLeft: 90,
+  //   marginTop: 10,
+  //   marginBottom: 20,
+  //   color: 'black',
+  //   // fontWeight: '100',
+  // },
   containerofpost: {
     flex: 1,
     margin: 15,
@@ -233,6 +244,7 @@ const styles = StyleSheet.create({
   //   padding: 1,
   // },
   additionalTextContainer: {
+    width: 600,
     flexDirection: 'row', // 가로로 정렬
     alignItems: 'center', // 수직 가운데 정렬
   },
@@ -247,6 +259,7 @@ const styles = StyleSheet.create({
   },
   moreButton: {
     letterSpacing: -1,
+    marginLeft: -65,
   },
   // moreButton: {
   //   marginLeft: 270,

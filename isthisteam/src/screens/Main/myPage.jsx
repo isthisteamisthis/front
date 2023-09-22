@@ -18,6 +18,7 @@ const MyPage = () => {
   ); // 자기소개를 마이페이지에서 할 필요가 있는가? 노출이 안 되는데
   const [voiceHighRange, setVoiceHighRange] = useState('3옥타브 라');
   const [voiceRowRange, setVoiceRowRange] = useState('2옥타브 미');
+  const [score, setScore] = useState('83.9');
   const navigation = useNavigation(); // 내비게이션 객체 가져오기
 
   useEffect(() => {
@@ -87,7 +88,17 @@ const MyPage = () => {
       </View>
       <View style={styles.additionalTextContainer}>
         <Text style={styles.int}>{name}님의 추천곡 몰아보기</Text>
-        {/* <Text style={styles.additionalText}>내 추천 곡 몰아보기</Text> */}
+      </View>
+      <FlatList
+        data={posts}
+        keyExtractor={item => item.id}
+        renderItem={({item}) => <PostItem post={item} />}
+        showsHorizontalScrollIndicator={false}
+        horizontal={true}
+      />
+      <View style={styles.additionalTextContainer}>
+        <Text style={styles.int}>{name}님의 평균 점수</Text>
+        <Text style={styles.score}>{score}</Text>
       </View>
 
       <FlatList
@@ -159,6 +170,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // borderColor: 'lightgray',
     borderRadius: 5,
+  },
+  score: {
+    marginTop: 20,
+    marginLeft: 24,
+    fontWeight: '800',
+    fontStyle: 'italic',
+    color: '#464646',
+    fontSize: 25,
   },
   userIntroduction: {
     fontSize: 16,

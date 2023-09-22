@@ -20,7 +20,7 @@ const MessageDetail = ({route, navigation}) => {
   };
 
   const handlePress = () => {
-    navigation.navigate('MyPage');
+    navigation.navigate('openUserPage');
   };
 
   return (

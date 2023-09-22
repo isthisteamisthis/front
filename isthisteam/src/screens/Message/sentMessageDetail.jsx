@@ -16,7 +16,7 @@ const SentMessageDetail = ({route, navigation}) => {
   };
 
   const handleViewSentMessages = () => {
-    navigation.navigate('Community');
+    navigation.navigate('SentMessages');
   };
 
   return (
@@ -28,10 +28,6 @@ const SentMessageDetail = ({route, navigation}) => {
         />
         <Text style={styles.sendtext1}>내가 보낸 쪽지</Text>
       </View>
-      {/* <ImageBackground>
-        source={require('../../../android/app/assets/images/detail.png')}
-        style={{width: '100%', height: '100%'}}
-      </ImageBackground> */}
       <View style={styles.subContainer}>
         <Text style={styles.subject}>{message.subject}</Text>
       </View>
@@ -42,19 +38,9 @@ const SentMessageDetail = ({route, navigation}) => {
       <View style={styles.detailContainer}>
         <Text style={styles.messageText}>{message.message}</Text>
       </View>
-
-      {/* <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => navigation.goBack()}>
-        <Text style={styles.backButtonText}>뒤로 가기</Text>
-      </TouchableOpacity> */}
-      <TouchableOpacity style={styles.replyButton} onPress={handleReplyPress}>
-        <Text style={styles.replyButtonText}>답장하기</Text>
-      </TouchableOpacity>
       <TouchableOpacity
         style={styles.viewSentMessagesButton}
-        onPress={handleViewSentMessages} // 내가 보낸 쪽지 목록으로 이동하는 버튼
-      >
+        onPress={handleViewSentMessages}>
         <Text style={styles.viewSentMessagesButtonText}>뒤로가기</Text>
       </TouchableOpacity>
     </View>
@@ -121,7 +107,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#4D55A5',
     borderRadius: 8,
     padding: 8,
-    marginTop: 10,
+    marginTop: -30,
     marginLeft: 230,
     width: 130,
     height: 40,

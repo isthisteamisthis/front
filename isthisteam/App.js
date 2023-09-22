@@ -36,6 +36,7 @@ import MessageDetail from './src/screens/Message/messageDetail';
 import ReplyMessage from './src/screens/Message/replyMessage';
 import SentMessages from './src/screens/Message/SentMessages';
 import sentMessageDetail from './src/screens/Message/sentMessageDetail';
+import SendMessage from './src/screens/Message/sendMessage';
 
 // record ---------------------------------------------------
 import aiCover from './src/screens/recorder/aiCover';
@@ -155,6 +156,11 @@ function App() {
           <Stack.Screen
             name="SentMessages"
             component={SentMessages}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="SendMessage"
+            component={SendMessage}
             options={{headerShown: false}}
           />
           <Stack.Screen

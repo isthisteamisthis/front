@@ -23,15 +23,16 @@ import middle from './src/screens/Enter/middle';
 import mainPage from './src/screens/Main/mainPage';
 import myPage from './src/screens/Main/myPage';
 import openUserPage from './src/screens/Main/openUserPage';
-// import EditProfileModal from './src/screens/Main/editProfileModal';
 import songDetail from './src/screens/Main/songDetail';
 import recSongList from './src/screens/Main/recSongList';
+// import EditProfileModal from './src/screens/Main/editProfileModal';
 
 // message ------------------------------------------------------------
 import ReplyMessage from './src/screens/Message/replyMessage';
 import SentMessages from './src/screens/Message/SentMessages';
 import Community from './src/screens/Message/commuity';
 import sentMessageDetail from './src/screens/Message/sentMessageDetail';
+import sendMessage from './src/screens/Message/sendMessage';
 
 // recorder ----------------------------------------------
 import aicover from './src/screens/recorder/aiCover';
