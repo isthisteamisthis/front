@@ -35,11 +35,12 @@ const Aicover = () => {
         type: [DocumentPicker.types.audio],
       });
 
-      // Handle the result
       if (Array.isArray(result)) {
         setMusicFile(result[0]);
+        setAudioFile(result[0].name);
       } else {
         setMusicFile(result);
+        setAudioFile(result.name);
       }
     } catch (err) {
       setError('Error picking music: ' + err.message);
@@ -112,29 +113,35 @@ const Aicover = () => {
   };
 
   return (
-    <SafeAreaView style={{backgroundColor: '#FFFFFF'}}>
+    <SafeAreaView style={{backgroundColor: '#EAEAF4'}}>
       <ScrollView>
         <View style={styles.container}>
           <View style={styles.contentContainer} />
           <View style={styles.imageContainer} />
-          <Image
-            source={response ? {uri: response.assets[0].uri} : null}
-            style={styles.img}
-          />
-        </View>
+          {/* <Text style={styles.headerText}>AI 커버곡 생성</Text> */}
+          <View style={styles.header}>
+            <Image
+              source={response ? {uri: response.assets[0].uri} : null}
+              style={styles.img}
+            />
 
-        <View style={styles.rightContent}>
-          <TouchableOpacity style={styles.imageButton} onPress={onSelectImage}>
-            <Text style={styles.buttonText}>
-              {imageFile ? '이미지  변경하기' : '이미지 추가하기'}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.audioButton} onPress={onSelectAudio}>
-            <Text style={styles.buttonText}>
-              {audioFile ? '음원 파일 변경하기' : '음원 파일 추가하기'}
-              {/* useEffect or useState 사용해서 음원 이름으로 변경하기 ! */}
-            </Text>
-          </TouchableOpacity>
+            <View style={styles.rightContent}>
+              <TouchableOpacity
+                style={styles.imageButton}
+                onPress={onSelectImage}>
+                <Text style={styles.buttonText}>
+                  {imageFile ? '이미지  변경하기' : '이미지 추가하기'}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.audioButton}
+                onPress={onSelectAudio}>
+                <Text style={styles.buttonText0}>
+                  {audioFile ? `${audioFile}` : '음원 파일 추가하기'}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
 
           <TextInput
             style={styles.textInput}
@@ -149,24 +156,7 @@ const Aicover = () => {
             onChangeText={text => setIndex(text)}
             keyboardType="numeric"
           />
-          <ModalDropdown
-            style={styles.dropdownText}
-            options={[
-              'hyungku50',
-              'hyungku100',
-              'hyungku250',
-              'hyungku2500',
-              'Jungkook',
-              'Jimin',
-            ]}
-            dropdownTextStyle={styles.dropdownText}
-            dropdownStyle={styles.dropdownContainer}
-            textoptionsStyle={styles.options01}
-            initialScrollIndex={0}>
-            <Text style={styles.text01}>목소리 선택</Text>
-          </ModalDropdown>
-
-          {/* <Picker
+          <Picker
             selectedValue={model}
             onValueChange={(itemValue, itemIndex) => setModel(itemValue)}
             style={styles.picker}>
@@ -175,7 +165,7 @@ const Aicover = () => {
             <Picker.Item label="더 멋진 여형구" value="hyungku2500" />
             <Picker.Item label="지민" value="Jimin" />
             <Picker.Item label="정국" value="Jungkook" />
-          </Picker> */}
+          </Picker>
 
           <Picker
             selectedValue={octave}
@@ -207,6 +197,20 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
   },
+  headerText: {
+    marginTop: 50,
+    marginBottom: -40,
+    fontSize: 24,
+    color: '#202B8F',
+    fontWeight: '900',
+    letterSpacing: -1.5,
+  },
+  header: {
+    flexDirection: 'row', // 가로로 정렬
+    alignItems: 'center', // 수직 가운데 정렬
+    marginBottom: 16,
+    marginTop: 10,
+  },
   contentContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -216,43 +220,58 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   rightContent: {
+    marginTop: 50,
     flex: 1,
     flexDirection: 'column', // 세로로 배치
     alignItems: 'center',
   },
   img: {
-    height: 120,
-    width: 120,
+    height: 130,
+    width: 130,
+    borderRadius: 10,
     marginTop: 60,
+    marginLeft: 50,
+    marginBottom: -30,
   },
   imageButton: {
-    backgroundColor: '#000',
+    // backgroundColor: '#202B8F',
+    borderWidth: 1,
+    borderColor: '#202B8F',
     padding: 7,
-    width: 140,
+    width: 150,
     borderRadius: 5,
     marginTop: 90,
     alignItems: 'center',
+    marginRight: 20,
     marginBottom: -90,
     marginLeft: 10,
   },
   audioButton: {
-    backgroundColor: '#000',
+    backgroundColor: '#202B8F',
     padding: 7,
     width: 150,
     borderRadius: 5,
-    marginTop: 10,
+    marginTop: 15,
     alignItems: 'center',
-    marginRight: 0,
+    marginRight: 20,
     marginBottom: 30,
     marginLeft: 10,
   },
   options: {
-    color: 'black',
+    color: '#202B8F',
+  },
+  buttonText0: {
+    fontSize: 16,
+    color: '#fff',
+    // letterSpacing: 0,
+    letterSpacing: -1,
+    lineHeight: 18,
   },
   buttonText: {
     fontSize: 16,
-    color: 'white',
-    letterSpacing: 0,
+    color: '#202B8F',
+    // letterSpacing: 0,
+    letterSpacing: -1,
     lineHeight: 18,
   },
   audioContainer: {
@@ -268,7 +287,7 @@ const styles = StyleSheet.create({
     width: 330,
     height: 40,
     marginLeft: 30,
-    // letterSpacing: -1,
+    letterSpacing: -1,
     textAlign: 'center',
     color: 'black',
     borderRadius: 10,
@@ -277,7 +296,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'black',
     marginLeft: 230,
-    // letterSpacing: -1.5,
+    letterSpacing: -1.5,
     lineHeight: 18,
   },
   reference: {
@@ -289,31 +308,23 @@ const styles = StyleSheet.create({
     width: 330,
     height: 40,
     marginLeft: 30,
-    // letterSpacing: -1,
+    letterSpacing: -0.5,
     textAlign: 'center',
     color: 'black',
     borderRadius: 10,
   },
-  dropdownContainer: {
-    fontSize: 16,
-    color: 'white',
-    marginLeft: 230,
-    // letterSpacing: -1.5,
-    lineHeight: 18,
-    width: 330,
-  },
   options01: {
     fontSize: 16,
     color: 'black',
-    // letterSpacing: -1.5,
+    letterSpacing: -1.5,
     lineHeight: 18,
   },
   made: {
-    backgroundColor: '#000',
+    backgroundColor: '#202B8F',
     padding: 7,
-    width: 140,
+    width: 150,
     borderRadius: 5,
-    marginTop: 30,
+    marginTop: 70,
     alignItems: 'center',
     marginBottom: 400,
     marginLeft: 10,
@@ -321,6 +332,7 @@ const styles = StyleSheet.create({
   madetext: {
     fontSize: 16,
     color: 'white',
+    letterSpacing: -1,
     // letterSpacing: 305,
     lineHeight: 18,
   },
@@ -332,29 +344,27 @@ const styles = StyleSheet.create({
     width: 330,
     height: 40,
     marginLeft: -200,
-    // letterSpacing: -1,
+    letterSpacing: -1,
     textAlign: 'center',
     color: 'black',
     borderRadius: 10,
   },
   picker: {
-    borderWidth: 1,
-    borderColor: '#000',
     marginTop: 10,
     width: 330,
-    height: 40,
+    height: 20,
     marginLeft: 20,
-    // letterSpacing: -1,
+    letterSpacing: -1,
     textAlign: 'center',
+    backgroundColor: '#DCDDED',
     color: 'black',
-    borderRadius: 10,
   },
   pickerItem: {
     fontSize: 16,
     color: 'black',
   },
   pickerLabel: {
-    // letterSpacing: -1,
+    letterSpacing: -1,
     fontSize: 16,
     color: 'black',
   },
@@ -367,7 +377,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 38,
     marginLeft: -150,
-    // letterSpacing: -1,
+    letterSpacing: -1,
     fontSize: 15,
     textAlign: 'center',
     backgroundColor: 'black',

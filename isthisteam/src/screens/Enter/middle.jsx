@@ -26,11 +26,11 @@ const Skip = ({navigation}) => (
     <Text style={styles.bottombtn}>Skip</Text>
   </TouchableOpacity>
 );
-const Next = ({...props}) => (
-  <TouchableOpacity style={{marginHorizontal: 20}}>
-    <Text style={styles.bottombtn}>Next</Text>
-  </TouchableOpacity>
-);
+// const Next = ({...props}) => (
+//   <TouchableOpacity style={{marginHorizontal: 20}}>
+//     <Text style={styles.bottombtn}>Next</Text>
+//   </TouchableOpacity>
+// );
 const Done = ({navigation}) => (
   <TouchableOpacity
     style={{marginHorizontal: 20}}
@@ -43,16 +43,16 @@ const Middle = ({navigation}) => {
   return (
     <Onboarding
       SkipButtonComponent={() => <Skip navigation={navigation} />}
-      NextButtonComponent={Next}
+      // NextButtonComponent={Next}
       DoneButtonComponent={() => <Done navigation={navigation} />}
       onSkip={() => navigation.replace('Select')}
       onDone={() => navigation.navigate('Select')}
       pages={[
         {
-          // backgroundColor: '#F7F5EB',
+          backgroundColor: '#EAEAF4',
           image: (
             <Image
-              source={require('../../../android/app/assets/images/middle02.png')}
+              source={require('../../../android/app/assets/images/headphone.png')}
               style={styles.imageStyle}
             />
           ),
@@ -61,10 +61,10 @@ const Middle = ({navigation}) => {
           // subtitle: '사용자의 음역대를 ',
         },
         {
-          // backgroundColor: '#F7F5EB',
+          backgroundColor: '#EAEAF4',
           image: (
             <Image
-              source={require('../../../android/app/assets/images/middle003.png')}
+              source={require('../../../android/app/assets/images/thumbsup.png')}
               style={styles.imageStyle}
             />
           ),
@@ -72,10 +72,10 @@ const Middle = ({navigation}) => {
           subtitle: '',
         },
         {
-          // backgroundColor: '#F7F5EB',
+          backgroundColor: '#EAEAF4',
           image: (
             <Image
-              source={require('../../../android/app/assets/images/middle04.png')}
+              source={require('../../../android/app/assets/images/miccc.png')}
               style={styles.imageStyle}
             />
           ),
@@ -84,26 +84,26 @@ const Middle = ({navigation}) => {
           subtitle: '',
         },
         {
-          // backgroundColor: '#F7F5EB',
+          backgroundColor: '#EAEAF4',
           image: (
             <Image
-              source={require('../../../android/app/assets/images/middle04.png')}
+              source={require('../../../android/app/assets/images/link.png')}
+              style={styles.imageStyle}
+            />
+          ),
+          title: '작곡가와 가수의 만남을 위한 \n커뮤니티 기능도 제공합니다',
+          subtitle: '',
+        },
+        {
+          backgroundColor: '#EAEAF4',
+          image: (
+            <Image
+              source={require('../../../android/app/assets/images/heart.png')}
               style={styles.imageStyle}
             />
           ),
           title:
-            '작곡가와 가수의 만남을 위한 \n 커뮤니티 기능 역시 제공하는 여기는,',
-          subtitle: '',
-        },
-        {
-          // backgroundColor: '#F7F5EB',
-          image: (
-            <Image
-              source={require('../../../android/app/assets/images/middle001.png')}
-              style={styles.imageStyle}
-            />
-          ),
-          title: '어서오세요 \n 랄라리아입니다',
+            '여러분의 음악 상상력을 높여줄 \n 당신을 위한 음악 플랫폼, 랄라리아',
           subtitle: '',
         },
       ]}

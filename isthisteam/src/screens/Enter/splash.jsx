@@ -21,7 +21,7 @@ const Splash = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Image
-        source={require('../../../android/app/src/main/res/drawable/logo.png')}
+        source={require('../../../android/app/assets/images/splash003.png')}
         style={styles.image}
       />
       <Text style={styles.text01}>ISTHISTEAM</Text>
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: '#EAC7C7',
+    backgroundColor: '#202B8F',
   },
   image: {
     marginTop: 150,
@@ -46,20 +46,21 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 12,
     marginTop: 1,
-    color: 'black',
+    color: 'white',
     fontWeight: '800',
   },
   text01: {
-    fontSize: 15,
+    fontSize: 16,
     marginTop: 100,
     marginBottom: 5,
-    color: 'black',
-    fontWeight: '800',
+    color: 'white',
+    fontWeight: '900',
   },
   text02: {
     fontSize: 12,
     marginTop: 1,
-    color: 'black',
+    color: 'white',
+    lineHeight: 15,
   },
 });
 

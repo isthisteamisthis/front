@@ -53,16 +53,15 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>SpoqaHanSansNeo-Bold.otf</string>
-		<string>SpoqaHanSansNeo-Light.otf</string>
-		<string>SpoqaHanSansNeo-Medium.otf</string>
-		<string>SpoqaHanSansNeo-Regular.otf</string>
-		<string>SpoqaHanSansNeo-Thin.otf</string>
-		<string>SpoqaHanSansNeo-Bold.ttf</string>
-		<string>SpoqaHanSansNeo-Light.ttf</string>
-		<string>SpoqaHanSansNeo-Medium.ttf</string>
-		<string>SpoqaHanSansNeo-Regular.ttf</string>
-		<string>SpoqaHanSansNeo-Thin.ttf</string>
+		<string>NotoSansKR-Black.ttf</string>
+		<string>NotoSansKR-Bold.ttf</string>
+		<string>NotoSansKR-ExtraBold.ttf</string>
+		<string>NotoSansKR-ExtraLight.ttf</string>
+		<string>NotoSansKR-Light.ttf</string>
+		<string>NotoSansKR-Medium.ttf</string>
+		<string>NotoSansKR-Regular.ttf</string>
+		<string>NotoSansKR-SemiBold.ttf</string>
+		<string>NotoSansKR-Thin.ttf</string>
 	</array>
 </dict>
 </plist>

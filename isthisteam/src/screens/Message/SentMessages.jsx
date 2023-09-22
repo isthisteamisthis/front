@@ -1,43 +1,131 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, FlatList, TouchableOpacity, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+} from 'react-native';
 
-const SentMessages = ({navigation}) => {
-  const [sentMessages, setSentMessages] = useState([]);
+const fakeMessages = [
+  {
+    id: '1',
+    sender: 'sui',
+    subject: '안녕하다!',
+    date: '2023-09-25',
+    message: '안녕하세요! 절 집에 보내주시겠어요?',
+  },
+  {
+    id: '2',
+    sender: 'Dylan',
+    subject: '중요한 일정 안내',
+    date: '2023-09-24',
+    message: '오늘 진심 점심 뭐먹냐',
+  },
+  {
+    id: '3',
+    sender: 'Rachaz',
+    subject: '주말 계획',
+    date: '2023-09-23',
+    message: '끝장나게 누워있기',
+  },
+  {
+    id: '3',
+    sender: 'Rachaz',
+    subject: '주말 계획',
+    date: '2023-09-23',
+    message: '끝장나게 누워있기',
+  },
+  {
+    id: '3',
+    sender: 'Rachaz',
+    subject: '주말 계획',
+    date: '2023-09-23',
+    message: '끝장나게 누워있기',
+  },
+  {
+    id: '3',
+    sender: 'Rachaz',
+    subject: '주말 계획',
+    date: '2023-09-23',
+    message: '끝장나게 누워있기',
+  },
+  {
+    id: '3',
+    sender: 'Rachaz',
+    subject: '주말 계획',
+    date: '2023-09-23',
+    message: '끝장나게 누워있기',
+  },
+  {
+    id: '3',
+    sender: 'Rachaz',
+    subject: '주말 계획',
+    date: '2023-09-23',
+    message: '끝장나게 누워있기',
+  },
+  {
+    id: '3',
+    sender: 'Rachaz',
+    subject: '주말 계획',
+    date: '2023-09-23',
+    message: '끝장나게 누워있기',
+  },
+  {
+    id: '3',
+    sender: 'Rachaz',
+    subject: '주말 계획',
+    date: '2023-09-23',
+    message: '끝장나게 누워있기',
+  },
+  {
+    id: '3',
+    sender: 'Rachaz',
+    subject: '주말 계획',
+    date: '2023-09-23',
+    message: '끝장나게 누워있기',
+  },
+];
 
-  const fetchSentMessages = async () => {
-    const fakeSentMessages = [
-      {id: 1, title: '안녕하세요', date: '2023-09-24'},
-      {id: 2, title: '쪽지 테스트', date: '2023-09-23'},
-      {id: 3, title: '더미 쪽지', date: '2023-09-22'},
-    ];
+const SentMessageDetail = ({navigation}) => {
+  const [messages] = useState(fakeMessages);
 
-    setSentMessages(fakeSentMessages);
+  const onPress = () => {
+    navigation.navigate('Mainpage');
   };
-
-  useEffect(() => {
-    // 화면이 로드될 때 내가 보낸 쪽지 목록을 가져옵니다.
-    fetchSentMessages();
-  }, []);
 
   const renderItem = ({item}) => {
     return (
       <TouchableOpacity
         style={styles.messageItem}
         onPress={() =>
-          navigation.navigate('SentMessageDetail', {message: item})
+          navigation.navigate('sentMessageDetail', {message: item})
         }>
-        <Text style={styles.messageTitle}>{item.title}</Text>
+        <Text style={styles.senderName}>{item.sender}</Text>
+        <Text style={styles.subject}>{item.subject}</Text>
+        <Text style={styles.date}>{item.date}</Text>
       </TouchableOpacity>
     );
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>내가 보낸 쪽지 목록</Text>
+      {/* <Text style={styles.header}>쪽지 목록</Text> */}
+      <View style={styles.container1}>
+        <TouchableOpacity>
+          <Image
+            source={require('../../../android/app/assets/images/paper1.png')} // 이미지 경로를 설정합니다.
+            style={styles.header}
+            onPress={() => navigation.navigate('Mainpage')}
+          />
+        </TouchableOpacity>
+        <Text style={styles.sendtext1}>내가 보낸 쪽지함</Text>
+      </View>
       <FlatList
-        data={sentMessages}
+        data={messages}
         renderItem={renderItem}
-        keyExtractor={item => item.id.toString()}
+        keyExtractor={item => item.id}
       />
     </View>
   );
@@ -45,26 +133,62 @@ const SentMessages = ({navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#Fff',
     flex: 1,
     padding: 16,
-    backgroundColor: '#F7F5EB',
+  },
+  sendtext1: {
+    marginTop: -25,
+    marginLeft: 175,
+    marginBottom: 10,
+    letterSpacing: -1.5,
+    color: 'black',
+    fontWeight: '800',
+  },
+  container1: {
+    marginTop: -20,
+    backgroundColor: '#EAEAF4',
+    width: 500,
+    marginLeft: -40,
+    height: 100,
   },
   header: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 16,
-    letterSpacing: -1,
+    marginBottom: 30,
+    marginTop: 30,
+    marginLeft: 205,
+    width: 25,
+    height: 25,
   },
   messageItem: {
-    backgroundColor: 'white',
-    padding: 16,
+    padding: 20,
     borderBottomWidth: 1,
-    borderColor: '#ccc',
+    borderBottomColor: 'lightgray',
+    letterSpacing: -1,
   },
-  messageTitle: {
+  senderName: {
     fontSize: 18,
     fontWeight: 'bold',
+    marginBottom: 4,
+    letterSpacing: -1,
+    color: 'black',
+  },
+  subject: {
+    fontSize: 16,
+    fontWeight: '500',
+    marginBottom: 4,
+    letterSpacing: -1,
+  },
+  date: {
+    fontSize: 14,
+    color: 'gray',
+  },
+  sendtext: {
+    marginTop: -5,
+    marginLeft: 142,
+    letterSpacing: -1,
+    color: 'black',
+    fontWeight: '600',
   },
 });
 
-export default SentMessages;
+export default SentMessageDetail;

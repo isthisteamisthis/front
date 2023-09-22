@@ -72,7 +72,7 @@ const MyPage = () => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Image
-        source={require('../../../android/app/assets/images/user.png')}
+        source={require('../../../android/app/assets/images/userrr.png')}
         style={styles.avatar}
       />
       <Text style={styles.name}>{name}</Text>
@@ -122,37 +122,42 @@ function PostItem({post}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F7F5EB',
+    backgroundColor: '#EAEAF4',
     alignItems: 'center',
     padding: 20,
   },
   name: {
-    marginBottom: 10,
-    fontSize: 25,
+    marginBottom: 20,
+    fontSize: 26,
     fontWeight: 'bold',
     color: 'black',
+    marginTop: -10,
   },
   int: {
+    flexDirection: 'row',
+    alignItems: 'center',
     marginTop: 20,
-    fontWeight: 'bold',
-    marginBottom: -20,
+    marginBottom: -15,
+
+    letterSpacing: -1,
+    color: 'gray',
   },
   avatar: {
-    width: 50,
-    height: 50,
+    width: 70,
+    height: 70,
     borderRadius: 75,
     marginBottom: 10,
     marginTop: 30,
   },
   userIntroductionContainer: {
-    backgroundColor: 'lightgray',
+    backgroundColor: '#DCDDED',
     marginTop: 30,
     marginBottom: 30,
-    width: 400,
+    width: 350,
     height: 100,
-    borderWidth: 1,
+    // borderWidth: 1,
     alignItems: 'center',
-    borderColor: 'lightgray',
+    // borderColor: 'lightgray',
     borderRadius: 5,
   },
   userIntroduction: {
@@ -163,23 +168,25 @@ const styles = StyleSheet.create({
     letterSpacing: -1,
   },
   textContainer: {
-    backgroundColor: 'lightgray',
+    backgroundColor: '#DCDDED',
     marginTop: 30,
     marginBottom: 30,
-    width: 400,
+    width: 350,
     height: 60,
-    borderWidth: 1,
+    // borderWidth: 1,
     alignItems: 'center',
-    borderColor: 'lightgray',
+    // borderColor: 'lightgray',
     borderRadius: 5,
     flexDirection: 'row',
   },
   voiceRange: {
-    marginRight: 100,
+    // marginRight: 50,
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: 'black',
-    marginLeft: 45,
+    marginLeft: 62,
+    marginBottom: 5,
+    letterSpacing: -1,
   },
   additionalText: {
     marginRight: 230,

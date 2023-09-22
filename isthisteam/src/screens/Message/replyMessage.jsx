@@ -23,20 +23,21 @@ const ReplyMessage = ({route, navigation}) => {
     console.log('작성한 답장 내용:', replyMessage);
 
     // 답장을 작성하고 나면 이전 화면으로 돌아갑니다.
-    navigation.goBack();
+    navigation.navigate('SentMessages');
   };
 
   return (
     <View style={styles.container}>
-      <Image
-        source={require('../../../android/app/assets/images/paper.png')} // 이미지 경로를 설정합니다.
-        style={styles.header}
-      />
+      <View style={styles.container1}>
+        <Image
+          source={require('../../../android/app/assets/images/paper.png')} // 이미지 경로를 설정합니다.
+          style={styles.header}
+        />
+        <Text style={styles.sendtext1}>답장하기</Text>
+      </View>
       <View style={styles.messageContainer}>
-        <Text style={styles.senderName}>
-          보낸 사람 | {originalMessage.sender}
-        </Text>
-        <Text style={styles.subject}>{originalMessage.subject}</Text>
+        <Text style={styles.subject}>Re : {originalMessage.subject}</Text>
+        <Text style={styles.senderName}>{originalMessage.sender}</Text>
         <Text style={styles.date}>{originalMessage.date}</Text>
         <Text style={styles.messageText}>{originalMessage.message}</Text>
       </View>
@@ -56,20 +57,38 @@ const ReplyMessage = ({route, navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#Fff',
     flex: 1,
     padding: 16,
-    backgroundColor: '#Fff',
+  },
+  sendtext1: {
+    marginTop: -25,
+    marginLeft: 195,
+    marginBottom: 10,
+    letterSpacing: -1.5,
+    color: 'black',
+    fontWeight: '800',
+  },
+  container1: {
+    marginTop: -20,
+    backgroundColor: '#EAEAF4',
+    width: 500,
+    marginLeft: -40,
+    height: 100,
   },
   header: {
-    marginTop: 10,
-    marginBottom: 10,
-    marginLeft: 170,
+    marginBottom: 30,
+    marginTop: 30,
+    marginLeft: 205,
+    width: 25,
+    height: 25,
   },
   messageContainer: {
+    marginTop: 30,
     padding: 16,
-    borderWidth: 3,
-    borderColor: '#FFCBB3',
-    borderRadius: 8,
+    borderWidth: 0.5,
+    borderColor: 'gray',
+    // borderRadius: 8,
     backgroundColor: 'white',
   },
   senderName: {
@@ -77,41 +96,62 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 8,
   },
-  subject: {
-    fontSize: 16,
-    fontWeight: '500',
-    marginBottom: 8,
+  sendtext: {
+    marginTop: -5,
+    marginLeft: 142,
     letterSpacing: -1,
+    color: 'black',
+    fontWeight: '600',
+  },
+  subject: {
+    fontSize: 20,
+    marginLeft: 0,
+    fontWeight: '900',
+    marginBottom: 20,
+    letterSpacing: -1.5,
+    color: 'black',
   },
   date: {
     fontSize: 14,
     color: 'gray',
     marginBottom: 16,
+    marginTop: -10,
   },
   messageText: {
     fontSize: 16,
     lineHeight: 24,
+    marginTop: 10,
+    fontWeight: '100',
+    color: 'black',
+    letterSpacing: -1,
   },
   replyInput: {
+    fontSize: 16,
+    letterSpacing: -1,
     borderWidth: 1,
-    borderColor: 'lightgray',
-    borderRadius: 8,
-    padding: 8,
+    borderColor: 'gray',
+    padding: 15,
     marginVertical: 16,
     backgroundColor: 'white',
-    minHeight: 100,
+    minHeight: 10,
   },
   sendButton: {
-    backgroundColor: '#0067FF',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 5,
-    alignSelf: 'flex-start',
+    borderWidth: 1,
+    borderColor: '#202B8F',
+    backgroundColor: '#202B8F',
+    borderRadius: 8,
+    padding: 6,
+    marginTop: 10,
+    marginLeft: 310,
+    width: 50,
+    height: 38,
   },
   sendButtonText: {
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
+    textAlign: 'center',
+    letterSpacing: -1,
   },
 });
 

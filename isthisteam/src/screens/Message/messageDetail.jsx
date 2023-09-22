@@ -16,24 +16,29 @@ const MessageDetail = ({route, navigation}) => {
   };
 
   const handleViewSentMessages = () => {
-    navigation.navigate('SentMessages'); // 내가 보낸 쪽지 목록으로 이동하는 내비게이션
+    navigation.navigate('SentMessages');
+  };
+
+  const handlePress = () => {
+    navigation.navigate('MyPage');
   };
 
   return (
     <View style={styles.container}>
-      <Image
-        source={require('../../../android/app/assets/images/paper1.png')} // 이미지 경로를 설정합니다.
-        style={styles.header}
-      />
-      {/* <ImageBackground>
-        source={require('../../../android/app/assets/images/detail.png')}
-        style={{width: '100%', height: '100%'}}
-      </ImageBackground> */}
+      <View style={styles.container1}>
+        <Image
+          source={require('../../../android/app/assets/images/paper1.png')} // 이미지 경로를 설정합니다.
+          style={styles.header}
+        />
+        <Text style={styles.sendtext1}>받은 쪽지 상세보기</Text>
+      </View>
       <View style={styles.subContainer}>
         <Text style={styles.subject}>{message.subject}</Text>
       </View>
       <View style={styles.messageContainer}>
-        <Text style={styles.senderName}>{message.sender}</Text>
+        <TouchableOpacity onPress={handlePress}>
+          <Text style={styles.senderName}>{message.sender}</Text>
+        </TouchableOpacity>
         <Text style={styles.date}>{message.date}</Text>
       </View>
       <View style={styles.detailContainer}>
@@ -50,9 +55,10 @@ const MessageDetail = ({route, navigation}) => {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.viewSentMessagesButton}
-        onPress={handleViewSentMessages} // 내가 보낸 쪽지 목록으로 이동하는 버튼
-      >
-        <Text style={styles.viewSentMessagesButtonText}>내가 보낸 쪽지</Text>
+        onPress={handleViewSentMessages}>
+        <Text style={styles.viewSentMessagesButtonText}>
+          내가 보낸 쪽지 목록
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -60,17 +66,34 @@ const MessageDetail = ({route, navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#Fff',
     flex: 1,
     padding: 16,
-    backgroundColor: '#fff',
-    marginBottom: 20,
+  },
+  sendtext1: {
+    marginTop: -25,
+    marginLeft: 165,
+    marginBottom: 10,
+    letterSpacing: -1.5,
+    color: 'black',
+    fontWeight: '800',
+  },
+  container1: {
+    marginTop: -20,
+    backgroundColor: '#EAEAF4',
+    width: 500,
+    marginLeft: -40,
+    height: 100,
   },
   header: {
     marginBottom: 30,
-    marginTop: 10,
-    marginLeft: 170,
-    width: 33,
-    height: 33,
+    marginTop: 30,
+    marginLeft: 205,
+    width: 25,
+    height: 25,
+  },
+  sendtext: {
+    color: 'black',
   },
   detail: {
     marginTop: 10,
@@ -81,18 +104,18 @@ const styles = StyleSheet.create({
   replyButton: {
     // backgroundColor: '#0067FF',
     borderWidth: 1,
-    borderColor: '#FF874E',
+    borderColor: '#4D55A5',
     // paddingVertical: 10,
     // paddingHorizontal: 20,
     padding: 8,
     borderRadius: 8,
-    marginTop: 16,
-    marginLeft: 220,
+    marginTop: -15,
+    marginLeft: 230,
     width: 130,
     height: 40,
   },
   replyButtonText: {
-    color: '#FF874E',
+    color: '#4D55A5',
     fontSize: 14,
     fontWeight: 'bold',
     textAlign: 'center',
@@ -100,12 +123,12 @@ const styles = StyleSheet.create({
   },
   viewSentMessagesButton: {
     borderWidth: 1,
-    borderColor: '#FF874E',
-    backgroundColor: '#FF874E',
+    borderColor: '#4D55A5',
+    backgroundColor: '#4D55A5',
     borderRadius: 8,
     padding: 8,
     marginTop: 10,
-    marginLeft: 220,
+    marginLeft: 230,
     width: 130,
     height: 40,
   },
@@ -144,11 +167,9 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     padding: 25,
     marginTop: 10,
-    backgroundColor: '#FFEFE8',
+    backgroundColor: '#EAEAF4',
     marginBottom: 50,
-    borderWidth: 0.3,
-    borderColor: '#FF874E',
-    borderRadius: 10,
+    borderRadius: 5,
     // marginBottom: 30,
   },
   senderName: {

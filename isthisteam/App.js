@@ -27,7 +27,7 @@ import SongDetail from './src/screens/Main/songDetail';
 import myPage from './src/screens/Main/myPage';
 // import EditProfileModal from './src/screens/Main/editProfileModal';
 import mainpage from './src/screens/Main/mainPage';
-import songList from './src/screens/Main/songList';
+import recSongList from './src/screens/Main/recSongList';
 import openUserPage from './src/screens/Main/openUserPage';
 
 // message ------------------------------------------------------
@@ -35,12 +35,14 @@ import Community from './src/screens/Message/commuity';
 import MessageDetail from './src/screens/Message/messageDetail';
 import ReplyMessage from './src/screens/Message/replyMessage';
 import SentMessages from './src/screens/Message/SentMessages';
+import sentMessageDetail from './src/screens/Message/sentMessageDetail';
 
 // record ---------------------------------------------------
 import aiCover from './src/screens/recorder/aiCover';
 import PerfectScore from './src/screens/recorder/perfectScore';
 import recSelect from './src/screens/recorder/recSelect';
 import coverDetail from './src/screens/recorder/coverDetail';
+import coverListPage from './src/screens/recorder/coverListPage';
 
 // ----------------------------------------------------------
 
@@ -111,8 +113,8 @@ function App() {
             options={{headerShown: false}}
           />
           <Stack.Screen
-            name="songList"
-            component={songList}
+            name="recSongList"
+            component={recSongList}
             options={{headerShown: false}}
           />
           <Stack.Screen
@@ -143,6 +145,11 @@ function App() {
             component={PerfectScore}
             options={{headerShown: false}}
           />
+          <Stack.Screen
+            name="coverListPage"
+            component={coverListPage}
+            options={{headerShown: false}}
+          />
 
           {/* ---------------------------------------- MESSAGE page----------------------------------------------------- */}
           <Stack.Screen
@@ -163,6 +170,11 @@ function App() {
           <Stack.Screen
             name="Community"
             component={Community}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="sentMessageDetail"
+            component={sentMessageDetail}
             options={{headerShown: false}}
           />
 

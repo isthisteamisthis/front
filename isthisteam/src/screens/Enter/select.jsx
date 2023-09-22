@@ -8,10 +8,10 @@ function Select({navigation}) {
 
   return (
     <View style={styles.container}>
-      {/* <Image
-        source={require('../../../android/app/assets/images/select.png')}
+      <Image
+        source={require('../../../android/app/assets/images/selectt.png')}
         style={styles.image}
-      /> */}
+      />
       <Text style={styles.title}>{`당신의 유형을 
 선택해주세요`}</Text>
       <Text
@@ -38,11 +38,11 @@ const styles = StyleSheet.create({
   image: {
     width: 170,
     height: 170,
-    marginBottom: 550,
-    marginTop: -30,
+    marginBottom: 25,
+    marginTop: -50,
   },
   container: {
-    // backgroundColor: '#F7F5EB',
+    backgroundColor: '#EAEAF4',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     fontWeight: '100',
     letterSpacing: -1,
     marginTop: -10,
-    marginBottom: 30,
+    marginBottom: 20,
     lineHeight: 22,
     color: 'gray',
   },
@@ -72,10 +72,10 @@ const styles = StyleSheet.create({
     height: 40,
     textAlign: 'center',
     borderRadius: 10,
-    borderColor: '#ff5403',
+    borderColor: '#202B8F',
     alignItems: 'center',
     borderWidth: 1,
-    backgroundColor: '#ff5403',
+    backgroundColor: '#202B8F',
     marginHorizontal: 'auto',
   },
   button: {
@@ -85,10 +85,10 @@ const styles = StyleSheet.create({
     height: 40,
     textAlign: 'center',
     borderRadius: 10,
-    borderColor: '#ff5403',
+    borderColor: '#202B8F',
     alignItems: 'center',
     borderWidth: 1,
-    backgroundColor: '#F4F4F4',
+    backgroundColor: '#EAEAF4',
     marginHorizontal: 'auto',
   },
   text00: {
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   text: {
-    color: '#ff5403',
+    color: '#202B8F',
     marginTop: 2.5,
     fontSize: 22,
     letterSpacing: -1,

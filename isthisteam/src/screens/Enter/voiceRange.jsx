@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
-    // backgroundColor: '#F7F5EB',
+    backgroundColor: '#EAEAF4',
   },
   container: {
     flex: 1,
@@ -149,12 +149,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     marginTop: -20,
-    letterSpacing: -0.7,
+    letterSpacing: -1,
     color: 'black',
-    fontWeight: 'bold',
+    fontWeight: '100',
     textAlign: 'center',
     marginBottom: 10,
-    lineHeight: 28,
+    lineHeight: 26,
     alignContent: 'center',
   },
   title00: {
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   button02: {
-    backgroundColor: '#ff5403',
+    backgroundColor: '#202B8F',
     // paddingTop: -5,
     width: 130,
     height: 30,
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
     backgroundColor: '#F4F4F4',
-    borderColor: '#ff5403',
+    borderColor: '#202B8F',
   },
   text01: {
     marginTop: 2,
@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
   },
   text02: {
     marginTop: 2,
-    color: '#ff5403',
+    color: '#202B8F',
     fontWeight: '800',
     letterSpacing: -1,
   },

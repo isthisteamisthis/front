@@ -13,9 +13,9 @@ const fakeMessages = [
   {
     id: '1',
     sender: 'sui',
-    subject: '안녕하다!',
+    subject: '오늘의 할일',
     date: '2023-09-25',
-    message: '안녕하세요! 절 집에 보내주시겠어요?',
+    message: '안녕하세요! 절 집에 보내주시겠어요? 내 오늘 할 일은 집 가기라고',
   },
   {
     id: '2',
@@ -107,10 +107,13 @@ const Community = ({navigation}) => {
   return (
     <View style={styles.container}>
       {/* <Text style={styles.header}>쪽지 목록</Text> */}
-      <Image
-        source={require('../../../android/app/assets/images/paper.png')} // 이미지 경로를 설정합니다.
-        style={styles.header}
-      />
+      <View style={styles.container1}>
+        <Image
+          source={require('../../../android/app/assets/images/paper1.png')} // 이미지 경로를 설정합니다.
+          style={styles.header}
+        />
+        <Text style={styles.sendtext1}>나의 쪽지함</Text>
+      </View>
       <FlatList
         data={messages}
         renderItem={renderItem}
@@ -126,10 +129,27 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
   },
-  header: {
-    marginTop: 10,
+  sendtext1: {
+    marginTop: -25,
+    marginLeft: 185,
     marginBottom: 10,
-    marginLeft: 170,
+    letterSpacing: -1.5,
+    color: 'black',
+    fontWeight: '800',
+  },
+  container1: {
+    marginTop: -20,
+    backgroundColor: '#EAEAF4',
+    width: 500,
+    marginLeft: -40,
+    height: 100,
+  },
+  header: {
+    marginBottom: 30,
+    marginTop: 30,
+    marginLeft: 205,
+    width: 25,
+    height: 25,
   },
   messageItem: {
     padding: 20,
@@ -153,6 +173,13 @@ const styles = StyleSheet.create({
   date: {
     fontSize: 14,
     color: 'gray',
+  },
+  sendtext: {
+    marginTop: -5,
+    marginLeft: 142,
+    letterSpacing: -1,
+    color: 'black',
+    fontWeight: '600',
   },
 });
 

@@ -42,16 +42,6 @@ function BottomTab({navigation}) {
           />
         </View>
       </TouchableOpacity>
-      {/* <TouchableOpacity
-        onPress={() => navigation.navigate('PerfectScore')}
-        style={styles.tabItem}>
-        <View style={styles.tabContent}>
-          <Image
-            source={require('../../android/app/assets/images/perfectscore.png')} // 이미지 경로를 설정합니다.
-            style={styles.tabImage}
-          />
-        </View>
-      </TouchableOpacity> */}
     </View>
   );
 }
@@ -64,8 +54,8 @@ const styles = StyleSheet.create({
     width: 350,
     height: 50,
     borderRadius: 30,
-    marginBottom: -10,
-    backgroundColor: '#ff5403',
+    marginBottom: -5,
+    backgroundColor: '#202B8F',
   },
   tabImage: {
     width: 30,

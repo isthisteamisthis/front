@@ -65,18 +65,25 @@ export default function KakaoLogin() {
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
-          // backgroundColor: '#F7F5EB',
+          backgroundColor: '#EAEAF4',
         }}>
         <Image
-          source={require('../../../android/app/assets/images/logo.png')}
-          style={{width: 250, height: 250, marginBottom: 10}}
+          source={require('../../../android/app/assets/images/key.png')}
+          style={{width: 150, height: 150, marginBottom: 40, marginTop: -50}}
         />
-        {/* <Text style={styles.text01}>{`         로그인을 
-        진행합니다`}</Text> */}
+        <Text style={styles.text01}>{`먼저, 하단의 버튼을 눌러 
+  로그인을 진행해주세요 
+        `}</Text>
         <TouchableOpacity onPress={handleKakaoLogin}>
           <Image
             source={require('../../../android/app/assets/images/kakao_login_large_narrow.png')}
-            style={{width: 200, height: 50, marginTop: -100, marginBottom: -60}}
+            style={{
+              width: 200,
+              height: 50,
+              marginTop: -40,
+              marginBottom: 0,
+              marginLeft: 20,
+            }}
           />
         </TouchableOpacity>
       </View>
@@ -85,6 +92,12 @@ export default function KakaoLogin() {
 }
 const styles = StyleSheet.create({
   text01: {
-    marginBottom: 10,
+    marginTop: -50,
+    marginBottom: 100,
+    fontWeight: '400',
+    marginLeft: 10,
+    fontSize: 18,
+    color: 'gray',
+    letterSpacing: -1.5,
   },
 });
