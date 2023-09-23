@@ -1,4 +1,5 @@
 import React from 'react';
+import { LogBox } from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -29,6 +30,7 @@ import myPage from './src/screens/Main/myPage';
 import mainpage from './src/screens/Main/mainPage';
 import recSongList from './src/screens/Main/recSongList';
 import openUserPage from './src/screens/Main/openUserPage';
+import KaraokeList from './src/screens/Main/KaraokeList';
 
 // message ------------------------------------------------------
 import Community from './src/screens/Message/commuity';
@@ -45,8 +47,12 @@ import PerfectScore from './src/screens/recorder/perfectScore';
 import recSelect from './src/screens/recorder/recSelect';
 import coverDetail from './src/screens/recorder/coverDetail';
 import coverList from './src/screens/recorder/coverList';
+import Karaoke from './src/screens/recorder/Karaoke';
 
 // ----------------------------------------------------------
+
+LogBox.ignoreLogs(['Warning: ...']);
+LogBox.ignoreAllLogs();
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -56,8 +62,8 @@ function App() {
     <NavigationContainer>
       <GestureHandlerRootView style={{flex: 1}}>
         {/* ---------------------------------------- ENTER page ----------------------------------------------------- */}
-        <Stack.Navigator initialRouteName="Splash">
-          <Stack.Screen
+        <Stack.Navigator initialRouteName="Mainpage">
+          {/* <Stack.Screen
             name="Splash"
             component={splash}
             options={{headerShown: false}}
@@ -91,7 +97,7 @@ function App() {
             name="VoiceRangehigh"
             component={voiceRangeHigh}
             options={{headerShown: false}}
-          />
+          /> */}
 
           {/* ---------------------------------------- MAIN page----------------------------------------------------- */}
           <Stack.Screen
@@ -124,6 +130,11 @@ function App() {
             component={SongDetail}
             options={{headerShown: false}}
           />
+          <Stack.Screen
+            name="KaraokeList"
+            component={KaraokeList}
+            options={{headerShown: false}}
+          />
 
           {/* ------------------------------------------- RECORD page----------------------------------------------------- */}
 
@@ -152,6 +163,12 @@ function App() {
             component={coverList}
             options={{headerShown: false}}
           />
+          <Stack.Screen
+            name="Karaoke"
+            component={Karaoke}
+            options={{headerShown: false}}
+          />
+          
 
           {/* ---------------------------------------- MESSAGE page----------------------------------------------------- */}
           <Stack.Screen

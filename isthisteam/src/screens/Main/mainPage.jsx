@@ -1,68 +1,77 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
   FlatList,
   Image,
   StyleSheet,
-  Flatlist,
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import ModalDropdown from 'react-native-modal-dropdown';
 import Swiper from 'react-native-swiper';
 import BottomTab from '../../components/bottomTab';
-import Banner from '../../components/banner';
 
-const Stack = createStackNavigator();
-
-function MainPage({navigation}) {
-  const [posts, setPosts] = useState([]);
-  const [name, setName] = useState('수이');
-
-  // const handleMoreButtonPress = () => {
-  //   navigation.navigate('songList');
-  // };
+function MainPage({ navigation }) {
+  const [recommendSongs, setRecommendSongs] = useState([]);
+  const [songDataList, setSongDataList] = useState([]);
 
   const MoreButtonPress = () => {
-    navigation.navigate('recSongList');
-  };
+        navigation.navigate('recSongList');
+      };
 
   const GetRecommendSong = async () => {
-    const apiUrl = 'http://192.168.0.42:8080/song-recommend';
+    const apiUrl = 'http://10.0.2.2:8080/song-recommend';
 
     try {
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          //토큰 받아서 넣는 로직 추가
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMDI6MDc5NjcyIiwiaWF0IjoxNjk1MTEyMjU3LCJleHAiOjE2OTUxOTg2NTd9.hiQteBEnvqnCY70fUdm_Qu-ZyN-8kERKx2FNpUYBpI0`,
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMDE2OTM2MDEwIiwiaWF0IjoxNjk1MjUzMjg4LCJleHAiOjE2OTYxMTcyODh9.FYifxFUMtp7FY2NN1EIAyqbrP4tEIQ-hnPHuTQQBRfM`,
         },
       });
 
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error('Network error');
       }
 
       const data = await response.json();
 
-      const postsData = Object.keys(data.data.recommendSongs).map(key => ({
+      const recommendData = Object.keys(data.data.recommendSongs).map(key => ({
         imageUrl: data.data.recommendSongs[key],
         title: key,
       }));
 
-      setPosts(postsData);
+      setRecommendSongs(recommendData);
     } catch (error) {
-      // console.error('Error:', error);
+      console.error('Error:', error);
+    }
+  };
+
+  const GetSongDataList = async () => {
+    const apiUrl = 'http://10.0.2.2:8080/song-data';
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'GET',
+      });
+
+      if (!response.ok) {
+        throw new Error('Network error');
+      }
+
+      const data = await response.json();
+
+      setSongDataList(data.data);
+    } catch (error) {
+      console.error('Error:', error);
     }
   };
 
   useEffect(() => {
     GetRecommendSong();
-  });
+    GetSongDataList();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -90,7 +99,6 @@ function MainPage({navigation}) {
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        {/* <Text style={styles.open}>환영합니다, {name}님</Text> */}
         <View style={styles.additionalTextContainer}>
           <Text style={styles.additionalText}>Ai 맞춤 추천곡</Text>
           <TouchableOpacity onPress={MoreButtonPress}>
@@ -99,24 +107,23 @@ function MainPage({navigation}) {
         </View>
 
         <FlatList
-          data={posts}
-          keyExtractor={item => item.id}
-          renderItem={({item}) => <PostItem post={item} />}
+          data={recommendSongs}
+          keyExtractor={(item) => item.title}
+          renderItem={({ item }) => <PostItem post={item} />}
           showsHorizontalScrollIndicator={false}
           horizontal={true}
         />
 
         <View style={styles.additionalTextContainer}>
-          <Text style={styles.additionalText}>퍼펙트 스코어</Text>
-          {/* <TouchableOpacity onPress={handleMoreButtonPress}>
-            <Text style={styles.moreButton}>더보기</Text>
-          </TouchableOpacity> */}
+          <Text style={styles.additionalText}>100점 도전! 노래방</Text>
         </View>
 
         <FlatList
-          data={posts1}
-          keyExtractor={item => item.id}
-          renderItem={({item}) => <PostItem post={item} />}
+          data={songDataList}
+          keyExtractor={(item) => item.songName}
+          renderItem={({ item }) => (
+            <PostItem post={{ imageUrl: item.imgUrl, title: item.songName }} />
+          )}
           showsHorizontalScrollIndicator={false}
           horizontal={true}
         />
@@ -126,42 +133,10 @@ function MainPage({navigation}) {
   );
 }
 
-const posts1 = [
-  {
-    id: '1',
-    imageUrl:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1lgDdFxuBbDfgby2OiMBDvCLPSffJYmJvrA&usqp=CAU',
-    title: 'NEVERMIND',
-  },
-  {
-    id: '2',
-    imageUrl:
-      'https://image.newsis.com/2021/05/17/NISI20210517_0000747908_web.jpg',
-    title: '해픈',
-  },
-  {
-    id: '3',
-    imageUrl:
-      'https://images.saramingig.co.kr/product/F/0/X/F0Xdpaep3WJVpIR.jpeg/o2j/resize/900',
-    title: 'THE BEATLES',
-  },
-  {
-    id: '4',
-    imageUrl:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfLWgfdEEvzkbjn-aHGNi_q0ry7Hkbm-FXKjznlZhBag&s',
-    title: '밤공기',
-  },
-];
-
-function PostItem({post}) {
+function PostItem({ post }) {
   return (
     <View style={styles.containerofpost}>
-      <Image
-        source={{uri: post.imageUrl}}
-        style={styles.imageofpost}
-        showsHorizontalScrollIndicator={false}
-        horizontal={true}
-      />
+      <Image source={{ uri: post.imageUrl }} style={styles.imageofpost} />
       <Text style={styles.titleofpost}>{post.title}</Text>
     </View>
   );
@@ -296,3 +271,4 @@ const styles = StyleSheet.create({
 });
 
 export default MainPage;
+
