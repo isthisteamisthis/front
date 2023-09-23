@@ -41,4 +41,5 @@ import perfectScore from './src/screens/recorder/perfectScore';
 import coverDetail from './src/screens/recorder/coverDetail';
 import coverListPage from './src/screens/recorder/coverListPage';
 
+
 AppRegistry.registerComponent(appName, () => App);

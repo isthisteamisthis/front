@@ -95,7 +95,7 @@ const Aicover = () => {
       });
 
       const response = await axios.post(
-        'http://192.168.0.109:8080/api/ai-songs',
+        'http://10.0.2.2:8080/api/ai-songs',
         formData,
         {
           headers: {

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -8,124 +8,128 @@ import {
   Button,
   FlatList,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const MyPage = () => {
   const [posts, setPosts] = useState([]);
-  const [name, setName] = useState('수이');
+  const [data, setData] = useState(null);
+  const [name, setName] = useState('Sui');
   const [userIntroduction, setUserIntroduction] = useState(
-    '안녕하세요! 저는 누구누구입니다. \n 취미는 하비 특기는 잠자기',
-  ); // 자기소개를 마이페이지에서 할 필요가 있는가? 노출이 안 되는데
-  const [voiceHighRange, setVoiceHighRange] = useState('3옥타브 라');
-  const [voiceRowRange, setVoiceRowRange] = useState('2옥타브 미');
+    'hello! I am so-and-so. \n My hobby is hobby and my specialty is sleeping',
+  );
+  const [voiceHighRange, setVoiceHighRange] = useState('3 octaves la');
+  const [voiceRowRange, setVoiceRowRange] = useState('2 octaves me');
   const [score, setScore] = useState('83.9');
-  const navigation = useNavigation(); // 내비게이션 객체 가져오기
+  const navigation = useNavigation();
 
-  useEffect(() => {
-    // 사용자 정보를 가져오는 로직 (API 호출 또는 데이터베이스 쿼리)을 구현합니다.
-    // 가져온 정보를 상태 변수에 설정합니다.
-    // 예시:
-    // fetchUserInfo().then(data => {
-    //   setUserName(data.name);
-    //   setUserIntroduction(data.introduction);
-    //   setVocalRange(data.vocalRange);
-    // });
-  }, []);
-
-  // 개인 정보 수정 페이지로 이동
-  // const goToEditProfile = () => {
-  //   navigation.navigate('EditProfileModal');
-  // };
-
-  const GetRecommendSong = async () => {
-    const apiUrl = 'http://192.168.0.42:8080/song-recommend';
-
-    try {
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          //토큰 받아서 넣는 로직 추가
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMDI6MDc5NjcyIiwiaWF0IjoxNjk1MTEyMjU3LCJleHAiOjE2OTUxOTg2NTd9.hiQteBEnvqnCY70fUdm_Qu-ZyN-8kERKx2FNpUYBpI0`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const data = await response.json();
-
-      const postsData = Object.keys(data.data.recommendSongs).map(key => ({
-        imageUrl: data.data.recommendSongs[key],
-        title: key,
-      }));
-
-      setPosts(postsData);
-    } catch (error) {
-      // console.error('Error:', error);
-    }
+  const goToPostDetails = (postNo) => {
+    navigation.navigate('PostDetail', { postNo });
   };
 
   useEffect(() => {
-    GetRecommendSong();
-  });
+    try {
+      // AsyncStorage에서 jwtToken을 가져옵니다.
+      AsyncStorage.getItem('jwtToken')
+        .then((jwtToken) => {
+          if (!jwtToken) {
+            throw new Error('JWT Token not found');
+          }
+          console.log(jwtToken)
+          return fetch('http://10.0.2.2:8080/my-page', {
+            method: 'GET',
+            headers: {
+              Authorization: `${jwtToken}`,
+            },
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.json();
+            })
+            .then((responseData) => {
+              setData(responseData.data);
+              console.log(responseData.data);
+            })
+            .catch((error) => {
+              console.error('Error fetching data:', error);
+            });
+        })
+        .catch((error) => {
+          console.error('Error fetching JWT token:', error);
+        });
+    } catch (error) {
+      console.error('Error in useEffect:', error);
+    }
+  }, []);
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Image
         source={require('../../../android/app/assets/images/userrr.png')}
         style={styles.avatar}
       />
-      <Text style={styles.name}>{name}</Text>
-      <Text style={styles.int}>{name}님의 자기소개</Text>
+      <Text style={styles.name}>{data?.nickname}</Text>
+      <Text style={styles.int}>{data?.nickname}의 자기소개</Text>
       <View style={styles.userIntroductionContainer}>
-        <Text style={styles.userIntroduction}>{userIntroduction}</Text>
+        <Text style={styles.userIntroduction}>{data?.userInfo}</Text>
       </View>
-      <Text style={styles.int}>{name}님의 음역대</Text>
+      <Text style={styles.int}>{data?.nickname}의 음역대</Text>
       <View style={styles.textContainer}>
-        <Text style={styles.voiceRange}>{voiceHighRange}</Text>
-        <Text style={styles.voiceRange}>{voiceRowRange}</Text>
+        <Text style={styles.voiceRange}>{data?.maxOctave} {data?.maxNote}</Text>
+        <Text style={styles.voiceRange}>{data?.minOctave} {data?.minNote}</Text>
       </View>
       <View style={styles.additionalTextContainer}>
-        <Text style={styles.int}>{name}님의 추천곡 몰아보기</Text>
+        <Text style={styles.int}>{data?.nickname}의 게시글</Text>
       </View>
       <FlatList
-        data={posts}
-        keyExtractor={item => item.id}
-        renderItem={({item}) => <PostItem post={item} />}
+        data={data?.postList}
+        keyExtractor={(item) => item.postNo.toString()}
+        renderItem={({ item }) => <PostItem post={item} />}
         showsHorizontalScrollIndicator={false}
         horizontal={true}
       />
       <View style={styles.additionalTextContainer}>
-        <Text style={styles.int}>{name}님의 평균 점수</Text>
-        <Text style={styles.score}>{score}</Text>
+        <Text style={styles.int}>{data?.nickname}의 평균 점수</Text>
+        <Text style={styles.score}>{data?.avgScore}</Text>
       </View>
 
       <FlatList
-        data={posts}
-        keyExtractor={item => item.id}
-        renderItem={({item}) => <PostItem post={item} />}
+        data={data?.perfectSongList}
+        keyExtractor={(item) => item.perfecSongNo.toString()}
+        renderItem={({ item }) => <PostItem post={item} />}
         showsHorizontalScrollIndicator={false}
         horizontal={true}
       />
-
-      {/* <Button
-        title="프로필 수정"
-        onPress={goToEditProfile} // 수정 버튼을 누를 때 개인 정보 수정 페이지로 이동
-      /> */}
     </ScrollView>
   );
 };
 
-function PostItem({post}) {
+function PostItem({ post }) {
+  const navigation = useNavigation();
+
+  const goToPostDetails = (postNo) => {
+    navigation.navigate('PostDetail', { postNo });
+  };
+
   return (
     <View style={styles.containerofpost}>
+      <Text style={styles.additionalText} onPress={() => goToPostDetails(post.postNo)}>
+        {post.title}
+      </Text>
+    </View>
+  );
+}
+
+function SongItem({ song }) {
+  return (
+    <View style={styles.containerofsong}>
       <Image
-        source={{uri: post.imageUrl}}
+        source={{ uri: song.imagFile }}
         style={styles.imageofpost}
-        showsHorizontalScrollIndicator={false}
+        showsHorizontalScrollIndicator={true}
       />
-      <Text style={styles.titleofpost}>{post.title}</Text>
     </View>
   );
 }
@@ -166,9 +170,6 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     width: 350,
     height: 100,
-    // borderWidth: 1,
-    alignItems: 'center',
-    // borderColor: 'lightgray',
     borderRadius: 5,
   },
   score: {
@@ -192,14 +193,11 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     width: 350,
     height: 60,
-    // borderWidth: 1,
     alignItems: 'center',
-    // borderColor: 'lightgray',
     borderRadius: 5,
     flexDirection: 'row',
   },
   voiceRange: {
-    // marginRight: 50,
     fontSize: 18,
     fontWeight: '600',
     color: 'black',
@@ -208,11 +206,22 @@ const styles = StyleSheet.create({
     letterSpacing: -1,
   },
   additionalText: {
-    marginRight: 230,
+    marginLeft: 10,
+    marginRight: 200,
     marginTop: 20,
     letterSpacing: -1,
     color: 'black',
     fontWeight: '800',
+  },
+  containerofpost: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 10,
+  },
+  imageofpost: {
+    width: 100,
+    height: 100,
   },
 });
 

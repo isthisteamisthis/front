@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -9,93 +9,71 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const OpenUserPage = () => {
-  const [posts, setPosts] = useState([]);
-  const [name, setName] = useState('수이');
-  const [userIntroduction, setUserIntroduction] = useState(
-    '안녕하세요! 저는 누구누구입니다. \n 취미는 하비 특기는 잠자기',
-  );
-  const [voiceHighRange, setVoiceHighRange] = useState('3옥타브 라');
-  const [voiceRowRange, setVoiceRowRange] = useState('2옥타브 미');
-  const [score, setScore] = useState('83.9');
+  const [user, setUser] = useState({});
   const navigation = useNavigation();
+  const route = useRoute();
+  const { userNo } = route.params;
+
+  useEffect(() => {
+    // 사용자 정보를 가져오는 함수
+    const fetchUserInfo = async () => {
+      try {
+        // AsyncStorage에서 jwtToken을 가져옵니다.
+        const jwtToken = await AsyncStorage.getItem('jwtToken');
+
+        // 사용자 정보를 가져오는 API 요청
+        const response = await fetch(`http://10.0.2.2:8080/my-page/${userNo}`, {
+          headers: {
+            Authorization: `${jwtToken}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const userData = await response.json();
+        setUser(userData.data);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    fetchUserInfo();
+  }, [userNo]);
+
   const onPress = () => {
-    navigation.navigate('SendMessage');
+    navigation.navigate('SendMessage', { userNo });
   };
+
   const onPress1 = () => {
     navigation.navigate('Mainpage');
   };
 
-  useEffect(() => {
-    // 사용자 정보를 가져오는 로직 (API 호출 또는 데이터베이스 쿼리)을 구현합니다.
-    // 가져온 정보를 상태 변수에 설정합니다.
-    // 예시:
-    // fetchUserInfo().then(data => {
-    //   setUserName(data.name);
-    //   setUserIntroduction(data.introduction);
-    //   setVocalRange(data.vocalRange);
-    // });
-  }, []);
 
-  // 개인 정보 수정 페이지로 이동
-  // const goToEditProfile = () => {
-  //   navigation.navigate('EditProfileModal');
-  // };
-
-  const GetRecommendSong = async () => {
-    const apiUrl = 'http://192.168.0.42:8080/song-recommend';
-
-    try {
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          //토큰 받아서 넣는 로직 추가
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMDI6MDc5NjcyIiwiaWF0IjoxNjk1MTEyMjU3LCJleHAiOjE2OTUxOTg2NTd9.hiQteBEnvqnCY70fUdm_Qu-ZyN-8kERKx2FNpUYBpI0`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const data = await response.json();
-
-      const postsData = Object.keys(data.data.recommendSongs).map(key => ({
-        imageUrl: data.data.recommendSongs[key],
-        title: key,
-      }));
-
-      setPosts(postsData);
-    } catch (error) {
-      // console.error('Error:', error);
-    }
-  };
-
-  useEffect(() => {
-    GetRecommendSong();
-  });
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Image
         source={require('../../../android/app/assets/images/userrr.png')}
         style={styles.avatar}
       />
-      <Text style={styles.name}>{name}</Text>
-      <Text style={styles.int}>{name}님의 자기소개</Text>
+      <Text style={styles.name}>{user?.nickname}</Text>
+      <Text style={styles.int}>{user?.nickname}님의 자기소개</Text>
       <View style={styles.userIntroductionContainer}>
-        <Text style={styles.userIntroduction}>{userIntroduction}</Text>
+        <Text style={styles.userIntroduction}>{user.userInfo}</Text>
       </View>
-      <Text style={styles.int}>{name}님의 음역대</Text>
+      <Text style={styles.int}>{user?.nickname}님의 음역대</Text>
       <View style={styles.textContainer}>
-        <Text style={styles.voiceRange}>{voiceHighRange}</Text>
-        <Text style={styles.voiceRange}>{voiceRowRange}</Text>
+      <Text style={styles.voiceRange}>{user?.maxOctave} {user?.maxNote}</Text>
+        <Text style={styles.voiceRange}>{user?.minOctave} {user?.minNote}</Text>
       </View>
       <View style={styles.additionalTextContainer}>
-        <Text style={styles.int}>{name}님의 평균 점수</Text>
-        <Text style={styles.score}>{score}</Text>
+        <Text style={styles.int}>{user?.nickname}님의 평균 점수</Text>
+        <Text style={styles.score}>{user.avgScore}</Text>
       </View>
       <TouchableOpacity
         activeOpacity={0.8}
@@ -103,42 +81,23 @@ const OpenUserPage = () => {
         onPress={onPress}>
         <Text style={styles.text}>쪽지 보내기</Text>
       </TouchableOpacity>
-
       <TouchableOpacity
         activeOpacity={0.8}
         style={styles.button1}
         onPress={onPress1}>
         <Text style={styles.text2}>메인으로</Text>
       </TouchableOpacity>
-
       <FlatList
-        data={posts}
-        keyExtractor={item => item.id}
-        renderItem={({item}) => <PostItem post={item} />}
+        data={user.recommendSongs}
+        keyExtractor={(item) => item.title}
+        renderItem={({ item }) => <PostItem post={item} />}
         showsHorizontalScrollIndicator={false}
         horizontal={true}
       />
-
-      {/* <Button
-        title="프로필 수정"
-        onPress={goToEditProfile} // 수정 버튼을 누를 때 개인 정보 수정 페이지로 이동
-      /> */}
     </ScrollView>
   );
 };
 
-function PostItem({post}) {
-  return (
-    <View style={styles.containerofpost}>
-      <Image
-        source={{uri: post.imageUrl}}
-        style={styles.imageofpost}
-        showsHorizontalScrollIndicator={false}
-      />
-      <Text style={styles.titleofpost}>{post.title}</Text>
-    </View>
-  );
-}
 
 const styles = StyleSheet.create({
   container: {

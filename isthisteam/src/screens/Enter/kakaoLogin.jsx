@@ -16,7 +16,7 @@ import Config from 'react-native-config';
 
 export default function KakaoLogin() {
   const navigation = useNavigation();
-
+  console.log("카카오 로그인 진입");
   // 하드웨어 뒤로가기 버튼 클릭 시 동작
   // Alert 창 : 앱을 종료할건지 묻고, 확인을 선택하면 앱 종료
 
@@ -25,7 +25,8 @@ export default function KakaoLogin() {
       // 카카오 로그인
       const result = await KakaoLogins.login();
       const kakaoLoginUrl = Config.REACT_APP_KAKAO_LOGIN_URL;
-
+      console.log(kakaoLoginUrl);
+      
       // 카카오 로그인 성공 시, result.accessToken을 서버로 전송
       const response = await fetch(`${kakaoLoginUrl}`, {
         method: 'POST',
@@ -42,7 +43,7 @@ export default function KakaoLogin() {
         console.log(jwtToken);
 
         // 화면 전환 : 메인 화면으로 이동
-        navigation.navigate('Select');
+        navigation.navigate('Mainpage');
       } else {
         console.error('서버에서 토큰을 받지 못했습니다.');
       }

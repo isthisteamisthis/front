@@ -1,45 +1,49 @@
-import React, {useState, useEffect} from 'react';
+/* eslint-disable */
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
   FlatList,
   Image,
   StyleSheet,
-  Flatlist,
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import ModalDropdown from 'react-native-modal-dropdown';
 import Swiper from 'react-native-swiper';
 import BottomTab from '../../components/bottomTab';
-import Banner from '../../components/banner';
+
+import AsyncStorage from '@react-native-async-storage/async-storage'; // AsyncStorage 추가
 
 const Stack = createStackNavigator();
 
-function MainPage({navigation}) {
+function MainPage({ navigation }) {
   const [posts, setPosts] = useState([]);
   const [name, setName] = useState('수이');
-
-  // const handleMoreButtonPress = () => {
-  //   navigation.navigate('songList');
-  // };
 
   const MoreButtonPress = () => {
     navigation.navigate('recSongList');
   };
 
   const GetRecommendSong = async () => {
-    const apiUrl = 'http://192.168.0.42:8080/song-recommend';
+    const apiUrl = 'http://10.0.2.2:8080/song-recommend';
 
     try {
+      // AsyncStorage에서 jwtToken을 가져옵니다.
+      const jwtToken = await AsyncStorage.getItem('jwtToken');
+
+      if (!jwtToken) {
+        throw new Error('JWT Token not found');
+      }
+
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          //토큰 받아서 넣는 로직 추가
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMDI6MDc5NjcyIiwiaWF0IjoxNjk1MTEyMjU3LCJleHAiOjE2OTUxOTg2NTd9.hiQteBEnvqnCY70fUdm_Qu-ZyN-8kERKx2FNpUYBpI0`,
+          // AsyncStorage에서 가져온 토큰을 사용합니다.
+          Authorization: `${jwtToken}`,
         },
       });
 
@@ -49,20 +53,20 @@ function MainPage({navigation}) {
 
       const data = await response.json();
 
-      const postsData = Object.keys(data.data.recommendSongs).map(key => ({
+      const postsData = Object.keys(data.data.recommendSongs).map((key) => ({
         imageUrl: data.data.recommendSongs[key],
         title: key,
       }));
 
       setPosts(postsData);
     } catch (error) {
-      // console.error('Error:', error);
+      console.error('Error:', error);
     }
   };
 
   useEffect(() => {
     GetRecommendSong();
-  });
+  }, []); // useEffect 두 번째 인수를 빈 배열로 설정하여 한 번만 실행
 
   return (
     <View style={styles.container}>

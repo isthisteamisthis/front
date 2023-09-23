@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Image,
   View,
@@ -8,35 +8,64 @@ import {
   StyleSheet,
   Alert,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const ReplyMessage = ({route, navigation}) => {
-  const {originalMessage} = route.params;
+const ReplyMessage = ({ route, navigation }) => {
+  const { originalMessage } = route.params;
   const [replyMessage, setReplyMessage] = useState('');
 
-  //   <TouchableOpacity onPress={MoreButtonPress}>
-  //   <Text style={styles.moreButton}>더보기</Text>
-  // </TouchableOpacity>
-
-  const handleSendReply = () => {
-    console.log('작성한 답장 내용:', replyMessage);
-    navigation.navigate('SentMessages');
-    const replyMessage = () => {
-      setTimeout(() => {
-        Alert.alert(
-          '전송 완료',
-          '답장 메시지가 성공적으로 전송되었습니다.',
-          [
-            {
-              text: '확인',
-              onPress: () => {
-                navigation.goBack();
-              },
-            },
-          ],
-          {cancelable: false},
-        );
-      }, 2000);
+  const formatDate = (dateString) => {
+    const options = {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
     };
+    const date = new Date(dateString);
+    return date.toLocaleDateString('ko-KR', options);
+  };
+
+  const handleSendReply = async () => {
+    try {
+      // AsyncStorage에서 jwtToken을 가져옵니다.
+      const jwtToken = await AsyncStorage.getItem('jwtToken');
+
+      // 사용자가 입력한 답장 내용을 서버로 전송
+      const response = await fetch(`http://10.0.2.2:8080/${originalMessage.sendUserNo}/message`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `${jwtToken}`  // jwtToken을 헤더에 추가
+          },
+          body: JSON.stringify({ content: replyMessage }), // 수정된 내용
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Network request was not ok');
+      }
+
+      // 성공적으로 전송된 경우
+      Alert.alert(
+        '전송 완료',
+        '답장 메시지가 성공적으로 전송되었습니다.',
+        [
+          {
+            text: '확인',
+            onPress: () => {
+              navigation.goBack();
+            },
+          },
+        ],
+        { cancelable: false }
+      );
+    } catch (error) {
+      console.error('Error sending reply message:', error);
+      // 오류 발생 시 처리
+      Alert.alert('전송 실패', '답장 메시지 전송 중 오류가 발생했습니다.');
+    }
   };
 
   return (
@@ -49,9 +78,14 @@ const ReplyMessage = ({route, navigation}) => {
         <Text style={styles.sendtext1}>답장하기</Text>
       </View>
       <View style={styles.messageContainer}>
-        <Text style={styles.subject}>Re : {originalMessage.subject}</Text>
-        <Text style={styles.senderName}>{originalMessage.sender}</Text>
-        <Text style={styles.date}>{originalMessage.date}</Text>
+        <Text style={styles.subject}>
+          Re :{' '}
+          {originalMessage.content.length > 15
+            ? originalMessage.content.substring(0, 15) + '...'
+            : originalMessage.content}
+        </Text>
+        <Text style={styles.senderName}>답장 받을 사람 : {originalMessage.sendUserNickname}</Text>
+        <Text style={styles.date}>{formatDate(new Date())}</Text>
         <Text style={styles.messageText}>{originalMessage.message}</Text>
       </View>
       <TextInput
@@ -59,7 +93,7 @@ const ReplyMessage = ({route, navigation}) => {
         placeholder="답장을 작성하세요..."
         multiline={true}
         value={replyMessage}
-        onChangeText={text => setReplyMessage(text)}
+        onChangeText={(text) => setReplyMessage(text)}
       />
       <TouchableOpacity style={styles.sendButton} onPress={handleSendReply}>
         <Text style={styles.sendButtonText}>전송</Text>
@@ -101,20 +135,12 @@ const styles = StyleSheet.create({
     padding: 16,
     borderWidth: 0.5,
     borderColor: 'gray',
-    // borderRadius: 8,
     backgroundColor: 'white',
   },
   senderName: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 8,
-  },
-  sendtext: {
-    marginTop: -5,
-    marginLeft: 142,
-    letterSpacing: -1,
-    color: 'black',
-    fontWeight: '600',
   },
   subject: {
     fontSize: 20,

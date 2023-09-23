@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import {Image, View, Text, Button, StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';

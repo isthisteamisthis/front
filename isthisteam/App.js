@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
@@ -44,6 +46,7 @@ import PerfectScore from './src/screens/recorder/perfectScore';
 import recSelect from './src/screens/recorder/recSelect';
 import coverDetail from './src/screens/recorder/coverDetail';
 import coverListPage from './src/screens/recorder/coverListPage';
+import PostDetail from './src/screens/recorder/postDetail';
 
 // ----------------------------------------------------------
 
@@ -51,6 +54,10 @@ const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 function App() {
+
+
+  console.warn = () => {};
+
   return (
     <NavigationContainer>
       <GestureHandlerRootView style={{flex: 1}}>
@@ -181,6 +188,11 @@ function App() {
           <Stack.Screen
             name="sentMessageDetail"
             component={sentMessageDetail}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="PostDetail"
+            component={PostDetail}
             options={{headerShown: false}}
           />
 
