@@ -1,42 +1,42 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
-function RecSelect({navigation}) {
+function MidSelect({navigation}) {
   const onPress = () => {
-    navigation.navigate('AiCover');
+    navigation.navigate('coverList');
   };
   const onPress1 = () => {
-    navigation.navigate('Karaoke');
+    navigation.navigate('Community');
   };
 
   return (
     <View style={styles.container}>
       <Image
-        source={require('../../../android/app/assets/images/headphone.png')}
+        source={require('../../../android/app/assets/images/chat.png')}
         style={styles.image}
       />
-      <Text style={styles.title0}>{`RECORD`}</Text>
-      <Text style={styles.title}>{`원하는 기능을 선택해주세요`}</Text>
+      <Text style={styles.title0}>{`COMMUNITY`}</Text>
+      <Text style={styles.title}>{`작곡가와 가수가 하나되는 커뮤니티`}</Text>
 
       <View style={styles.header}>
         <TouchableOpacity
           activeOpacity={0.8}
           style={styles.button}
           onPress={onPress}>
-          <Text style={styles.text}>Ai 커버곡 생성</Text>
-          <Text style={styles.text0}>{`            학습된 모델의 
-          목소리를 가지고
-              본인이 원하는 
-      노래를 들을 수 있어요`}</Text>
+          <Text style={styles.text}>커버곡 모음</Text>
+          <Text style={styles.text0}>{`            랄라리아 유저들의 
+        커버곡 혹은 데모곡을
+             직접 들어보세요`}</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           activeOpacity={0.5}
           style={styles.button1}
           onPress={onPress1}>
-          <Text style={styles.text00}>나만의 노래방</Text>
-          <Text style={styles.text01}>{`    직접 노래하고
-점수를 받아보세요!`}</Text>
+          <Text style={styles.text00}>쪽지함</Text>
+          <Text style={styles.text01}>{`             원하는 상대와
+        쪽지를 주고받으며
+더 나은 영감을 나눠보세요`}</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginBottom: 40,
     marginLeft: -0,
-    fontSize: 36,
+    fontSize: 30,
     letterSpacing: -1.5,
     color: 'black',
     fontWeight: '600',
@@ -69,11 +69,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#EAEAF4',
+    backgroundColor: '#FFF9F1',
     marginTop: -60,
   },
   title: {
-    fontSize: 18,
+    fontSize: 15,
     fontWeight: '400',
     letterSpacing: -1.5,
     marginTop: -45,
@@ -91,8 +91,8 @@ const styles = StyleSheet.create({
     // borderRadius: 10,
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: '#202B8F',
-    backgroundColor: '#202B8F',
+    borderColor: '#F7A642',
+    backgroundColor: '#F7A642',
     marginHorizontal: 'auto',
   },
   text: {
@@ -103,23 +103,26 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   text00: {
-    color: '#202B8F',
+    color: '#F7A642',
     marginTop: 8,
     fontSize: 22,
     letterSpacing: -1.5,
     fontWeight: '600',
   },
   text0: {
-    marginTop: 12,
+    marginLeft: -20,
+    marginTop: 20,
     color: 'white',
     letterSpacing: -1,
-    // fontWeight: '100',
+    fontWeight: '400',
   },
   text01: {
-    color: '#202B8F',
+    color: '#F7A642',
     letterSpacing: -1,
-    fontWeight: '100',
-    margin: 30,
+    fontWeight: '400',
+    width: 200,
+    marginLeft: 56,
+    marginTop: 20,
   },
   button1: {
     marginTop: 5,
@@ -130,7 +133,7 @@ const styles = StyleSheet.create({
     // borderRadius: 10,
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: '#202B8F',
+    borderColor: '#F7A642',
     backgroundColor: '#fff',
     marginHorizontal: 'auto',
   },
@@ -139,8 +142,8 @@ const styles = StyleSheet.create({
     marginTop: 4,
     fontSize: 22,
     letterSpacing: -1,
-    fontWeight: '600',
+    // fontWeight: '00',
   },
 });
 
-export default RecSelect;
+export default MidSelect;

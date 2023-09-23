@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   },
   container1: {
     marginTop: -20,
-    backgroundColor: '#EAEAF4',
+    backgroundColor: '#FBD3A1',
     width: 500,
     marginLeft: -40,
     height: 100,
@@ -99,10 +99,8 @@ const styles = StyleSheet.create({
   messageContainer: {
     marginTop: 30,
     padding: 16,
-    borderWidth: 0.5,
-    borderColor: 'gray',
-    // borderRadius: 8,
-    backgroundColor: 'white',
+    borderRadius: 6,
+    backgroundColor: '#FFF9F1',
   },
   senderName: {
     fontSize: 18,
@@ -142,7 +140,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     letterSpacing: -1,
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: '#FBD3A1',
     padding: 15,
     marginVertical: 16,
     backgroundColor: 'white',
@@ -150,8 +148,8 @@ const styles = StyleSheet.create({
   },
   sendButton: {
     borderWidth: 1,
-    borderColor: '#202B8F',
-    backgroundColor: '#202B8F',
+    borderColor: '#F7A642',
+    backgroundColor: '#F7A642',
     borderRadius: 8,
     padding: 6,
     marginTop: 10,

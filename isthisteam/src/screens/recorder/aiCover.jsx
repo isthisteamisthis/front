@@ -15,9 +15,11 @@ import {Picker} from '@react-native-picker/picker';
 import DocumentPicker from 'react-native-document-picker';
 import {launchImageLibrary} from 'react-native-image-picker';
 import ModalDropdown from 'react-native-modal-dropdown';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 import axios from 'axios';
 
-const Aicover = () => {
+const Aicover = ({navigation}) => {
   const [musicFile, setMusicFile] = useState(null);
   const [name, setName] = useState('');
   const [response, setResponse] = useState('');
@@ -45,6 +47,10 @@ const Aicover = () => {
     } catch (err) {
       setError('Error picking music: ' + err.message);
     }
+  };
+
+  const onPress2 = () => {
+    navigation.navigate('CoverList');
   };
 
   const onSelectImage = () => {
@@ -182,7 +188,7 @@ const Aicover = () => {
             ))}
           </Picker>
 
-          <TouchableOpacity style={styles.made} onPress={uploadData}>
+          <TouchableOpacity style={styles.made} onPress={onPress2}>
             <Text style={styles.madetext}>Ai 데모곡 생성</Text>
           </TouchableOpacity>
 

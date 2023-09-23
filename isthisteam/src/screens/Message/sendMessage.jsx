@@ -62,7 +62,7 @@ const SendMessage = ({route, navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#Fff',
+    backgroundColor: '#FFF9F1',
     flex: 1,
     padding: 16,
   },

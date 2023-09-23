@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   },
   container1: {
     marginTop: -20,
-    backgroundColor: '#EAEAF4',
+    backgroundColor: '#FBD3A1',
     width: 500,
     marginLeft: -40,
     height: 100,
@@ -103,8 +103,8 @@ const styles = StyleSheet.create({
   },
   viewSentMessagesButton: {
     borderWidth: 1,
-    borderColor: '#4D55A5',
-    backgroundColor: '#4D55A5',
+    borderColor: '#F7A642',
+    backgroundColor: '#F7A642',
     borderRadius: 8,
     padding: 8,
     marginTop: -30,
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     padding: 25,
     marginTop: 10,
-    backgroundColor: '#EAEAF4',
+    backgroundColor: '#FFF9F1',
     marginBottom: 50,
     borderRadius: 5,
     // marginBottom: 30,

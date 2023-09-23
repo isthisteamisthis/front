@@ -37,13 +37,14 @@ import ReplyMessage from './src/screens/Message/replyMessage';
 import SentMessages from './src/screens/Message/SentMessages';
 import sentMessageDetail from './src/screens/Message/sentMessageDetail';
 import SendMessage from './src/screens/Message/sendMessage';
+import MidSelect from './src/screens/Message/midSelect';
 
 // record ---------------------------------------------------
 import aiCover from './src/screens/recorder/aiCover';
 import PerfectScore from './src/screens/recorder/perfectScore';
 import recSelect from './src/screens/recorder/recSelect';
 import coverDetail from './src/screens/recorder/coverDetail';
-import coverListPage from './src/screens/recorder/coverListPage';
+import coverList from './src/screens/recorder/coverList';
 
 // ----------------------------------------------------------
 
@@ -141,14 +142,14 @@ function App() {
             component={aiCover}
             options={{headerShown: false}}
           />
-          <Stack.Screen
+          {/* <Stack.Screen
             name="PerfectScore"
             component={PerfectScore}
             options={{headerShown: false}}
-          />
+          /> */}
           <Stack.Screen
-            name="coverListPage"
-            component={coverListPage}
+            name="coverList"
+            component={coverList}
             options={{headerShown: false}}
           />
 
@@ -181,6 +182,11 @@ function App() {
           <Stack.Screen
             name="sentMessageDetail"
             component={sentMessageDetail}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="MidSelect"
+            component={MidSelect}
             options={{headerShown: false}}
           />
 

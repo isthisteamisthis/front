@@ -133,7 +133,7 @@ const SentMessageDetail = ({navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#Fff',
+    backgroundColor: '#FFF9F1',
     flex: 1,
     padding: 16,
   },
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
   },
   container1: {
     marginTop: -20,
-    backgroundColor: '#EAEAF4',
+    backgroundColor: '#FBD3A1',
     width: 500,
     marginLeft: -40,
     height: 100,

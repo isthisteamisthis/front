@@ -33,12 +33,13 @@ import SentMessages from './src/screens/Message/SentMessages';
 import Community from './src/screens/Message/commuity';
 import sentMessageDetail from './src/screens/Message/sentMessageDetail';
 import sendMessage from './src/screens/Message/sendMessage';
+import MidSelect from './src/screens/Message/midSelect';
 
 // recorder ----------------------------------------------
 import aicover from './src/screens/recorder/aiCover';
 import recSelect from './src/screens/recorder/recSelect';
-import perfectScore from './src/screens/recorder/perfectScore';
+// import perfectScore from './src/screens/recorder/perfectScore';
 import coverDetail from './src/screens/recorder/coverDetail';
-import coverListPage from './src/screens/recorder/coverListPage';
+import coverList from './src/screens/recorder/coverList';
 
 AppRegistry.registerComponent(appName, () => App);

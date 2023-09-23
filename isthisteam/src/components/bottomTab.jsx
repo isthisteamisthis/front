@@ -23,7 +23,7 @@ function BottomTab({navigation}) {
         </View>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => navigation.navigate('Community')}
+        onPress={() => navigation.navigate('MidSelect')}
         style={styles.tabItem}>
         <View style={styles.tabContent}>
           <Image

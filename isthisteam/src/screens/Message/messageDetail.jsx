@@ -66,7 +66,7 @@ const MessageDetail = ({route, navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#Fff',
+    backgroundColor: '#FFF9F1',
     flex: 1,
     padding: 16,
   },
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   },
   container1: {
     marginTop: -20,
-    backgroundColor: '#EAEAF4',
+    backgroundColor: '#FBD3A1',
     width: 500,
     marginLeft: -40,
     height: 100,
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   replyButton: {
     // backgroundColor: '#0067FF',
     borderWidth: 1,
-    borderColor: '#4D55A5',
+    borderColor: '#F7A642',
     // paddingVertical: 10,
     // paddingHorizontal: 20,
     padding: 8,
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     height: 40,
   },
   replyButtonText: {
-    color: '#4D55A5',
+    color: '#F7A642',
     fontSize: 14,
     fontWeight: 'bold',
     textAlign: 'center',
@@ -123,8 +123,8 @@ const styles = StyleSheet.create({
   },
   viewSentMessagesButton: {
     borderWidth: 1,
-    borderColor: '#4D55A5',
-    backgroundColor: '#4D55A5',
+    borderColor: '#F7A642',
+    backgroundColor: '#F7A642',
     borderRadius: 8,
     padding: 8,
     marginTop: 10,
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     padding: 25,
     marginTop: 10,
-    backgroundColor: '#EAEAF4',
+    backgroundColor: '#FDE4C6',
     marginBottom: 50,
     borderRadius: 5,
     // marginBottom: 30,

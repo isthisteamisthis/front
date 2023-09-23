@@ -1,10 +1,10 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
-export default function coverListPage() {
+export default function Karaoke() {
   return (
     <View>
-      <Text>coverListPage</Text>
+      <Text>Karaoke</Text>
     </View>
   );
 }
