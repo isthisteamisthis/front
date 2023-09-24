@@ -52,8 +52,7 @@ export default function KaraokeList({navigation}) {
   return (
     <View style={styles.container}>
       <View style={styles.container1}>
-        <Text style={styles.sendtext1}>{`나만의
-노래방`}</Text>
+        <Text style={styles.sendtext1}>나만의 노래방</Text>
       </View>
       <FlatList
         data={songDataList}
@@ -67,14 +66,13 @@ export default function KaraokeList({navigation}) {
 
 const styles = StyleSheet.create({
   sendtext1: {
-    marginTop: 25,
-    marginLeft: 200,
+    marginTop: 30,
+    marginLeft: 165,
     marginBottom: 10,
     letterSpacing: -1.5,
     color: 'black',
     fontWeight: '900',
-    fontSize: 16,
-    lineHeight: 20,
+    fontSize: 20,
   },
   container1: {
     marginTop: -20,

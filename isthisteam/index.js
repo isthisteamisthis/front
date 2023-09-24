@@ -35,6 +35,7 @@ import Karaoke from './src/screens/recorder/Karaoke';
 import aicover from './src/screens/recorder/aiCover';
 import recSelect from './src/screens/recorder/recSelect';
 import CoverList from './src/screens/recorder/coverList';
+import PostDetail from './src/screens/recorder/postDetail';
 import coverDetail from './src/screens/recorder/coverDetail';
 import KaraokeList from './src/screens/recorder/KaraokeList';
 // import perfectScore from './src/screens/recorder/perfectScore';

@@ -47,6 +47,7 @@ import aiCover from './src/screens/recorder/aiCover';
 import Karaoke from './src/screens/recorder/Karaoke';
 import CoverList from './src/screens/recorder/coverList';
 import recSelect from './src/screens/recorder/recSelect';
+import PostDetail from './src/screens/recorder/postDetail';
 import coverDetail from './src/screens/recorder/coverDetail';
 import KaraokeList from './src/screens/recorder/KaraokeList';
 import PerfectScore from './src/screens/recorder/perfectScore';
@@ -145,6 +146,11 @@ function App() {
           <Stack.Screen
             name="AiCover"
             component={aiCover}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="PostDetail"
+            component={PostDetail}
             options={{headerShown: false}}
           />
           {/* <Stack.Screen

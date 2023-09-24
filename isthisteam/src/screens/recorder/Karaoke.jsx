@@ -141,7 +141,7 @@ function Karaoke({route, navigation}) {
           console.log('성공!');
           const responseData = await response.json();
           alert('당신의 점수는  ' + responseData.data.score + '점 입니다!');
-          navigation.navigate('Mainpage');
+          navigation.navigate('MyPage');
         } else {
           console.error('실패');
           alert('파일 업로드를 실패했습니다');

@@ -1,33 +1,101 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, Image, StyleSheet, ScrollView} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {AudioPlayer} from 'react-native-simple-audio-player';
 
-const SongDetail = () => {
+const SongDetail = ({route, navigation}) => {
+  // route.params에서 songNo를 추출하고, 기본값으로 빈 문자열("")을 설정합니다.
+  // const {songNo} = route.params;
+  const [songNo, setSongNo] = useState('');
+  const [song, setSong] = useState(null);
+
+  const [songName, setSongName] = useState('');
+  const [userName, setUserName] = useState('');
+  const [date, setDate] = useState('');
+  const [imageFile, setImageFile] = useState('');
+
+  const formatDate = dateString => {
+    const options = {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    };
+    const date = new Date(dateString);
+    return date.toLocaleDateString('ko-KR', options);
+  };
+
+  useEffect(() => {
+    // songNo가 빈 문자열인 경우 처리
+    if (!songNo) {
+      console.error('songNo is not defined');
+      return;
+    }
+
+    // AsyncStorage에서 JWT 토큰을 가져오는 함수
+    AsyncStorage.getItem('jwtToken')
+      .then(jwtToken => {
+        console.log('페이지 진입~!');
+        if (!jwtToken) {
+          throw new Error('JWT Token not found');
+        }
+        return fetch(`http://10.0.2.2:8080/song-data/${songNo}`, {
+          method: 'GET',
+          headers: {
+            Authorization: `${jwtToken}`,
+          },
+        });
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network request was not ok');
+        }
+        return response.json();
+      })
+      .then(responseData => {
+        console.log(responseData);
+        setSong(responseData.data);
+        setSongName(responseData.data.songName);
+        setUserName(responseData.data.userName);
+        setDate(responseData.data.Date);
+        setImageFile(responseData.data.ImageFile);
+      })
+      .catch(error => {
+        console.error('Error fetching message content:', error);
+      });
+  }, [songNo]);
+
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.header}>
+      <View style={styles.container1}>
+        <Image
+          source={require('../../../android/app/assets/images/paper1.png')}
+          style={styles.header}
+        />
+        <Text style={styles.sendtext1}>나의 쪽지함</Text>
+      </View>
+      <View style={styles.header00}>
         <Image
           style={styles.albumCover}
-          source={{uri: 'https://example.com/album-cover.jpg'}}
+          source={{
+            uri: 'https://firebasestorage.googleapis.com/v0/b/is-this-team-lalalia.appspot.com/o/test.jpg?alt=media&token=100e3f08-2b64-42b7-84f5-17a85c51d32f',
+          }} // 이미지 파일을 가져오도록 수정
         />
         <View style={styles.albumInfo}>
-          <Text style={styles.albumTitle}>제목</Text>
-          <Text style={styles.artistName}>아티스트 이름</Text>
-          <Text style={styles.releaseDate}>발매일: 2023-09-22</Text>
+          <Text style={styles.albumTitle}>{songName}</Text>
+          <Text style={styles.artistName}>{userName}</Text>
+          <Text style={styles.releaseDate}>{formatDate(date)}</Text>
         </View>
       </View>
-      <Text style={styles.description}>
-        이 앨범은 아티스트의 최신 작품으로, 멋진 음악과 가사로 가득 차 있습니다.
-        앨범에 대한 자세한 정보와 트랙 목록을 아래에서 확인하세요.
-      </Text>
-
-      {/* 트랙 목록 */}
-      <Text style={styles.trackListTitle}>트랙 목록</Text>
-      <View style={styles.trackList}>
-        <Text style={styles.trackItem}>1. 노래 제목 1</Text>
-        <Text style={styles.trackItem}>2. 노래 제목 2</Text>
-        <Text style={styles.trackItem}>3. 노래 제목 3</Text>
-        {/* 필요한 만큼 트랙을 추가하세요. */}
-      </View>
+      {/* <View
+        style={{
+          flex: 1,
+          backgroundColor: '#313131',
+          justifyContent: 'center',
+        }}>
+        <AudioPlayer
+          url={'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'}
+        />
+      </View> */}
     </ScrollView>
   );
 };
@@ -35,20 +103,45 @@ const SongDetail = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    // padding: 16,
+  },
+  sendtext1: {
+    marginTop: -25,
+    marginLeft: 205,
+    marginBottom: 10,
+    letterSpacing: -1.5,
+    color: 'black',
+    fontWeight: '800',
+  },
+  container1: {
+    marginTop: -10,
+    backgroundColor: '#EAEAF4',
+    width: 800,
+    marginLeft: -40,
+    height: 100,
   },
   header: {
-    flexDirection: 'row', // 가로로 정렬
-    alignItems: 'center', // 수직 가운데 정렬
+    marginBottom: 30,
+    marginTop: 30,
+    marginLeft: 225,
+    width: 25,
+    height: 25,
+  },
+  header00: {
+    flexDirection: 'row',
+    alignItems: 'center',
     marginBottom: 16,
   },
   albumCover: {
-    width: 200,
-    height: 200,
+    width: 150,
+    height: 150,
+    borderRadius: 8,
     marginRight: 16,
+    marginTop: 50,
+    marginLeft: 50,
   },
   albumInfo: {
-    flex: 1, // 남은 공간을 모두 차지하도록 설정
+    flex: 1,
   },
   albumTitle: {
     fontSize: 24,
@@ -60,22 +153,6 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   releaseDate: {
-    fontSize: 16,
-    marginBottom: 8,
-  },
-  description: {
-    fontSize: 16,
-    marginBottom: 16,
-  },
-  trackListTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 8,
-  },
-  trackList: {
-    marginLeft: 16,
-  },
-  trackItem: {
     fontSize: 16,
     marginBottom: 8,
   },

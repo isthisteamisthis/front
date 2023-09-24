@@ -82,27 +82,27 @@ const Aicover = ({navigation}) => {
         return;
       }
 
-      // const jsonString = `{
-      //     "name": "${name}",
-      //     "model": "${model}",
-      //     "octave": "${octave}",
-      //     "index": "${index}"
-      // }`
+      const jsonString = `{
+          "name": "${name}",
+          "model": "${model}",
+          "textInput": "${textInput}",
+          "musicFile": "${musicFile}"
+      }`;
 
-      const formData = new FormData();
-      formData.append('name', name);
-      formData.append('model', model);
-      formData.append('octave', octave);
-      formData.append('index', index);
-      formData.append('ai-song', {
-        uri: musicFile.uri,
-        type: 'audio/wav',
-        name: 'ai-demo.wav',
-      });
+      // const formData = new FormData();
+      // formData.append('name', name);
+      // formData.append('model', model);
+      // formData.append('octave', octave);
+      // formData.append('index', index);
+      // formData.append('ai-song', {
+      //   uri: musicFile.uri,
+      //   type: 'audio/wav',
+      //   name: 'ai-demo.wav',
+      // });
 
       const response = await axios.post(
         'http://192.168.0.109:8080/api/ai-songs',
-        formData,
+        jsonString,
         {
           headers: {
             'Content-Type': 'multipart/form-data',
