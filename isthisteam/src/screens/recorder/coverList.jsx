@@ -120,18 +120,31 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     letterSpacing: -1.5,
     color: 'black',
+<<<<<<< HEAD
     fontWeight: '900',
     fontSize: 18,
     width: '100%',
     textAlign: 'center',
     textAlignVertical: 'center',
     marginTop: 50,
+=======
+    fontWeight: '800',
+    lineHeight: 18,
+    width: '100%',
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    marginTop: 30,
+>>>>>>> 1d43768fd3c52db73347642e73db5b79272cff90
   },
   container1: {
     marginTop: -20,
     backgroundColor: '#FBD3A1',
     width: '100%',
+<<<<<<< HEAD
     height: 120,
+=======
+    height: 100,
+>>>>>>> 1d43768fd3c52db73347642e73db5b79272cff90
     align: 'center',
   },
   header: {

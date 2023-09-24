@@ -90,6 +90,7 @@ const MyPage = () => {
           {data?.minOctave} {data?.minNote}
         </Text>
       </View>
+<<<<<<< HEAD
       <View style={styles.additionalTextContaineravg}>
         <Text style={styles.int}>{data?.nickname}의 평균 점수</Text>
         <Text style={styles.score}>{data?.avgScore}</Text>
@@ -104,6 +105,45 @@ const MyPage = () => {
         showsHorizontalScrollIndicator={false}
         horizontal={true}
       />
+=======
+      <View style={styles.additionalTextContainer}>
+        <Text style={styles.int}>{data?.nickname}님의 데모</Text>
+      </View>
+      <FlatList
+        data={data?.composeSongList}
+        keyExtractor={item => item.composeSongNo.toString()}
+        renderItem={({item}) => <SongItem song={item} />}
+        showsHorizontalScrollIndicator={false}
+        horizontal={true}
+      />
+      <View style={styles.additionalTextContainer}>
+        <Text style={styles.int}>{data?.nickname}의 평균 점수</Text>
+        <Text style={styles.score}>{data?.avgScore}</Text>
+      </View>
+      {/* <TouchableOpacity style={styles.modifyinfobtn} onPress={modifyinfo}>
+        <Text style={styles.modifyinfoText}>수정하기</Text>
+      </TouchableOpacity> */}
+      {/* <FlatList
+        data={data?.perfectSongList}
+        keyExtractor={item => item.perfecSongNo.toString()}
+        renderItem={({item}) => <PostItem post={item} />}
+        showsHorizontalScrollIndicator={false}
+        horizontal={true}
+      /> */}
+      {/* EditProfileModal
+      <Modal visible={isModalVisible} animationType="slide">
+        <EditProfileModal
+          isVisible={isModalVisible}
+          onCancel={onCancelProfileEdit}
+          onSave={onSaveProfile}
+          initialData={{
+            name: data?.nickname,
+            introduction: data?.userInfo,
+            vocalRange: `${data?.maxOctave} ${data?.maxNote} - ${data?.minOctave} ${data?.minNote}`,
+          }}
+        />
+      </Modal> */}
+>>>>>>> 1d43768fd3c52db73347642e73db5b79272cff90
     </ScrollView>
   );
 };
@@ -189,7 +229,11 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 20,
     width: '100%',
+<<<<<<< HEAD
     height: 50,
+=======
+    height: 60,
+>>>>>>> 1d43768fd3c52db73347642e73db5b79272cff90
     alignItems: 'center',
     borderRadius: 5,
     flexDirection: 'row',

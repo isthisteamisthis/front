@@ -1,7 +1,59 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, Image, StyleSheet, ScrollView} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {AudioPlayer} from 'react-native-simple-audio-player';
 
-const SongDetail = () => {
+const SongDetail = ({route, navigation}) => {
+  // route.params에서 songNo를 추출하고, 기본값으로 빈 문자열("")을 설정합니다.
+  const {songNo} = route.params;
+  const [data, setData] = useState('');
+
+  const formatDate = dateString => {
+    const options = {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    };
+    const date = new Date(dateString);
+    return date.toLocaleDateString('ko-KR', options);
+  };
+
+  useEffect(() => {
+    // songNo가 빈 문자열인 경우 처리
+    if (!songNo) {
+      console.error('songNo is not defined');
+      return;
+    }
+
+    // AsyncStorage에서 JWT 토큰을 가져오는 함수
+    AsyncStorage.getItem('jwtToken')
+      .then(jwtToken => {
+        console.log('페이지 진입~!');
+        if (!jwtToken) {
+          throw new Error('JWT Token not found');
+        }
+        return fetch(`http://10.0.2.2:8080/song-data/${songNo}`, {
+          method: 'GET',
+          headers: {
+            Authorization: `${jwtToken}`,
+          },
+        });
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network request was not ok');
+        }
+        return response.json();
+      })
+      .then(responseData => {
+        console.log(responseData);
+        setData(responseData.data);
+      })
+      .catch(error => {
+        console.error('Error fetching message content:', error);
+      });
+  }, [songNo]);
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.container1}>
@@ -14,12 +66,14 @@ const SongDetail = () => {
       <View style={styles.header00}>
         <Image
           style={styles.albumCover}
-          source={{uri: 'https://example.com/album-cover.jpg'}}
+          source={{
+            uri: data.imgUrl,
+          }} // 이미지 파일을 가져오도록 수정
         />
         <View style={styles.albumInfo}>
-          <Text style={styles.albumTitle}>제목</Text>
-          <Text style={styles.artistName}>아티스트 이름</Text>
-          <Text style={styles.releaseDate}>발매일: 2023-09-22</Text>
+          <Text style={styles.albumTitle}>{data.songName}</Text>
+          <Text style={styles.artistName}>원곡자 | {data.artistName}</Text>
+
         </View>
       </View>
       {/* <View
