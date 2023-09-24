@@ -26,7 +26,7 @@ const Aicover = ({navigation}) => {
   const [model, setModel] = useState('');
   const [textInput, setTextInput] = useState('');
   const [audioFile, setAudioFile] = useState(null);
-  const [imageFile, setImageFile] = useState('');
+  const [imageFile, setImageFile] = useState(null);
   const [octave, setOctave] = useState('');
   const [index, setIndex] = useState('');
   const [error, setError] = useState('');
@@ -81,28 +81,37 @@ const Aicover = ({navigation}) => {
         setError('Please select a music file');
         return;
       }
+      if (!imageFile) {
+        setError('Please select a image file');
+        return;
+      }
 
-      const jsonString = `{
-          "name": "${name}",
-          "model": "${model}",
-          "textInput": "${textInput}",
-          "musicFile": "${musicFile}"
-      }`;
+      // const jsonString = `{
+      //     "name": "${name}",
+      //     "model": "${model}",
+      //     "textInput": "${textInput}",
+      //     "musicFile": "${musicFile}"
+      // }`;
 
-      // const formData = new FormData();
-      // formData.append('name', name);
-      // formData.append('model', model);
-      // formData.append('octave', octave);
-      // formData.append('index', index);
-      // formData.append('ai-song', {
-      //   uri: musicFile.uri,
-      //   type: 'audio/wav',
-      //   name: 'ai-demo.wav',
-      // });
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('model', model);
+      formData.append('octave', octave);
+      formData.append('index', index);
+      formData.append('img', {
+        uri: imageFile.uri,
+        type: 'image/jpeg',
+        name: 'selected_image.jpg',
+      });
+      formData.append('ai-song', {
+        uri: musicFile.uri,
+        type: 'audio/wav',
+        name: 'ai-demo.wav',
+      });
 
       const response = await axios.post(
-        'http://192.168.0.109:8080/api/ai-songs',
-        jsonString,
+        'http://10.0.2.2:8080/ai-songs',
+        formData,
         {
           headers: {
             'Content-Type': 'multipart/form-data',
@@ -112,6 +121,22 @@ const Aicover = ({navigation}) => {
 
       console.log(response.data);
       setError('');
+
+      Alert('전송 완료! 5분 정도 기다려주세요.');
+
+      // Alert.alert(
+      //   '전송 완료',
+      //   '데이터가 성공적으로 전송되었습니다.',
+      //   [
+      //     {
+      //       text: '확인',
+      //       onPress: () => {
+      //         navigation.goBack();
+      //       },
+      //     },
+      //   ],
+      //   {cancelable: false},
+      // );
     } catch (error) {
       console.error('Error uploading data:', error);
       setError('Error uploading data: ' + error.message);
@@ -167,10 +192,14 @@ const Aicover = ({navigation}) => {
             onValueChange={(itemValue, itemIndex) => setModel(itemValue)}
             style={styles.picker}>
             <Picker.Item label="목소리 모델 선택" value="" />
-            <Picker.Item label="여형구" value="hyungku250" />
-            <Picker.Item label="더 멋진 여형구" value="hyungku2500" />
-            <Picker.Item label="지민" value="Jimin" />
-            <Picker.Item label="정국" value="Jungkook" />
+            <Picker.Item label="그냥 여형구" value="hyungku2500" />
+            <Picker.Item label="멋쟁이 여형구" value="hyungku2500" />
+            <Picker.Item label="궁극의 여형구" value="hyungku5000" />
+            <Picker.Item label="아이유" value="iu" />
+            <Picker.Item label="트와이스 다현" value="dahyeon" />
+            <Picker.Item label="트와이스 지효" value="jihyo" />
+            <Picker.Item label="방탄소년단 지민" value="jimin" />
+            <Picker.Item label="방탄소년단 정국" value="jungkook" />
           </Picker>
 
           <Picker

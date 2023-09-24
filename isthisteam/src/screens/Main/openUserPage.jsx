@@ -29,7 +29,7 @@ const OpenUserPage = () => {
         // 사용자 정보를 가져오는 API 요청
         const response = await fetch(`http://10.0.2.2:8080/my-page/${userNo}`, {
           headers: {
-            Authorization: `${jwtToken}`,
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMDE2OTM2MDEwIiwiaWF0IjoxNjk1MjUzMjg4LCJleHAiOjE2OTYxMTcyODh9.FYifxFUMtp7FY2NN1EIAyqbrP4tEIQ-hnPHuTQQBRfM`,
           },
         });
 

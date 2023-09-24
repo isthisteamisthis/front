@@ -57,7 +57,7 @@ export default function VoiceRange({navigation}) {
     if (recordedFilePath) {
       try {
         // const apiUrl = 'http://10.0.2.2:8080/api/perfect-scores';
-        const apiUrl = 'http://192.168.0.109:8080/api/max-voice-range';
+        const apiUrl = 'http://10.0.2.2:8080/max-voice-range';
 
         const formData = new FormData();
         formData.append('voice-range', {
@@ -70,6 +70,7 @@ export default function VoiceRange({navigation}) {
           method: 'POST',
           headers: {
             'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMDE2OTM2MDEwIiwiaWF0IjoxNjk1MjUzMjg4LCJleHAiOjE2OTYxMTcyODh9.FYifxFUMtp7FY2NN1EIAyqbrP4tEIQ-hnPHuTQQBRfM`,
           },
           body: formData,
         });

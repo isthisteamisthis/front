@@ -68,8 +68,8 @@ export default function KakaoLogin() {
           source={require('../../../android/app/assets/images/key.png')}
           style={{width: 170, height: 170, marginBottom: 40, marginTop: -50}}
         />
-        <Text style={styles.text01}>{`먼저, 하단의 버튼을 눌러 
-  로그인을 진행해주세요 
+        <Text style={styles.text01}>{`먼저, 하단의 버튼을 눌러
+  로그인을 진행해주세요
         `}</Text>
         <TouchableOpacity onPress={handleKakaoLogin}>
           <Image

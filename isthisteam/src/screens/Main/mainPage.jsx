@@ -45,7 +45,7 @@ function MainPage({navigation}) {
         headers: {
           'Content-Type': 'application/json',
           // AsyncStorage에서 가져온 토큰을 사용합니다.
-          Authorization: `${jwtToken}`,
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMDE2OTM2MDEwIiwiaWF0IjoxNjk1MjUzMjg4LCJleHAiOjE2OTYxMTcyODh9.FYifxFUMtp7FY2NN1EIAyqbrP4tEIQ-hnPHuTQQBRfM`,
         },
       });
 
@@ -200,10 +200,11 @@ function PostItem({post}) {
 }
 const styles = StyleSheet.create({
   bannercontainer: {
-    flex: 1,
+    flex: 2,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 0,
+    height: 400,
   },
   containerofpost: {
     flex: 1,
@@ -230,7 +231,7 @@ const styles = StyleSheet.create({
     letterSpacing: -1,
   },
   container: {
-    flex: 1,
+    flex: 1.5,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 25,

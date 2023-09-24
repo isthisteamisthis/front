@@ -132,7 +132,7 @@ function Karaoke({route, navigation}) {
           method: 'POST',
           headers: {
             'Content-Type': 'multipart/form-data',
-            Authorization: `${jwtToken}`,
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMDE2OTM2MDEwIiwiaWF0IjoxNjk1MjUzMjg4LCJleHAiOjE2OTYxMTcyODh9.FYifxFUMtp7FY2NN1EIAyqbrP4tEIQ-hnPHuTQQBRfM`,
           },
           body: formData,
         });

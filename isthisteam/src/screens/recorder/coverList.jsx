@@ -39,7 +39,7 @@ const CoverList = ({navigation}) => {
         const response = await fetch('http://10.0.2.2:8080/posts', {
           method: 'GET',
           headers: {
-            Authorization: `${jwtToken}`,
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMDE2OTM2MDEwIiwiaWF0IjoxNjk1MjUzMjg4LCJleHAiOjE2OTYxMTcyODh9.FYifxFUMtp7FY2NN1EIAyqbrP4tEIQ-hnPHuTQQBRfM`,
           },
         });
 
@@ -120,31 +120,18 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     letterSpacing: -1.5,
     color: 'black',
-<<<<<<< HEAD
     fontWeight: '900',
     fontSize: 18,
     width: '100%',
     textAlign: 'center',
     textAlignVertical: 'center',
     marginTop: 50,
-=======
-    fontWeight: '800',
-    lineHeight: 18,
-    width: '100%',
-    textAlign: 'center',
-    textAlignVertical: 'center',
-    marginTop: 30,
->>>>>>> 1d43768fd3c52db73347642e73db5b79272cff90
   },
   container1: {
     marginTop: -20,
     backgroundColor: '#FBD3A1',
     width: '100%',
-<<<<<<< HEAD
-    height: 120,
-=======
     height: 100,
->>>>>>> 1d43768fd3c52db73347642e73db5b79272cff90
     align: 'center',
   },
   header: {

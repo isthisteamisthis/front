@@ -35,7 +35,7 @@ const MyAiCoverDetail = ({route, navigation}) => {
         return fetch(`http://10.0.2.2:8080/ai-songs/${songNo}`, {
           method: 'GET',
           headers: {
-            Authorization: `${jwtToken}`,
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMDE2OTM2MDEwIiwiaWF0IjoxNjk1MjUzMjg4LCJleHAiOjE2OTYxMTcyODh9.FYifxFUMtp7FY2NN1EIAyqbrP4tEIQ-hnPHuTQQBRfM`,
           },
         });
       })
@@ -72,7 +72,6 @@ const MyAiCoverDetail = ({route, navigation}) => {
         />
         <View style={styles.albumInfo}>
           <Text style={styles.albumTitle}>{data.title}</Text>
-
         </View>
       </View>
       {/* <View

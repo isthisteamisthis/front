@@ -169,13 +169,12 @@ function App() {
             component={CoverList}
             options={{headerShown: false}}
           />
-          
+
           <Stack.Screen
             name="MyAiCoverDetail"
             component={MyAiCoverDetail}
             options={{headerShown: false}}
           />
-          
 
           {/* ---------------------------------------- MESSAGE page----------------------------------------------------- */}
           <Stack.Screen
