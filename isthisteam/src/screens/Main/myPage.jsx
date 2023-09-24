@@ -110,10 +110,6 @@ const MyPage = () => {
           showsHorizontalScrollIndicator={false}
           horizontal={true}
         />
-        <View style={styles.additionalTextContainer}>
-          <Text style={styles.int}>{data?.nickname}의 평균 점수</Text>
-          <Text style={styles.score}>{data?.avgScore}</Text>
-        </View>
       </View>
     </ScrollView>
   );
@@ -161,6 +157,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 20,
     marginBottom: -15,
+
     letterSpacing: -1,
     color: 'gray',
   },
@@ -181,12 +178,10 @@ const styles = StyleSheet.create({
   },
   score: {
     marginTop: 20,
-    marginLeft: 23,
     fontWeight: '800',
     fontStyle: 'italic',
     color: '#464646',
     fontSize: 25,
-    marginBottom: 30,
   },
   userIntroduction: {
     fontSize: 16,
@@ -200,7 +195,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 20,
     width: '100%',
-    height: 50,
+    height: 60,
     alignItems: 'center',
     borderRadius: 5,
     flexDirection: 'row',
