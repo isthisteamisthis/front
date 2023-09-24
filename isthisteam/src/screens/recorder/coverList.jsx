@@ -65,8 +65,8 @@ const CoverList = ({navigation}) => {
       onPress={() => navigation.navigate('SongDetail')}>
       <Image source={{uri: item.imgFile}} style={styles.imageofpost} />
       <Text style={styles.title}>{item.title}</Text>
-      <Text style={styles.subject}>💖 {item.likeCnt}</Text>
       <Text style={styles.date}>{formatDate(item.date)}</Text>
+      <Text style={styles.subject}>💖 {item.likeCnt}</Text>
     </TouchableOpacity>
   );
 
@@ -101,8 +101,7 @@ const CoverList = ({navigation}) => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.container1}>
-        <Text style={styles.sendtext1}>{`Ai 커버곡
-   리스트`}</Text>
+        <Text style={styles.sendtext1}>{`Ai 커버곡 리스트`}</Text>
       </View>
       {renderGalleryItems()}
     </ScrollView>
@@ -115,24 +114,25 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     marginTop: -20,
-    width: 600,
-    marginLeft: -20,
   },
   sendtext1: {
-    marginTop: 45,
-    marginLeft: 215,
+    flex: 1,
     marginBottom: 10,
     letterSpacing: -1.5,
     color: 'black',
     fontWeight: '800',
     lineHeight: 18,
+    width: '100%',
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    marginTop: 30,
   },
   container1: {
     marginTop: -20,
     backgroundColor: '#FBD3A1',
-    width: 500,
-    marginLeft: -40,
+    width: '100%',
     height: 100,
+    align: 'center',
   },
   header: {
     marginBottom: 30,
@@ -142,22 +142,31 @@ const styles = StyleSheet.create({
     height: 27,
   },
   galleryContainer: {
-    marginTop: 20,
+    marginTop: 10,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   galleryRow: {
     flexDirection: 'row',
-    marginBottom: 10,
+    marginBottom: 5,
   },
   galleryItem: {
     flex: 1,
     marginRight: 5,
     marginHorizontal: 5,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   messageItem: {
-    padding: 20,
+    padding: 10,
     flex: 1,
     marginTop: 5,
     letterSpacing: -1,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   subject: {
     fontSize: 13,
@@ -167,16 +176,21 @@ const styles = StyleSheet.create({
     marginTop: 2,
     fontSize: 12,
     fontWeight: '500',
+    flex: 1,
+    alignItems: 'center',
   },
   date: {
     fontSize: 12,
     color: 'gray',
+    flex: 1,
+    alignItems: 'center',
   },
   imageofpost: {
     width: 100,
     height: 100,
     borderRadius: 5,
-    marginLeft: -15,
+    flex: 1,
+    alignItems: 'center',
   },
 });
 

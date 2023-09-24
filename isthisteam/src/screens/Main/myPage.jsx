@@ -29,8 +29,8 @@ const MyPage = () => {
   const [score, setScore] = useState('83.9');
   const navigation = useNavigation();
 
-  const goToPostDetails = postNo => {
-    navigation.navigate('PostDetail', {postNo});
+  const goToSongDetails = composeSongNo => {
+    navigation.navigate('SongDetail', {composeSongNo});
   };
 
   useEffect(() => {
@@ -91,12 +91,12 @@ const MyPage = () => {
         </Text>
       </View>
       <View style={styles.additionalTextContainer}>
-        <Text style={styles.int}>{data?.nickname}님의 게시글</Text>
+        <Text style={styles.int}>{data?.nickname}님의 데모</Text>
       </View>
       <FlatList
-        data={data?.postList}
-        keyExtractor={item => item.postNo.toString()}
-        renderItem={({item}) => <PostItem post={item} />}
+        data={data?.composeSongList}
+        keyExtractor={item => item.composeSongNo.toString()}
+        renderItem={({item}) => <SongItem song={item} />}
         showsHorizontalScrollIndicator={false}
         horizontal={true}
       />
@@ -107,13 +107,13 @@ const MyPage = () => {
       {/* <TouchableOpacity style={styles.modifyinfobtn} onPress={modifyinfo}>
         <Text style={styles.modifyinfoText}>수정하기</Text>
       </TouchableOpacity> */}
-      <FlatList
+      {/* <FlatList
         data={data?.perfectSongList}
         keyExtractor={item => item.perfecSongNo.toString()}
         renderItem={({item}) => <PostItem post={item} />}
         showsHorizontalScrollIndicator={false}
         horizontal={true}
-      />
+      /> */}
       {/* EditProfileModal
       <Modal visible={isModalVisible} animationType="slide">
         <EditProfileModal
@@ -131,32 +131,26 @@ const MyPage = () => {
   );
 };
 
-function PostItem({post}) {
+function SongItem({song}) {
   const navigation = useNavigation();
 
-  const goToPostDetails = postNo => {
-    navigation.navigate('PostDetail', {postNo});
+  const goToSongDetails = composeSongNo => {
+    navigation.navigate('MyAiCoverDetail', {songNo: composeSongNo});
   };
 
   return (
     <View style={styles.containerofpost}>
+      <Image
+        source={{uri: song.imgFile}}
+        style={styles.imageofpost}
+        showsHorizontalScrollIndicator={false}
+        onPress={() => goToSongDetails(song.composeSongNo)}
+      />
       <Text
         style={styles.additionalText}
-        onPress={() => goToPostDetails(post.postNo)}>
-        {post.title}
+        onPress={() => goToSongDetails(song.composeSongNo)}>
+        {song.title}
       </Text>
-    </View>
-  );
-}
-
-function SongItem({song}) {
-  return (
-    <View style={styles.containerofsong}>
-      <Image
-        source={{uri: song.imagFile}}
-        style={styles.imageofpost}
-        showsHorizontalScrollIndicator={true}
-      />
     </View>
   );
 }
@@ -169,7 +163,6 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   name: {
-    marginBottom: 20,
     fontSize: 26,
     fontWeight: 'bold',
     color: 'black',
@@ -189,12 +182,12 @@ const styles = StyleSheet.create({
     height: 70,
     borderRadius: 75,
     marginBottom: 10,
-    marginTop: 30,
+    marginTop: 20,
   },
   userIntroductionContainer: {
     backgroundColor: '#DCDDED',
     marginTop: 30,
-    marginBottom: 30,
+    marginBottom: 10,
     width: 350,
     height: 100,
     borderRadius: 5,
@@ -217,8 +210,8 @@ const styles = StyleSheet.create({
   textContainer: {
     backgroundColor: '#DCDDED',
     marginTop: 30,
-    marginBottom: 30,
-    width: 350,
+    marginBottom: 20,
+    width: '100%',
     height: 60,
     alignItems: 'center',
     borderRadius: 5,
@@ -233,9 +226,8 @@ const styles = StyleSheet.create({
     letterSpacing: -1,
   },
   additionalText: {
-    marginLeft: 10,
-    marginRight: 200,
-    marginTop: 20,
+    textAlign: 'center',
+    marginTop: 5,
     letterSpacing: -1,
     color: 'black',
     fontWeight: '800',
@@ -247,8 +239,10 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   imageofpost: {
+    margin: 5,
     width: 100,
     height: 100,
+    borderRadius: 5,
   },
   modifyinfobtn: {
     borderWidth: 1,
