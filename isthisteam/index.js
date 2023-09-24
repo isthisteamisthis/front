@@ -37,6 +37,6 @@ import recSelect from './src/screens/recorder/recSelect';
 import CoverList from './src/screens/recorder/coverList';
 import coverDetail from './src/screens/recorder/coverDetail';
 import KaraokeList from './src/screens/recorder/KaraokeList';
-// import perfectScore from './src/screens/recorder/perfectScore';
+import MyAiCoverDetail from './src/screens/recorder/myAiCoverDetail';
 
 AppRegistry.registerComponent(appName, () => App);

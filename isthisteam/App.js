@@ -50,6 +50,7 @@ import recSelect from './src/screens/recorder/recSelect';
 import coverDetail from './src/screens/recorder/coverDetail';
 import KaraokeList from './src/screens/recorder/KaraokeList';
 import PerfectScore from './src/screens/recorder/perfectScore';
+import MyAiCoverDetail from './src/screens/recorder/myAiCoverDetail';
 
 // ----------------------------------------------------------
 
@@ -162,6 +163,13 @@ function App() {
             component={CoverList}
             options={{headerShown: false}}
           />
+          
+          <Stack.Screen
+            name="MyAiCoverDetail"
+            component={MyAiCoverDetail}
+            options={{headerShown: false}}
+          />
+          
 
           {/* ---------------------------------------- MESSAGE page----------------------------------------------------- */}
           <Stack.Screen

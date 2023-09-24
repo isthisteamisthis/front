@@ -3,7 +3,7 @@ import {View, Text, Image, StyleSheet, ScrollView} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {AudioPlayer} from 'react-native-simple-audio-player';
 
-const SongDetail = ({route, navigation}) => {
+const MyAiCoverDetail = ({route, navigation}) => {
   // route.params에서 songNo를 추출하고, 기본값으로 빈 문자열("")을 설정합니다.
   const {songNo} = route.params;
   const [data, setData] = useState('');
@@ -32,7 +32,7 @@ const SongDetail = ({route, navigation}) => {
         if (!jwtToken) {
           throw new Error('JWT Token not found');
         }
-        return fetch(`http://10.0.2.2:8080/song-data/${songNo}`, {
+        return fetch(`http://10.0.2.2:8080/ai-songs/${songNo}`, {
           method: 'GET',
           headers: {
             Authorization: `${jwtToken}`,
@@ -67,12 +67,11 @@ const SongDetail = ({route, navigation}) => {
         <Image
           style={styles.albumCover}
           source={{
-            uri: data.imgUrl,
+            uri: data.imgFile,
           }} // 이미지 파일을 가져오도록 수정
         />
         <View style={styles.albumInfo}>
-          <Text style={styles.albumTitle}>{data.songName}</Text>
-          <Text style={styles.artistName}>원곡자 | {data.artistName}</Text>
+          <Text style={styles.albumTitle}>{data.title}</Text>
 
         </View>
       </View>
@@ -148,4 +147,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SongDetail;
+export default MyAiCoverDetail;
