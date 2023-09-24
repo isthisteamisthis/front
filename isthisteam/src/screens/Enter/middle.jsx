@@ -26,11 +26,6 @@ const Skip = ({navigation}) => (
     <Text style={styles.bottombtn}>Skip</Text>
   </TouchableOpacity>
 );
-// const Next = ({...props}) => (
-//   <TouchableOpacity style={{marginHorizontal: 20}}>
-//     <Text style={styles.bottombtn}>Next</Text>
-//   </TouchableOpacity>
-// );
 const Done = ({navigation}) => (
   <TouchableOpacity
     style={{marginHorizontal: 20}}
@@ -45,8 +40,8 @@ const Middle = ({navigation}) => {
       SkipButtonComponent={() => <Skip navigation={navigation} />}
       // NextButtonComponent={Next}
       DoneButtonComponent={() => <Done navigation={navigation} />}
-      onSkip={() => navigation.replace('Select')}
-      onDone={() => navigation.navigate('Select')}
+      onSkip={() => navigation.replace('KakaoLogin')}
+      onDone={() => navigation.navigate('KakaoLogin')}
       pages={[
         {
           backgroundColor: '#EAEAF4',
@@ -108,7 +103,7 @@ const Middle = ({navigation}) => {
         },
       ]}
       titleStyles={{
-        marginTop: -30,
+        marginTop: -20,
         fontSize: 18,
         fontWeight: '400',
         color: 'black',
@@ -140,7 +135,7 @@ const styles = StyleSheet.create({
   imageStyle: {
     width: 200,
     height: 200,
-    marginTop: -100,
+    marginTop: -80,
   },
 });
 

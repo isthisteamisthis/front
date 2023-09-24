@@ -1,118 +1,76 @@
-import React from 'react';
 import {
-  Image,
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
   StyleSheet,
+  Text,
+  View,
+  FlatList,
+  Image,
+  TouchableOpacity,
+  ScrollView,
 } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {useNavigation} from '@react-navigation/native';
 
-const fakeMessages = [
-  {
-    id: '1',
-    writer: 'sui',
-    subject: '좋은날',
-    date: '2023-09-25',
-    image:
-      'https://firebasestorage.googleapis.com/v0/b/is-this-team-lalalia.appspot.com/o/d9122cf2-7fc7-4c41-b3b3-dc85482afe9a?alt=media&token=c3ba68c3-6107-4a60-ae46-c502957c6c54', // 이미지 URL
-  },
-  {
-    id: '2',
-    writer: 'Dylan',
-    subject: '거북이',
-    date: '2023-09-24',
-    image:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSD7ikNfnzciX871NVgJrpveFprpi5wLJMYoQ&usqp=CAU', // 이미지 URL
-  },
-  {
-    id: '3',
-    writer: 'Rachaz',
-    subject: '물론',
-    date: '2023-09-23',
-    image:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXEX1FVDqI78cpHEAXcweDUrBLKLBd_LNRtg&usqp=CAU', // 이미지 URL
-  },
-  {
-    id: '1',
-    writer: 'sui',
-    subject: '좋은날',
-    date: '2023-09-25',
-    image:
-      'https://firebasestorage.googleapis.com/v0/b/is-this-team-lalalia.appspot.com/o/d9122cf2-7fc7-4c41-b3b3-dc85482afe9a?alt=media&token=c3ba68c3-6107-4a60-ae46-c502957c6c54', // 이미지 URL
-  },
-  {
-    id: '2',
-    writer: 'Dylan',
-    subject: '거북이',
-    date: '2023-09-24',
-    image:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSD7ikNfnzciX871NVgJrpveFprpi5wLJMYoQ&usqp=CAU', // 이미지 URL
-  },
-  {
-    id: '3',
-    writer: 'Rachaz',
-    subject: '물론',
-    date: '2023-09-23',
-    image:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXEX1FVDqI78cpHEAXcweDUrBLKLBd_LNRtg&usqp=CAU', // 이미지 URL
-  },
-  {
-    id: '1',
-    writer: 'sui',
-    subject: '좋은날',
-    date: '2023-09-25',
-    image:
-      'https://firebasestorage.googleapis.com/v0/b/is-this-team-lalalia.appspot.com/o/d9122cf2-7fc7-4c41-b3b3-dc85482afe9a?alt=media&token=c3ba68c3-6107-4a60-ae46-c502957c6c54', // 이미지 URL
-  },
-  {
-    id: '2',
-    writer: 'Dylan',
-    subject: '거북이',
-    date: '2023-09-24',
-    image:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSD7ikNfnzciX871NVgJrpveFprpi5wLJMYoQ&usqp=CAU', // 이미지 URL
-  },
-  {
-    id: '3',
-    writer: 'Rachaz',
-    subject: '물론',
-    date: '2023-09-23',
-    image:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXEX1FVDqI78cpHEAXcweDUrBLKLBd_LNRtg&usqp=CAU', // 이미지 URL
-  },
-  {
-    id: '1',
-    writer: 'sui',
-    subject: '좋은날',
-    date: '2023-09-25',
-    image:
-      'https://firebasestorage.googleapis.com/v0/b/is-this-team-lalalia.appspot.com/o/d9122cf2-7fc7-4c41-b3b3-dc85482afe9a?alt=media&token=c3ba68c3-6107-4a60-ae46-c502957c6c54', // 이미지 URL
-  },
-  {
-    id: '2',
-    writer: 'Dylan',
-    subject: '거북이',
-    date: '2023-09-24',
-    image:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSD7ikNfnzciX871NVgJrpveFprpi5wLJMYoQ&usqp=CAU', // 이미지 URL
-  },
-  {
-    id: '3',
-    writer: 'Rachaz',
-    subject: '물론',
-    date: '2023-09-23',
-    image:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXEX1FVDqI78cpHEAXcweDUrBLKLBd_LNRtg&usqp=CAU', // 이미지 URL
-  },
-];
+export default function CoverList({navigation}) {
+  const [songDataList, setSongDataList] = useState([]);
+  const [songDataNo, setSongDataNo] = useState([]);
 
-const CoverList = ({navigation}) => {
+  const GetSongDataList = async () => {
+    const apiUrl = 'http://10.0.2.2:8080/song-data';
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'GET',
+      });
+
+      if (!response.ok) {
+        throw new Error('네트워크 오류');
+      }
+
+      const data = await response.json();
+
+      setSongDataList(data.data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  useEffect(() => {
+    GetSongDataList();
+  }, []);
+
+  const renderItem = ({item}) => (
+    <TouchableOpacity
+      style={styles.item}
+      onPress={() => {
+        navigation.navigate('CoverDetail', {songNo: item.songDataNo});
+      }}>
+      <Image style={styles.image} source={{uri: item.imgUrl}} />
+      <Text style={styles.songName}>{item.songName}</Text>
+      <Text style={styles.artistName}>{item.artistName}</Text>
+    </TouchableOpacity>
+  );
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.container1}>
+        <Text style={styles.sendtext1}>{`커버곡
+리스트`}</Text>
+      </View>
+      <FlatList
+        data={songDataList}
+        renderItem={renderItem}
+        keyExtractor={item => item.songDataNo.toString()}
+        numColumns={2}
+      />
+    </View>
+  );
+}
+const CoverLists = ({navigation}) => {
   const renderGalleryItems = () => {
     // 3개씩 열로 나누기 위한 배열 생성
     const galleryRows = [];
-    for (let i = 0; i < fakeMessages.length; i += 3) {
-      const rowItems = fakeMessages.slice(i, i + 3);
+    for (let i = 0; i < CoverList.length; i += 3) {
+      const rowItems = CoverList.slice(i, i + 3);
       galleryRows.push(
         <View key={i} style={styles.galleryRow}>
           {rowItems.map(item => (
@@ -125,32 +83,34 @@ const CoverList = ({navigation}) => {
     }
     return galleryRows;
   };
-
-  const renderItem = item => (
-    <TouchableOpacity
-      style={styles.messageItem}
-      onPress={() => navigation.navigate('coverDetail')}>
-      <Image source={{uri: item.image}} style={styles.itemImage} />
-      <Text style={styles.subject}>{item.subject}</Text>
-      <Text style={styles.date}>{item.date}</Text>
-    </TouchableOpacity>
-  );
-
-  return (
-    <View style={styles.container}>
-      <View style={styles.container1}>
-        <Image
-          source={require('../../../android/app/assets/images/paper.png')} // 이미지 경로를 설정합니다.
-          style={styles.header}
-        />
-        <Text style={styles.sendtext1}>Ai 커버곡 리스트</Text>
-      </View>
-      <ScrollView style={styles.galleryContainer}>
-        {renderGalleryItems()}
-      </ScrollView>
-    </View>
-  );
 };
+
+const renderItem = item => (
+  <TouchableOpacity
+    style={styles.messageItem}
+    onPress={() => navigation.navigate('coverDetail')}>
+    <Image source={{uri: item.image}} style={styles.itemImage} />
+    <Text style={styles.subject}>{item.subject}</Text>
+    <Text style={styles.date}>{item.date}</Text>
+  </TouchableOpacity>
+);
+
+//   return (
+//     <View style={styles.container}>
+//       <View style={styles.container1}>
+//         {/* <Image
+//           source={require('../../../android/app/assets/images/paper.png')} // 이미지 경로를 설정합니다.
+//           style={styles.header}
+//         /> */}
+//         <Text style={styles.sendtext1}>{`Ai 커버곡
+//    리스트`}</Text>
+//       </View>
+//       <ScrollView style={styles.galleryContainer}>
+//         {renderGalleryItems()}
+//       </ScrollView>
+//     </View>
+//   );
+// };
 
 const styles = StyleSheet.create({
   container: {
@@ -159,19 +119,20 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   sendtext1: {
-    marginTop: -25,
-    marginLeft: 175,
+    marginTop: 22,
+    marginLeft: 200,
     marginBottom: 10,
     letterSpacing: -1.5,
     color: 'black',
-    fontWeight: '800',
+    fontWeight: '900',
+    lineHeight: 18,
   },
   container1: {
     marginTop: -20,
     backgroundColor: '#FDE4C6',
     width: 500,
     marginLeft: -40,
-    height: 100,
+    height: 80,
   },
   header: {
     marginBottom: 30,
@@ -215,5 +176,3 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
 });
-
-export default CoverList;

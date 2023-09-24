@@ -17,9 +17,6 @@ import Config from 'react-native-config';
 export default function KakaoLogin() {
   const navigation = useNavigation();
 
-  // 하드웨어 뒤로가기 버튼 클릭 시 동작
-  // Alert 창 : 앱을 종료할건지 묻고, 확인을 선택하면 앱 종료
-
   const handleKakaoLogin = async () => {
     try {
       // 카카오 로그인

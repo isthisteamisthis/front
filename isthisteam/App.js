@@ -1,50 +1,55 @@
 import React from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import DocumentPicker from 'react-native-document-picker';
-import {launchImageLibrary} from 'react-native-image-picker';
+import Swiper from 'react-native-swiper';
 import ModalDropdown from 'react-native-modal-dropdown';
 import Onboarding from 'react-native-onboarding-swiper';
-import Swiper from 'react-native-swiper';
-import {Swipeable, GestureHandlerRootView} from 'react-native-gesture-handler';
+import DocumentPicker from 'react-native-document-picker';
 import {AudioPlayer} from 'react-native-simple-audio-player';
+import {launchImageLibrary} from 'react-native-image-picker';
+import {createStackNavigator} from '@react-navigation/stack';
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {Swipeable, GestureHandlerRootView} from 'react-native-gesture-handler';
+
+import {LogBox} from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']);
+LogBox.ignoreAllLogs();
 
 // component
 import BottomTab from './src/components/bottomTab';
 
 // enter -------------------------------------------------
+import middle from './src/screens/Enter/middle';
 import splash from './src/screens/Enter/splash';
 import select from './src/screens/Enter/select';
-import middle from './src/screens/Enter/middle';
-import voiceRange from './src/screens/Enter/voiceRange';
-import voiceRangeHigh from './src/screens/Enter/voiceRangeHigh';
-import kakaoLogin from './src/screens/Enter/kakaoLogin';
-import kakaoLogout from './src/screens/Enter/kakaoLogout';
 import SongDetail from './src/screens/Main/songDetail';
+import kakaoLogin from './src/screens/Enter/kakaoLogin';
+import voiceRange from './src/screens/Enter/voiceRange';
+import kakaoLogout from './src/screens/Enter/kakaoLogout';
+import voiceRangeHigh from './src/screens/Enter/voiceRangeHigh';
 
 // main ----------------------------------------------------
 import myPage from './src/screens/Main/myPage';
-// import EditProfileModal from './src/screens/Main/editProfileModal';
 import mainpage from './src/screens/Main/mainPage';
 import recSongList from './src/screens/Main/recSongList';
 import openUserPage from './src/screens/Main/openUserPage';
 
 // message ------------------------------------------------------
 import Community from './src/screens/Message/commuity';
-import MessageDetail from './src/screens/Message/messageDetail';
-import ReplyMessage from './src/screens/Message/replyMessage';
-import SentMessages from './src/screens/Message/SentMessages';
-import sentMessageDetail from './src/screens/Message/sentMessageDetail';
-import SendMessage from './src/screens/Message/sendMessage';
 import MidSelect from './src/screens/Message/midSelect';
+import SendMessage from './src/screens/Message/sendMessage';
+import SentMessages from './src/screens/Message/SentMessages';
+import ReplyMessage from './src/screens/Message/replyMessage';
+import MessageDetail from './src/screens/Message/messageDetail';
+import SentMessageDetail from './src/screens/Message/SentMessageDetail';
 
 // record ---------------------------------------------------
 import aiCover from './src/screens/recorder/aiCover';
-import PerfectScore from './src/screens/recorder/perfectScore';
+import Karaoke from './src/screens/recorder/Karaoke';
+import CoverList from './src/screens/recorder/coverList';
 import recSelect from './src/screens/recorder/recSelect';
 import coverDetail from './src/screens/recorder/coverDetail';
-import coverList from './src/screens/recorder/coverList';
+import KaraokeList from './src/screens/recorder/KaraokeList';
+import PerfectScore from './src/screens/recorder/perfectScore';
 
 // ----------------------------------------------------------
 
@@ -99,11 +104,6 @@ function App() {
             component={mainpage}
             options={{headerShown: false}}
           />
-          {/* <Stack.Screen
-            name="EditProfileModal"
-            component={EditProfileModal}
-            options={{headerShown: false}}
-          /> */}
           <Stack.Screen
             name="MyPage"
             component={myPage}
@@ -128,6 +128,11 @@ function App() {
           {/* ------------------------------------------- RECORD page----------------------------------------------------- */}
 
           <Stack.Screen
+            name="Karaoke"
+            component={Karaoke}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
             name="coverDetail"
             component={coverDetail}
             options={{headerShown: false}}
@@ -148,8 +153,13 @@ function App() {
             options={{headerShown: false}}
           /> */}
           <Stack.Screen
-            name="coverList"
-            component={coverList}
+            name="KaraokeList"
+            component={KaraokeList}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="CoverList"
+            component={CoverList}
             options={{headerShown: false}}
           />
 
@@ -180,8 +190,8 @@ function App() {
             options={{headerShown: false}}
           />
           <Stack.Screen
-            name="sentMessageDetail"
-            component={sentMessageDetail}
+            name="SentMessageDetail"
+            component={SentMessageDetail}
             options={{headerShown: false}}
           />
           <Stack.Screen
@@ -189,9 +199,6 @@ function App() {
             component={MidSelect}
             options={{headerShown: false}}
           />
-
-          {/* <Stack.Screen name="ChatModal" component={ChatModal} options={{headerShown: false} />
-          <Stack.Screen name="ChatPage" component={ChatPage} options={{headerShown: false} /> */}
         </Stack.Navigator>
       </GestureHandlerRootView>
     </NavigationContainer>

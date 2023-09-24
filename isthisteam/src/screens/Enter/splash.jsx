@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
     marginTop: 1,
     color: 'white',
     lineHeight: 15,
+    letterSpacing: -0.5,
   },
 });
 

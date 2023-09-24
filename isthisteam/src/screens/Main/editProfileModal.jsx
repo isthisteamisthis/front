@@ -7,15 +7,13 @@
 //   const [vocalRange, setVocalRange] = useState(initialData.vocalRange);
 
 //   const handleSave = () => {
-//     // 수정된 정보를 서버 또는 데이터베이스에 업데이트하는 로직을 구현합니다.
-//     // 이 부분은 실제 백엔드와 연동하여 작성되어야 합니다.
+//     // Modify this function to handle saving the updated data (e.g., send it to the server)
 //     const updatedData = {
 //       name,
 //       introduction,
 //       vocalRange,
 //     };
 
-//     // onSave 콜백 함수를 호출하여 업데이트된 정보를 전달합니다.
 //     onSave(updatedData);
 //   };
 

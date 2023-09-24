@@ -6,7 +6,7 @@ function RecSelect({navigation}) {
     navigation.navigate('AiCover');
   };
   const onPress1 = () => {
-    navigation.navigate('Karaoke');
+    navigation.navigate('KaraokeList');
   };
 
   return (

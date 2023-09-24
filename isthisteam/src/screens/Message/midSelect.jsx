@@ -3,7 +3,7 @@ import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
 function MidSelect({navigation}) {
   const onPress = () => {
-    navigation.navigate('coverList');
+    navigation.navigate('CoverList');
   };
   const onPress1 = () => {
     navigation.navigate('Community');

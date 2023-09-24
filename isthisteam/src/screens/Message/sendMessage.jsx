@@ -8,13 +8,42 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SendMessage = ({route, navigation}) => {
-  const [replyMessage, setReplyMessage] = useState('');
+  const [message, setMessage] = useState('');
+  const {userNo} = route.params;
 
-  const handleSendMsg = () => {
-    navigation.navigate('openUserPage');
-    setTimeout(() => {
+  const handleSendMsg = async () => {
+    try {
+      // AsyncStorage에서 jwtToken을 가져옵니다.
+      const jwtToken = await AsyncStorage.getItem('jwtToken');
+
+      if (!jwtToken) {
+        throw new Error('JWT Token not found');
+      }
+
+      const apiUrl = `http://10.0.2.2:8080/${userNo}/message`;
+
+      // 메시지를 요청 body에 담습니다.
+      const requestBody = {
+        content: message,
+      };
+
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `${jwtToken}`,
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      // 성공적으로 메시지가 전송되었을 때 알림을 표시합니다.
       Alert.alert(
         '전송 완료',
         '메시지가 성공적으로 전송되었습니다.',
@@ -28,7 +57,9 @@ const SendMessage = ({route, navigation}) => {
         ],
         {cancelable: false},
       );
-    }, 2000);
+    } catch (error) {
+      console.error('Error sending message:', error);
+    }
   };
 
   return (
@@ -40,18 +71,12 @@ const SendMessage = ({route, navigation}) => {
         />
         <Text style={styles.sendtext1}>쪽지보내기</Text>
       </View>
-      {/* <View style={styles.messageContainer}>
-        <Text style={styles.subject}>Re : {originalMessage.subject}</Text>
-        <Text style={styles.senderName}>{originalMessage.sender}</Text>
-        <Text style={styles.date}>{originalMessage.date}</Text>
-        <Text style={styles.messageText}>{originalMessage.message}</Text>
-      </View> */}
       <TextInput
-        style={styles.replyInput}
+        style={styles.input}
         placeholder="메시지를 작성하세요..."
         multiline={true}
-        value={replyMessage}
-        onChangeText={text => setReplyMessage(text)}
+        value={message}
+        onChangeText={text => setMessage(text)}
       />
       <TouchableOpacity style={styles.sendButton} onPress={handleSendMsg}>
         <Text style={styles.sendButtonText}>전송</Text>
@@ -62,7 +87,7 @@ const SendMessage = ({route, navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFF9F1',
+    backgroundColor: '#Fff',
     flex: 1,
     padding: 16,
   },
@@ -88,49 +113,7 @@ const styles = StyleSheet.create({
     width: 25,
     height: 25,
   },
-  messageContainer: {
-    marginTop: 30,
-    padding: 16,
-    borderWidth: 0.5,
-    borderColor: 'gray',
-    // borderRadius: 8,
-    backgroundColor: 'white',
-  },
-  senderName: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 8,
-  },
-  sendtext: {
-    marginTop: -5,
-    marginLeft: 142,
-    letterSpacing: -1,
-    color: 'black',
-    fontWeight: '600',
-  },
-  subject: {
-    fontSize: 20,
-    marginLeft: 0,
-    fontWeight: '900',
-    marginBottom: 20,
-    letterSpacing: -1.5,
-    color: 'black',
-  },
-  date: {
-    fontSize: 14,
-    color: 'gray',
-    marginBottom: 16,
-    marginTop: -10,
-  },
-  messageText: {
-    fontSize: 16,
-    lineHeight: 24,
-    marginTop: 10,
-    fontWeight: '100',
-    color: 'black',
-    letterSpacing: -1,
-  },
-  replyInput: {
+  input: {
     marginTop: 50,
     fontSize: 16,
     letterSpacing: -1,

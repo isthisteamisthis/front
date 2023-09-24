@@ -2,144 +2,106 @@ import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
+  StyleSheet,
   FlatList,
   TouchableOpacity,
-  StyleSheet,
   Image,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native'; // useNavigation 추가
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const fakeMessages = [
-  {
-    id: '1',
-    sender: 'sui',
-    subject: '안녕하다!',
-    date: '2023-09-25',
-    message: '안녕하세요! 절 집에 보내주시겠어요?',
-  },
-  {
-    id: '2',
-    sender: 'Dylan',
-    subject: '중요한 일정 안내',
-    date: '2023-09-24',
-    message: '오늘 진심 점심 뭐먹냐',
-  },
-  {
-    id: '3',
-    sender: 'Rachaz',
-    subject: '주말 계획',
-    date: '2023-09-23',
-    message: '끝장나게 누워있기',
-  },
-  {
-    id: '3',
-    sender: 'Rachaz',
-    subject: '주말 계획',
-    date: '2023-09-23',
-    message: '끝장나게 누워있기',
-  },
-  {
-    id: '3',
-    sender: 'Rachaz',
-    subject: '주말 계획',
-    date: '2023-09-23',
-    message: '끝장나게 누워있기',
-  },
-  {
-    id: '3',
-    sender: 'Rachaz',
-    subject: '주말 계획',
-    date: '2023-09-23',
-    message: '끝장나게 누워있기',
-  },
-  {
-    id: '3',
-    sender: 'Rachaz',
-    subject: '주말 계획',
-    date: '2023-09-23',
-    message: '끝장나게 누워있기',
-  },
-  {
-    id: '3',
-    sender: 'Rachaz',
-    subject: '주말 계획',
-    date: '2023-09-23',
-    message: '끝장나게 누워있기',
-  },
-  {
-    id: '3',
-    sender: 'Rachaz',
-    subject: '주말 계획',
-    date: '2023-09-23',
-    message: '끝장나게 누워있기',
-  },
-  {
-    id: '3',
-    sender: 'Rachaz',
-    subject: '주말 계획',
-    date: '2023-09-23',
-    message: '끝장나게 누워있기',
-  },
-  {
-    id: '3',
-    sender: 'Rachaz',
-    subject: '주말 계획',
-    date: '2023-09-23',
-    message: '끝장나게 누워있기',
-  },
-];
-
-const SentMessageDetail = ({navigation}) => {
-  const [messages] = useState(fakeMessages);
-
-  const onPress = () => {
-    navigation.navigate('Mainpage');
+const SentMessages = () => {
+  const [messages, setMessages] = useState([]);
+  const formatDate = dateString => {
+    const options = {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+    };
+    const date = new Date(dateString);
+    return date.toLocaleDateString('ko-KR', options);
   };
+
+  const navigation = useNavigation(); // useNavigation을 사용하여 navigation 객체 가져오기
+
+  useEffect(() => {
+    // AsyncStorage에서 jwtToken을 가져옵니다.
+    AsyncStorage.getItem('jwtToken').then(jwtToken => {
+      if (!jwtToken) {
+        throw new Error('JWT Token not found');
+      }
+
+      console.log(`${jwtToken}`);
+      // API를 호출하여 메시지 목록을 가져옵니다.
+      return fetch('http://10.0.2.2:8080/messages/sent', {
+        method: 'GET',
+        headers: {
+          Authorization: `${jwtToken}`,
+        },
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network request was not ok');
+          }
+          return response.json();
+        })
+        .then(responseData => {
+          setMessages(responseData.data);
+        })
+        .catch(error => {
+          console.error('Error fetching message list:', error);
+        });
+    });
+  }, []);
 
   const renderItem = ({item}) => {
     return (
       <TouchableOpacity
         style={styles.messageItem}
         onPress={() =>
-          navigation.navigate('sentMessageDetail', {message: item})
+          navigation.navigate('sentMessageDetail', {messageNo: item.messageNo})
         }>
-        <Text style={styles.senderName}>{item.sender}</Text>
-        <Text style={styles.subject}>{item.subject}</Text>
-        <Text style={styles.date}>{item.date}</Text>
+        <Text style={styles.receiverName}>
+          받은 사람 : {item.getUserNickname}
+        </Text>
+        <Text style={styles.subject}>
+          {item.content.length > 20
+            ? item.content.substring(0, 20) + '...'
+            : item.content}
+        </Text>
+        <Text style={styles.date}>{formatDate(item.date)}</Text>
       </TouchableOpacity>
     );
   };
 
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.header}>쪽지 목록</Text> */}
       <View style={styles.container1}>
-        <TouchableOpacity>
-          <Image
-            source={require('../../../android/app/assets/images/paper1.png')} // 이미지 경로를 설정합니다.
-            style={styles.header}
-            onPress={() => navigation.navigate('Mainpage')}
-          />
-        </TouchableOpacity>
+        <Image
+          source={require('../../../android/app/assets/images/paper1.png')}
+          style={styles.header}
+        />
         <Text style={styles.sendtext1}>내가 보낸 쪽지함</Text>
       </View>
       <FlatList
         data={messages}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.messageNo.toString()}
       />
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFF9F1',
+    backgroundColor: '#Fff',
     flex: 1,
     padding: 16,
   },
   sendtext1: {
     marginTop: -25,
-    marginLeft: 175,
+    marginLeft: 185,
     marginBottom: 10,
     letterSpacing: -1.5,
     color: 'black',
@@ -147,7 +109,7 @@ const styles = StyleSheet.create({
   },
   container1: {
     marginTop: -20,
-    backgroundColor: '#FBD3A1',
+    backgroundColor: '#EAEAF4',
     width: 500,
     marginLeft: -40,
     height: 100,
@@ -191,4 +153,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SentMessageDetail;
+export default SentMessages;

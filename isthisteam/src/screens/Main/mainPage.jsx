@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, {useState, useEffect} from 'react';
 import {
   View,
@@ -5,16 +6,18 @@ import {
   FlatList,
   Image,
   StyleSheet,
-  Flatlist,
   ScrollView,
   TouchableOpacity,
+  BackHandler,
+  Alert,
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import ModalDropdown from 'react-native-modal-dropdown';
 import Swiper from 'react-native-swiper';
 import BottomTab from '../../components/bottomTab';
-import Banner from '../../components/banner';
+
+import AsyncStorage from '@react-native-async-storage/async-storage'; // AsyncStorage 추가
 
 const Stack = createStackNavigator();
 
@@ -22,24 +25,27 @@ function MainPage({navigation}) {
   const [posts, setPosts] = useState([]);
   const [name, setName] = useState('수이');
 
-  // const handleMoreButtonPress = () => {
-  //   navigation.navigate('songList');
-  // };
-
   const MoreButtonPress = () => {
     navigation.navigate('recSongList');
   };
 
   const GetRecommendSong = async () => {
-    const apiUrl = 'http://192.168.0.42:8080/song-recommend';
+    const apiUrl = 'http://10.0.2.2:8080/song-recommend';
 
     try {
+      // AsyncStorage에서 jwtToken을 가져옵니다.
+      const jwtToken = await AsyncStorage.getItem('jwtToken');
+
+      if (!jwtToken) {
+        throw new Error('JWT Token not found');
+      }
+
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          //토큰 받아서 넣는 로직 추가
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMDI6MDc5NjcyIiwiaWF0IjoxNjk1MTEyMjU3LCJleHAiOjE2OTUxOTg2NTd9.hiQteBEnvqnCY70fUdm_Qu-ZyN-8kERKx2FNpUYBpI0`,
+          // AsyncStorage에서 가져온 토큰을 사용합니다.
+          Authorization: `${jwtToken}`,
         },
       });
 
@@ -56,13 +62,47 @@ function MainPage({navigation}) {
 
       setPosts(postsData);
     } catch (error) {
-      // console.error('Error:', error);
+      console.error('Error:', error);
     }
   };
 
   useEffect(() => {
     GetRecommendSong();
-  });
+  }, []); // useEffect 두 번째 인수를 빈 배열로 설정하여 한 번만 실행
+
+  // useEffect(() => {
+  //   const backAction = () => {
+  //     Alert.alert(
+  //       '앱 종료',
+  //       '앱을 종료하시겠습니까?',
+  //       [
+  //         {
+  //           text: '취소',
+  //           onPress: () => null,
+  //           style: 'cancel',
+  //         },
+  //         {
+  //           text: '확인',
+  //           onPress: () => {
+  //             BackHandler.exitApp();
+  //           },
+  //         },
+  //       ],
+  //       {cancelable: false},
+  //     );
+
+  //     return true;
+  //   };
+
+  //   const backHandler = BackHandler.addEventListener(
+  //     'hardwareBackPress',
+  //     backAction,
+  //   );
+
+  //   return () => {
+  //     backHandler.remove();
+  //   };
+  // }, []);
 
   return (
     <View style={styles.container}>
@@ -90,7 +130,6 @@ function MainPage({navigation}) {
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        {/* <Text style={styles.open}>환영합니다, {name}님</Text> */}
         <View style={styles.additionalTextContainer}>
           <Text style={styles.additionalText}>Ai 맞춤 추천곡</Text>
           <TouchableOpacity onPress={MoreButtonPress}>
@@ -108,9 +147,6 @@ function MainPage({navigation}) {
 
         <View style={styles.additionalTextContainer}>
           <Text style={styles.additionalText}>퍼펙트 스코어</Text>
-          {/* <TouchableOpacity onPress={handleMoreButtonPress}>
-            <Text style={styles.moreButton}>더보기</Text>
-          </TouchableOpacity> */}
         </View>
 
         <FlatList
@@ -160,13 +196,11 @@ function PostItem({post}) {
         source={{uri: post.imageUrl}}
         style={styles.imageofpost}
         showsHorizontalScrollIndicator={false}
-        horizontal={true}
       />
       <Text style={styles.titleofpost}>{post.title}</Text>
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   bannercontainer: {
     flex: 1,
@@ -174,15 +208,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 0,
   },
-  // open: {
-  //   fontSize: 22,
-  //   letterSpacing: -1.5,
-  //   marginLeft: 90,
-  //   marginTop: 10,
-  //   marginBottom: 20,
-  //   color: 'black',
-  //   // fontWeight: '100',
-  // },
   containerofpost: {
     flex: 1,
     margin: 15,
@@ -207,16 +232,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     letterSpacing: -1,
   },
-  // additionalText: {
-  //   color: 'black',
-  //   fontSize: 16,
-  //   width: 150,
-  //   fontWeight: '900',
-  //   marginRight: 185,
-  //   marginTop: 40,
-  //   marginBottom: 10,
-  //   letterSpacing: -1.5,
-  // },
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -238,18 +253,6 @@ const styles = StyleSheet.create({
     letterSpacing: -1,
     marginTop: -1,
   },
-  // text01: {
-  //   color: 'white',
-  //   fontSize: 16,
-  //   fontWeight: '900',
-  //   textAlign: 'center',
-  //   letterSpacing: -1,
-  //   // backgroundColor: '#4F709C',
-  //   paddingVertical: 10,
-  //   paddingHorizontal: 20,
-  //   borderRadius: 5,
-  //   padding: 1,
-  // },
   additionalTextContainer: {
     // width: 1000,
     flexDirection: 'row', // 가로로 정렬
@@ -267,12 +270,6 @@ const styles = StyleSheet.create({
   moreButton: {
     letterSpacing: -1,
   },
-  // moreButton: {
-  //   marginLeft: 270,
-  //   color: 'black',
-  //   fontWeight: '800',
-  //   letterSpacing: -1,
-  // },
   dropdownText: {
     color: 'black',
     fontSize: 16,
