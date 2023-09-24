@@ -22,8 +22,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage'; // AsyncSt
 const Stack = createStackNavigator();
 
 function MainPage({navigation}) {
-  const [posts, setPosts] = useState([]);
-  const [name, setName] = useState('수이');
+  const [recommendSongs, setRecommendSongs] = useState([]);
+  const [songDataList, setSongDataList] = useState([]);
 
   const MoreButtonPress = () => {
     navigation.navigate('recSongList');
@@ -60,7 +60,27 @@ function MainPage({navigation}) {
         title: key,
       }));
 
-      setPosts(postsData);
+      setRecommendSongs(postsData);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  const GetSongDataList = async () => {
+    const apiUrl = 'http://10.0.2.2:8080/song-data';
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'GET',
+      });
+
+      if (!response.ok) {
+        throw new Error('Network error');
+      }
+
+      const data = await response.json();
+
+      setSongDataList(data.data);
     } catch (error) {
       console.error('Error:', error);
     }
@@ -68,6 +88,7 @@ function MainPage({navigation}) {
 
   useEffect(() => {
     GetRecommendSong();
+    GetSongDataList();
   }, []); // useEffect 두 번째 인수를 빈 배열로 설정하여 한 번만 실행
 
   // useEffect(() => {
@@ -138,7 +159,7 @@ function MainPage({navigation}) {
         </View>
 
         <FlatList
-          data={posts}
+          data={recommendSongs}
           keyExtractor={item => item.id}
           renderItem={({item}) => <PostItem post={item} />}
           showsHorizontalScrollIndicator={false}
@@ -146,13 +167,16 @@ function MainPage({navigation}) {
         />
 
         <View style={styles.additionalTextContainer}>
-          <Text style={styles.additionalText}>퍼펙트 스코어</Text>
+          <Text style={styles.additionalText}>100점 도전! 노래방</Text>
         </View>
 
         <FlatList
-          data={posts1}
-          keyExtractor={item => item.id}
-          renderItem={({item}) => <PostItem post={item} />}
+          data={songDataList}
+          keyExtractor={(item) => item.songDataNo.toString()}
+          renderItem={({ item }) => (
+            <PostItem post={{ imageUrl: item.imgUrl, title: item.songName }} />
+          )}
+          // renderItem={renderItem}
           showsHorizontalScrollIndicator={false}
           horizontal={true}
         />
@@ -161,33 +185,6 @@ function MainPage({navigation}) {
     </View>
   );
 }
-
-const posts1 = [
-  {
-    id: '1',
-    imageUrl:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1lgDdFxuBbDfgby2OiMBDvCLPSffJYmJvrA&usqp=CAU',
-    title: 'NEVERMIND',
-  },
-  {
-    id: '2',
-    imageUrl:
-      'https://image.newsis.com/2021/05/17/NISI20210517_0000747908_web.jpg',
-    title: '해픈',
-  },
-  {
-    id: '3',
-    imageUrl:
-      'https://images.saramingig.co.kr/product/F/0/X/F0Xdpaep3WJVpIR.jpeg/o2j/resize/900',
-    title: 'THE BEATLES',
-  },
-  {
-    id: '4',
-    imageUrl:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfLWgfdEEvzkbjn-aHGNi_q0ry7Hkbm-FXKjznlZhBag&s',
-    title: '밤공기',
-  },
-];
 
 function PostItem({post}) {
   return (

@@ -40,7 +40,7 @@ import SendMessage from './src/screens/Message/sendMessage';
 import SentMessages from './src/screens/Message/SentMessages';
 import ReplyMessage from './src/screens/Message/replyMessage';
 import MessageDetail from './src/screens/Message/messageDetail';
-import SentMessageDetail from './src/screens/Message/SentMessageDetail';
+import SentMessageDetail from './src/screens/Message/sentMessageDetail';
 
 // record ---------------------------------------------------
 import aiCover from './src/screens/recorder/aiCover';
@@ -180,7 +180,7 @@ function App() {
             options={{headerShown: false}}
           />
           <Stack.Screen
-            name="messageDetail"
+            name="MessageDetail"
             component={MessageDetail}
             options={{headerbackVisible: false, headerShown: false}}
           />

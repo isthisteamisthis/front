@@ -36,7 +36,7 @@ export default function KakaoLogin() {
         // 서버에서 받은 JWT 토큰을 AsyncStorage에 저장
         const jwtToken = response.headers.get('Authorization');
         await AsyncStorage.setItem('jwtToken', jwtToken);
-        console.log(jwtToken);
+        console.log("jwtToken: " + jwtToken);
 
         // 화면 전환 : 메인 화면으로 이동
         navigation.navigate('Select');

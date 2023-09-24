@@ -28,7 +28,7 @@ import MidSelect from './src/screens/Message/midSelect';
 import sendMessage from './src/screens/Message/sendMessage';
 import ReplyMessage from './src/screens/Message/replyMessage';
 import SentMessages from './src/screens/Message/SentMessages';
-import SentMessageDetail from './src/screens/Message/SentMessageDetail';
+import SentMessageDetail from './src/screens/Message/sentMessageDetail';
 
 // recorder ----------------------------------------------
 import Karaoke from './src/screens/recorder/Karaoke';

@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import TrackPlayer from 'react-native-track-player';
 import AudioRecorderPlayer from 'react-native-audio-recorder-player';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const audioRecorderPlayer = new AudioRecorderPlayer();
 
@@ -72,7 +73,7 @@ function Karaoke({route, navigation}) {
     });
 
     return () => {};
-  }, [mrUrl, songNo]);
+  }, [mrUrl]);
 
   const startRecording = async () => {
     try {
@@ -112,6 +113,12 @@ function Karaoke({route, navigation}) {
       try {
         const apiUrl = 'http://10.0.2.2:8080/perfect-scores';
 
+        const jwtToken = await AsyncStorage.getItem('jwtToken');
+
+        if (!jwtToken) {
+          throw new Error('JWT Token not found');
+        }
+
         const formData = new FormData();
         formData.append('file', {
           uri: 'file://' + recordedFilePath,
@@ -125,7 +132,7 @@ function Karaoke({route, navigation}) {
           method: 'POST',
           headers: {
             'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMDE2OTM2MDEwIiwiaWF0IjoxNjk1MjUzMjg4LCJleHAiOjE2OTYxMTcyODh9.FYifxFUMtp7FY2NN1EIAyqbrP4tEIQ-hnPHuTQQBRfM`,
+            Authorization: `${jwtToken}`,
           },
           body: formData,
         });
