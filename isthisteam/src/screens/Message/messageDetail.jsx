@@ -55,7 +55,7 @@ const MessageDetail = ({route, navigation}) => {
   };
 
   const handlePress = () => {
-    navigation.navigate('openUserPage');
+    navigation.navigate('openUserPage', {userNo: message.sendUserNo});
   };
 
   return (
@@ -109,7 +109,7 @@ const MessageDetail = ({route, navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFF9F1',
+    backgroundColor: '#Fff',
     flex: 1,
     padding: 16,
   },
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   },
   container1: {
     marginTop: -20,
-    backgroundColor: '#FBD3A1',
+    backgroundColor: '#EAEAF4',
     width: 500,
     marginLeft: -40,
     height: 100,
@@ -145,11 +145,8 @@ const styles = StyleSheet.create({
     height: 600,
   },
   replyButton: {
-    // backgroundColor: '#0067FF',
     borderWidth: 1,
-    borderColor: '#F7A642',
-    // paddingVertical: 10,
-    // paddingHorizontal: 20,
+    borderColor: '#4D55A5',
     padding: 8,
     borderRadius: 8,
     marginTop: -15,
@@ -158,7 +155,7 @@ const styles = StyleSheet.create({
     height: 40,
   },
   replyButtonText: {
-    color: '#F7A642',
+    color: '#4D55A5',
     fontSize: 14,
     fontWeight: 'bold',
     textAlign: 'center',
@@ -166,8 +163,8 @@ const styles = StyleSheet.create({
   },
   viewSentMessagesButton: {
     borderWidth: 1,
-    borderColor: '#F7A642',
-    backgroundColor: '#F7A642',
+    borderColor: '#4D55A5',
+    backgroundColor: '#4D55A5',
     borderRadius: 8,
     padding: 8,
     marginTop: 10,
@@ -182,18 +179,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     letterSpacing: -1,
   },
-  // message: {
-  //   marginTop: 20,
-  //   color: 'black',
-  // },
   messageContainer: {
     paddingLeft: 15,
     paddingTop: 15,
     marginLeft: -5,
-    // backgroundColor: '#FFEFE8',
-    // borderWidth: 1,
-    // borderColor: '#FF874E',
-    // marginBottom: 30,
   },
   subContainer: {
     paddingLeft: 15,
@@ -201,19 +190,14 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginLeft: -10,
     marginBottom: -15,
-    // backgroundColor: '#ff5403',
-    // borderWidth: 1,
-    // borderColor: '#FF874E',
-    // marginBottom: 30,
   },
   detailContainer: {
     paddingTop: 15,
     padding: 25,
     marginTop: 10,
-    backgroundColor: '#FDE4C6',
+    backgroundColor: '#EAEAF4',
     marginBottom: 50,
     borderRadius: 5,
-    // marginBottom: 30,
   },
   senderName: {
     fontSize: 18,
@@ -243,16 +227,6 @@ const styles = StyleSheet.create({
     color: 'black',
     letterSpacing: -1,
   },
-  // backButton: {
-  //   marginTop: 16,
-  //   alignSelf: 'flex-start',
-  // },
-  // backButtonText: {
-  //   color: '#0067FF',
-  //   fontSize: 16,
-  //   fontWeight: 'bold',
-  //   marginLeft: 5,
-  // },
 });
 
 export default MessageDetail;

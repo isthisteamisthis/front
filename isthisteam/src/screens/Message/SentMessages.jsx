@@ -61,7 +61,7 @@ const SentMessages = () => {
       <TouchableOpacity
         style={styles.messageItem}
         onPress={() =>
-          navigation.navigate('sentMessageDetail', {messageNo: item.messageNo})
+          navigation.navigate('SentMessageDetail', {messageNo: item.messageNo})
         }>
         <Text style={styles.receiverName}>
           받은 사람 : {item.getUserNickname}

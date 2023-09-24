@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import {
-  Image,
   View,
   Text,
+  StyleSheet,
   FlatList,
   TouchableOpacity,
-  StyleSheet,
+  Image,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -57,20 +57,25 @@ const Community = ({navigation}) => {
     return (
       <TouchableOpacity
         style={styles.messageItem}
-        onPress={() => navigation.navigate('messageDetail', {message: item})}>
-        <Text style={styles.senderName}>{item.sender}</Text>
-        <Text style={styles.subject}>{item.subject}</Text>
-        <Text style={styles.date}>{item.date}</Text>
+        onPress={() =>
+          navigation.navigate('MessageDetail', {messageNo: item.messageNo})
+        }>
+        <Text style={styles.senderName}>{item.sendUserNickname}</Text>
+        <Text style={styles.subject}>
+          {item.content.length > 28
+            ? item.content.substring(0, 28) + '...'
+            : item.content}
+        </Text>
+        <Text style={styles.date}>{formatDate(item.date)}</Text>
       </TouchableOpacity>
     );
   };
 
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.header}>쪽지 목록</Text> */}
       <View style={styles.container1}>
         <Image
-          source={require('../../../android/app/assets/images/paper1.png')} // 이미지 경로를 설정합니다.
+          source={require('../../../android/app/assets/images/paper1.png')}
           style={styles.header}
         />
         <Text style={styles.sendtext1}>나의 쪽지함</Text>
@@ -78,7 +83,7 @@ const Community = ({navigation}) => {
       <FlatList
         data={messages}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.messageNo.toString()}
       />
     </View>
   );
@@ -86,7 +91,7 @@ const Community = ({navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFF9F1',
+    backgroundColor: '#Fff',
     flex: 1,
     padding: 16,
   },
@@ -100,7 +105,7 @@ const styles = StyleSheet.create({
   },
   container1: {
     marginTop: -20,
-    backgroundColor: '#FBD3A1',
+    backgroundColor: '#EAEAF4',
     width: 500,
     marginLeft: -40,
     height: 100,

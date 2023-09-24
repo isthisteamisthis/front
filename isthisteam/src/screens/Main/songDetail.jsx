@@ -10,7 +10,7 @@ const SongDetail = () => {
           source={{uri: 'https://example.com/album-cover.jpg'}}
         />
         <View style={styles.albumInfo}>
-          <Text style={styles.albumTitle}>앨범 제목</Text>
+          <Text style={styles.albumTitle}>제목</Text>
           <Text style={styles.artistName}>아티스트 이름</Text>
           <Text style={styles.releaseDate}>발매일: 2023-09-22</Text>
         </View>

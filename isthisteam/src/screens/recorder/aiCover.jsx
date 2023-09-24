@@ -50,7 +50,7 @@ const Aicover = ({navigation}) => {
   };
 
   const onPress2 = () => {
-    navigation.navigate('CoverList');
+    navigation.navigate('MyPage');
   };
 
   const onSelectImage = () => {

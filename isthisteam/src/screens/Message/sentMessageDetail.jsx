@@ -57,7 +57,7 @@ const SentMessageDetail = ({route, navigation}) => {
   };
 
   const handlePress = () => {
-    navigation.navigate('openUserPage');
+    navigation.navigate('openUserPage', {userNo: message.getUserNo});
   };
 
   return (

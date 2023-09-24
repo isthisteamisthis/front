@@ -153,9 +153,9 @@ function MainPage({navigation}) {
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.additionalTextContainer}>
           <Text style={styles.additionalText}>Ai 맞춤 추천곡</Text>
-          <TouchableOpacity onPress={MoreButtonPress}>
+          {/* <TouchableOpacity onPress={MoreButtonPress}>
             <Text style={styles.moreButton}>더보기</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
 
         <FlatList
@@ -172,9 +172,9 @@ function MainPage({navigation}) {
 
         <FlatList
           data={songDataList}
-          keyExtractor={(item) => item.songDataNo.toString()}
-          renderItem={({ item }) => (
-            <PostItem post={{ imageUrl: item.imgUrl, title: item.songName }} />
+          keyExtractor={item => item.songDataNo.toString()}
+          renderItem={({item}) => (
+            <PostItem post={{imageUrl: item.imgUrl, title: item.songName}} />
           )}
           // renderItem={renderItem}
           showsHorizontalScrollIndicator={false}
