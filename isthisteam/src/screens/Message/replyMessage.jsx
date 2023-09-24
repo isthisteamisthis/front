@@ -86,7 +86,7 @@ const ReplyMessage = ({route, navigation}) => {
             : originalMessage.content}
         </Text>
         <Text style={styles.senderName}>
-          답장 받을 사람 : {originalMessage.sendUserNickname}
+          답장 받을 사람 [ {originalMessage.sendUserNickname} ]
         </Text>
         <Text style={styles.date}>{formatDate(new Date())}</Text>
         <Text style={styles.messageText}>{originalMessage.message}</Text>
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   },
   container1: {
     marginTop: -20,
-    backgroundColor: '#FBD3A1',
+    backgroundColor: '#FDE4C6',
     width: 500,
     marginLeft: -40,
     height: 100,
@@ -142,6 +142,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 8,
+    letterSpacing: -1,
   },
   sendtext: {
     marginTop: -5,

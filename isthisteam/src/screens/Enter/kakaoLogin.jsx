@@ -36,7 +36,7 @@ export default function KakaoLogin() {
         // 서버에서 받은 JWT 토큰을 AsyncStorage에 저장
         const jwtToken = response.headers.get('Authorization');
         await AsyncStorage.setItem('jwtToken', jwtToken);
-        console.log("jwtToken: " + jwtToken);
+        console.log('jwtToken: ' + jwtToken);
 
         // 화면 전환 : 메인 화면으로 이동
         navigation.navigate('Select');
@@ -66,7 +66,7 @@ export default function KakaoLogin() {
         }}>
         <Image
           source={require('../../../android/app/assets/images/key.png')}
-          style={{width: 150, height: 150, marginBottom: 40, marginTop: -50}}
+          style={{width: 170, height: 170, marginBottom: 40, marginTop: -50}}
         />
         <Text style={styles.text01}>{`먼저, 하단의 버튼을 눌러 
   로그인을 진행해주세요 
@@ -89,10 +89,10 @@ export default function KakaoLogin() {
 }
 const styles = StyleSheet.create({
   text01: {
-    marginTop: -50,
-    marginBottom: 100,
+    marginTop: -20,
+    marginBottom: 30,
     fontWeight: '400',
-    marginLeft: 10,
+    marginLeft: 15,
     fontSize: 18,
     color: 'gray',
     letterSpacing: -1.5,

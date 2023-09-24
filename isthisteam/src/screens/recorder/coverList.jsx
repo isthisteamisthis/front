@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFF9F1',
     flex: 1,
-    padding: 16,
+    // padding: 16,
     marginTop: -20,
   },
   sendtext1: {
@@ -120,18 +120,18 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     letterSpacing: -1.5,
     color: 'black',
-    fontWeight: '800',
-    lineHeight: 18,
+    fontWeight: '900',
+    fontSize: 18,
     width: '100%',
     textAlign: 'center',
     textAlignVertical: 'center',
-    marginTop: 30,
+    marginTop: 50,
   },
   container1: {
     marginTop: -20,
     backgroundColor: '#FBD3A1',
     width: '100%',
-    height: 100,
+    height: 120,
     align: 'center',
   },
   header: {
