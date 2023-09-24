@@ -62,7 +62,7 @@ const CoverList = ({navigation}) => {
   const renderItem = ({item}) => (
     <TouchableOpacity
       style={styles.messageItem}
-      onPress={() => navigation.navigate('SongDetail')}>
+      onPress={() => navigation.navigate('PostDetail', {postNo : item.postNo, nickname : item.nickname})}>
       <Image source={{uri: item.imgFile}} style={styles.imageofpost} />
       <Text style={styles.title}>{item.title}</Text>
       <Text style={styles.date}>{formatDate(item.date)}</Text>
@@ -112,13 +112,9 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFF9F1',
     flex: 1,
-    padding: 16,
-    marginTop: -20,
   },
   sendtext1: {
     flex: 1,
-    marginBottom: 10,
-    letterSpacing: -1.5,
     color: 'black',
     fontWeight: '800',
     lineHeight: 18,

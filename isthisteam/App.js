@@ -51,6 +51,7 @@ import coverDetail from './src/screens/recorder/coverDetail';
 import KaraokeList from './src/screens/recorder/KaraokeList';
 import PerfectScore from './src/screens/recorder/perfectScore';
 import MyAiCoverDetail from './src/screens/recorder/myAiCoverDetail';
+import PostDetail from './src/screens/recorder/postDetail';
 
 // ----------------------------------------------------------
 
@@ -167,6 +168,11 @@ function App() {
           <Stack.Screen
             name="MyAiCoverDetail"
             component={MyAiCoverDetail}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="PostDetail"
+            component={PostDetail}
             options={{headerShown: false}}
           />
           

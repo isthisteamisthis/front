@@ -38,5 +38,6 @@ import CoverList from './src/screens/recorder/coverList';
 import coverDetail from './src/screens/recorder/coverDetail';
 import KaraokeList from './src/screens/recorder/KaraokeList';
 import MyAiCoverDetail from './src/screens/recorder/myAiCoverDetail';
+import PostDetail from './src/screens/recorder/postDetail';
 
 AppRegistry.registerComponent(appName, () => App);

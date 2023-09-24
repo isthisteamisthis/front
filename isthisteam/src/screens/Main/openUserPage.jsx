@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 30,
     width: 350,
-    height: 100,
+    height: 50,
     // borderWidth: 1,
     alignItems: 'center',
     // borderColor: 'lightgray',
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
   },
   score: {
     marginTop: 20,
-    marginLeft: 24,
+    textAlign: 'center',
     fontWeight: '800',
     fontStyle: 'italic',
     color: '#464646',

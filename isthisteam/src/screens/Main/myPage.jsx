@@ -90,18 +90,15 @@ const MyPage = () => {
           {data?.minOctave} {data?.minNote}
         </Text>
       </View>
-      <View style={styles.additionalTextContainer}>
-        <Text style={styles.int}>{data?.nickname}님의 데모</Text>
-      </View>
+      <Text style={styles.int}>{data?.nickname}님의 데모</Text>
       <FlatList
         data={data?.composeSongList}
         keyExtractor={item => item.composeSongNo.toString()}
         renderItem={({item}) => <SongItem song={item} />}
         showsHorizontalScrollIndicator={false}
-        horizontal={true}
-      />
+        horizontal={true}/>
+      <Text style={styles.int}>{data?.nickname}의 평균 점수</Text>
       <View style={styles.additionalTextContainer}>
-        <Text style={styles.int}>{data?.nickname}의 평균 점수</Text>
         <Text style={styles.score}>{data?.avgScore}</Text>
       </View>
       {/* <TouchableOpacity style={styles.modifyinfobtn} onPress={modifyinfo}>
@@ -189,12 +186,11 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 10,
     width: 350,
-    height: 100,
+    height: 50,
     borderRadius: 5,
   },
   score: {
     marginTop: 20,
-    marginLeft: 40,
     fontWeight: '800',
     fontStyle: 'italic',
     color: '#464646',
