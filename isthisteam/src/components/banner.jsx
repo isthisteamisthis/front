@@ -10,11 +10,13 @@ const Banner = ({title, imageUrl}) => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    // flex: 5,
+  },
   image: {
     marginTop: -30,
     width: 400,
-    height: 200,
+    height: 300,
     resizeMode: 'cover',
   },
   title: {

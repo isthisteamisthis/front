@@ -29,7 +29,7 @@ const Skip = ({navigation}) => (
 const Done = ({navigation}) => (
   <TouchableOpacity
     style={{marginHorizontal: 20}}
-    onPress={() => navigation.navigate('VoiceRange')}>
+    onPress={() => navigation.navigate('KakaoLogin')}>
     <Text style={styles.bottombtn}>Done</Text>
   </TouchableOpacity>
 );

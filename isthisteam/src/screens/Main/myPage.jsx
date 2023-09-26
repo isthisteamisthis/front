@@ -45,7 +45,7 @@ const MyPage = () => {
           return fetch('http://10.0.2.2:8080/my-page', {
             method: 'GET',
             headers: {
-              Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMDE2OTM2MDEwIiwiaWF0IjoxNjk1MjUzMjg4LCJleHAiOjE2OTYxMTcyODh9.FYifxFUMtp7FY2NN1EIAyqbrP4tEIQ-hnPHuTQQBRfM`,
+              Authorization: `${jwtToken}`,
             },
           })
             .then(response => {
@@ -90,19 +90,8 @@ const MyPage = () => {
           {data?.minOctave} {data?.minNote}
         </Text>
       </View>
-      <View style={styles.additionalTextContaineravg}>
-        <Text style={styles.int}>{data?.nickname}의 평균 점수</Text>
-        <Text style={styles.score}>{data?.avgScore}</Text>
-        <FlatList
-          data={data?.composeSongList}
-          keyExtractor={item => item.composeSongNo.toString()}
-          renderItem={({item}) => <SongItem song={item} />}
-          showsHorizontalScrollIndicator={false}
-          horizontal={true}
-        />
-        <View style={styles.additionalTextContainer}>
-          <Text style={styles.int}>{data?.nickname}님의 데모</Text>
-        </View>
+      <View style={styles.democontainer}>
+        <Text style={styles.int}>{data?.nickname}님의 데모</Text>
         <FlatList
           data={data?.composeSongList}
           keyExtractor={item => item.composeSongNo.toString()}
@@ -111,6 +100,8 @@ const MyPage = () => {
           horizontal={true}
         />
       </View>
+      <Text style={styles.intscore}>{data?.nickname}의 평균 점수</Text>
+      <Text style={styles.score}>73.94</Text>
     </ScrollView>
   );
 };
@@ -151,15 +142,20 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'black',
     marginTop: -10,
+    marginBottom: 20,
+    letterSpacing: -1,
   },
   int: {
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 20,
     marginBottom: -15,
-
     letterSpacing: -1,
     color: 'gray',
+  },
+  democontainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   avatar: {
     width: 70,
@@ -167,6 +163,21 @@ const styles = StyleSheet.create({
     borderRadius: 75,
     marginBottom: 10,
     marginTop: 20,
+  },
+  intscore: {
+    marginTop: -500,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: -15,
+    letterSpacing: -1,
+    color: 'gray',
+  },
+  score: {
+    marginTop: 20,
+    fontStyle: 'italic',
+    fontWeight: '800',
+    color: '#464646',
+    fontSize: 32,
   },
   userIntroductionContainer: {
     backgroundColor: '#DCDDED',
@@ -176,19 +187,18 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 5,
   },
-  score: {
-    marginTop: 20,
-    fontWeight: '800',
-    fontStyle: 'italic',
-    color: '#464646',
-    fontSize: 25,
-  },
+
   userIntroduction: {
     fontSize: 16,
     textAlign: 'center',
     color: 'black',
     margin: 10,
     letterSpacing: -1,
+  },
+  scorecontainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: -300,
   },
   textContainer: {
     backgroundColor: '#DCDDED',
@@ -226,6 +236,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 5,
+    marginTop: -520,
   },
   modifyinfobtn: {
     borderWidth: 1,

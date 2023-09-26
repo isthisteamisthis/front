@@ -39,7 +39,7 @@ const CoverList = ({navigation}) => {
         const response = await fetch('http://10.0.2.2:8080/posts', {
           method: 'GET',
           headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMDE2OTM2MDEwIiwiaWF0IjoxNjk1MjUzMjg4LCJleHAiOjE2OTYxMTcyODh9.FYifxFUMtp7FY2NN1EIAyqbrP4tEIQ-hnPHuTQQBRfM`,
+            Authorization: `${jwtToken}`,
           },
         });
 
@@ -62,7 +62,12 @@ const CoverList = ({navigation}) => {
   const renderItem = ({item}) => (
     <TouchableOpacity
       style={styles.messageItem}
-      onPress={() => navigation.navigate('SongDetail')}>
+      onPress={() =>
+        navigation.navigate('PostDetail', {
+          postNo: item.postNo,
+          nickname: item.nickname,
+        })
+      }>
       <Image source={{uri: item.imgFile}} style={styles.imageofpost} />
       <Text style={styles.title}>{item.title}</Text>
       <Text style={styles.date}>{formatDate(item.date)}</Text>
@@ -101,6 +106,10 @@ const CoverList = ({navigation}) => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.container1}>
+        <Image
+          source={require('../../../android/app/assets/images/micmic.png')}
+          style={styles.header}
+        />
         <Text style={styles.sendtext1}>{`Ai 커버곡 리스트`}</Text>
       </View>
       {renderGalleryItems()}
@@ -112,34 +121,28 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFF9F1',
     flex: 1,
-    // padding: 16,
-    marginTop: -20,
   },
   sendtext1: {
-    flex: 1,
+    marginTop: -25,
+    marginLeft: 155,
     marginBottom: 10,
     letterSpacing: -1.5,
     color: 'black',
-    fontWeight: '900',
-    fontSize: 18,
-    width: '100%',
-    textAlign: 'center',
-    textAlignVertical: 'center',
-    marginTop: 50,
+    fontWeight: '800',
   },
   container1: {
     marginTop: -20,
     backgroundColor: '#FBD3A1',
     width: '100%',
-    height: 100,
+    height: 110,
     align: 'center',
   },
   header: {
     marginBottom: 30,
-    marginTop: 30,
-    marginLeft: 205,
-    width: 27,
-    height: 27,
+    marginTop: 40,
+    marginLeft: 185,
+    width: 25,
+    height: 25,
   },
   galleryContainer: {
     marginTop: 10,
@@ -155,7 +158,6 @@ const styles = StyleSheet.create({
     flex: 1,
     marginRight: 5,
     marginHorizontal: 5,
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -164,7 +166,6 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 5,
     letterSpacing: -1,
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },

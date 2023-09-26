@@ -52,6 +52,10 @@ export default function KaraokeList({navigation}) {
   return (
     <View style={styles.container}>
       <View style={styles.container1}>
+        <Image
+          source={require('../../../android/app/assets/images/micmic.png')}
+          style={styles.header}
+        />
         <Text style={styles.sendtext1}>나만의 노래방</Text>
       </View>
       <FlatList
@@ -66,26 +70,26 @@ export default function KaraokeList({navigation}) {
 
 const styles = StyleSheet.create({
   sendtext1: {
-    marginTop: 30,
-    marginLeft: 165,
+    marginTop: -25,
+    marginLeft: 155,
     marginBottom: 10,
     letterSpacing: -1.5,
     color: 'black',
-    fontWeight: '900',
-    fontSize: 20,
+    fontWeight: '800',
   },
   container1: {
     marginTop: -20,
     backgroundColor: '#DCDDED',
-    width: 500,
-    marginLeft: -40,
-    height: 90,
-    marginBottom: 20,
+    width: 800,
+    height: 110,
+    marginLeft: -20,
+    align: 'center',
+    marginBottom: 30,
   },
   header: {
     marginBottom: 30,
-    marginTop: 30,
-    marginLeft: 205,
+    marginTop: 35,
+    marginLeft: 185,
     width: 25,
     height: 25,
   },

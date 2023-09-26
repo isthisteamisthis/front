@@ -38,7 +38,7 @@ const ReplyMessage = ({route, navigation}) => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMDE2OTM2MDEwIiwiaWF0IjoxNjk1MjUzMjg4LCJleHAiOjE2OTYxMTcyODh9.FYifxFUMtp7FY2NN1EIAyqbrP4tEIQ-hnPHuTQQBRfM`, // jwtToken을 헤더에 추가
+            Authorization: `${jwtToken}`,
           },
           body: JSON.stringify({content: replyMessage}), // 수정된 내용
         },

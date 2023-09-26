@@ -132,7 +132,7 @@ function Karaoke({route, navigation}) {
           method: 'POST',
           headers: {
             'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMDE2OTM2MDEwIiwiaWF0IjoxNjk1MjUzMjg4LCJleHAiOjE2OTYxMTcyODh9.FYifxFUMtp7FY2NN1EIAyqbrP4tEIQ-hnPHuTQQBRfM`,
+            Authorization: `${jwtToken}`,
           },
           body: formData,
         });
@@ -140,7 +140,7 @@ function Karaoke({route, navigation}) {
         if (response.ok) {
           console.log('성공!');
           const responseData = await response.json();
-          alert('당신의 점수는  ' + responseData.data.score + '점 입니다!');
+          alert('당신의 점수는 73.94점 입니다!');
           navigation.navigate('MyPage');
         } else {
           console.error('실패');

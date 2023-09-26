@@ -45,7 +45,7 @@ function MainPage({navigation}) {
         headers: {
           'Content-Type': 'application/json',
           // AsyncStorage에서 가져온 토큰을 사용합니다.
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzMDE2OTM2MDEwIiwiaWF0IjoxNjk1MjUzMjg4LCJleHAiOjE2OTYxMTcyODh9.FYifxFUMtp7FY2NN1EIAyqbrP4tEIQ-hnPHuTQQBRfM`,
+          Authorization: `${jwtToken}`,
         },
       });
 
@@ -152,10 +152,7 @@ function MainPage({navigation}) {
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.additionalTextContainer}>
-          <Text style={styles.additionalText}>Ai 맞춤 추천곡</Text>
-          {/* <TouchableOpacity onPress={MoreButtonPress}>
-            <Text style={styles.moreButton}>더보기</Text>
-          </TouchableOpacity> */}
+          <Text style={styles.additionalText}>AI 맞춤 추천곡</Text>
         </View>
 
         <FlatList
@@ -200,10 +197,10 @@ function PostItem({post}) {
 }
 const styles = StyleSheet.create({
   bannercontainer: {
-    flex: 2,
+    flex: 5,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 0,
+    // padding: 0,
     height: 400,
   },
   containerofpost: {
@@ -253,17 +250,19 @@ const styles = StyleSheet.create({
   },
   additionalTextContainer: {
     // width: 1000,
+    marginTop: 15,
     flexDirection: 'row', // 가로로 정렬
     alignItems: 'center', // 수직 가운데 정렬
   },
   additionalText: {
     marginTop: 10,
     marginBottom: 5,
-    fontSize: 15,
-    marginRight: 215, // 텍스트 사이 간격 조절
+    fontSize: 16,
+    marginRight: 210, // 텍스트 사이 간격 조절
     color: 'black',
     letterSpacing: -1,
     fontWeight: '800',
+    marginLeft: 10,
   },
   moreButton: {
     letterSpacing: -1,
