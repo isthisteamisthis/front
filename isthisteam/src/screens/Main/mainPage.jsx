@@ -91,39 +91,39 @@ function MainPage({navigation}) {
     GetSongDataList();
   }, []); // useEffect 두 번째 인수를 빈 배열로 설정하여 한 번만 실행
 
-  // useEffect(() => {
-  //   const backAction = () => {
-  //     Alert.alert(
-  //       '앱 종료',
-  //       '앱을 종료하시겠습니까?',
-  //       [
-  //         {
-  //           text: '취소',
-  //           onPress: () => null,
-  //           style: 'cancel',
-  //         },
-  //         {
-  //           text: '확인',
-  //           onPress: () => {
-  //             BackHandler.exitApp();
-  //           },
-  //         },
-  //       ],
-  //       {cancelable: false},
-  //     );
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert(
+        '앱 종료',
+        '앱을 종료하시겠습니까?',
+        [
+          {
+            text: '취소',
+            onPress: () => null,
+            style: 'cancel',
+          },
+          {
+            text: '확인',
+            onPress: () => {
+              BackHandler.exitApp();
+            },
+          },
+        ],
+        {cancelable: false},
+      );
 
-  //     return true;
-  //   };
+      return true;
+    };
 
-  //   const backHandler = BackHandler.addEventListener(
-  //     'hardwareBackPress',
-  //     backAction,
-  //   );
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
 
-  //   return () => {
-  //     backHandler.remove();
-  //   };
-  // }, []);
+    return () => {
+      backHandler.remove();
+    };
+  }, []);
 
   return (
     <View style={styles.container}>
